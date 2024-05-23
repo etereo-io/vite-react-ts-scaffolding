@@ -1,0 +1,24 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+  },
+  "[css]": {
+    "editor.formatOnSave": true,
+  },
+  "eslint.options": {
+    "overrideConfigFile": ".eslintrc.cjs"
+  },
+  "editor.tabSize": 2,
+  "editor.autoIndent": "full",
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#fb6e074a",
+    "titleBar.activeBackground": "#fb6e074a",
+    "titleBar.activeForeground": "#F4FBFA"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+}
