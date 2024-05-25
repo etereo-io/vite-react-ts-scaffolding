@@ -4,7 +4,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { SignInSide } from "./SignInSide";
-import { TestApp, renderWithTestProviders } from "../../test/tests.helpers";
+
+import { TestApp, renderWithTestProviders } from "#/tests.helpers";
 
 describe("SignInSide", () => {
   it("should render", async () => {

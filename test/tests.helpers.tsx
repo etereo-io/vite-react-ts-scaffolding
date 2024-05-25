@@ -3,9 +3,8 @@ import { MemoryRouter, RouterProvider, createMemoryRouter } from "react-router-d
 import { ThemeProvider } from "@mui/material/styles";
 import { RenderOptions, render } from "@testing-library/react";
 
+import { routes } from "@/app/routes";
 import { defaultTheme } from "@/lib/theme/theme";
-
-import { routes } from "../app/routes";
 
 export function TestProviders({ children }: { children: React.ReactNode }) {
   return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>;

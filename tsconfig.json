@@ -4,6 +4,7 @@
     "paths": {
       "*": ["@types/*"],
       "@/*": ["src/*"],
+      "#/*": ["test/*"],
     },
 
     /* Base */
@@ -30,7 +31,7 @@
 
     "types": ["node", "vitest/globals", "@testing-library/jest-dom/vitest"],
   },
-  "include": ["src/**/*", "@types"],
+  "include": ["src/**/*", "@types", "test"],
   "exclude": ["node_modules/**"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
