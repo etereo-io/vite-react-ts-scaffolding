@@ -1,8 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    /* aliases */
+    "paths": {
+      "*": ["@types/*"],
+      "@/*": ["src/*"],
+    },
+
+    /* Base */
+    "baseUrl": ".",
+    "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -18,8 +26,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "types": ["node", "vitest/globals", "@testing-library/jest-dom/vitest"],
   },
-  "include": ["src"],
+  "include": ["src/**/*", "@types"],
+  "exclude": ["node_modules/**"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

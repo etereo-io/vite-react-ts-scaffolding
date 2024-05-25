@@ -10,7 +10,11 @@
     "lint:fix": "npm run lint -- --fix",
     "types:check": "tsc --noEmit",
     "git:pre-commit": "npm run types:check && lint-staged",
-    "test": "echo ok",
+    "test:base": "vitest --passWithNoTests",
+    "test": "npm run test:run",
+    "test:ui": "npm run test:base -- --ui",
+    "test:run": "npm run test:base -- --run",
+    "test:coverage": "npm run test:base -- --run --coverage",
     "preview": "vite preview",
     "prepare": "husky"
   },
@@ -20,17 +24,29 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/roboto": "^5.0.13",
+    "@mui/icons-material": "^5.15.18",
+    "@mui/material": "^5.15.18",
+    "@mui/x-charts": "^7.5.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@juggle/resize-observer": "^3.4.0",
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.10.0",
     "@typescript-eslint/parser": "^7.10.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
+    "@vitest/coverage-v8": "^1.6.0",
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-node": "^11.1.0",
@@ -39,8 +55,12 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "husky": "^9.0.11",
+    "intersection-observer": "^0.12.2",
+    "jsdom": "^24.0.0",
     "lint-staged": "^15.2.5",
+    "matchmedia-polyfill": "^0.3.2",
     "typescript": "^5.4.5",
-    "vite": "^5.2.11"
+    "vite": "^5.2.11",
+    "vitest": "^1.6.0"
   }
 }
