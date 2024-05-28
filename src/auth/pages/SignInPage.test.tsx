@@ -3,13 +3,13 @@ import { act } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { SignInSide } from "./SignInSide";
+import { SignInPage } from "./SignInPage";
 
 import { TestApp, renderWithTestProviders } from "#/tests.helpers";
 
-describe("SignInSide", () => {
+describe("SignInPage", () => {
   it("should render", async () => {
-    const { container } = render(<TestApp initialEntries={["/admin/login"]} />);
+    const { container } = render(<TestApp initialEntries={["/login"]} />);
 
     expect(screen.getByTestId("login-page")).toBeInTheDocument();
 
@@ -17,7 +17,7 @@ describe("SignInSide", () => {
   });
 
   it("should render alternative", async () => {
-    const { container } = renderWithTestProviders(<SignInSide />);
+    const { container } = renderWithTestProviders(<SignInPage />);
 
     expect(screen.getByTestId("login-page")).toBeInTheDocument();
 
@@ -25,7 +25,7 @@ describe("SignInSide", () => {
   });
 
   it("should navigate to /admin/dashboard", async () => {
-    render(<TestApp initialEntries={["/admin/login"]} />);
+    render(<TestApp initialEntries={["/login"]} />);
 
     await act(() => userEvent.click(screen.getByText("Sign In")));
 

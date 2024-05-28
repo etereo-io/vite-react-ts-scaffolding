@@ -3,7 +3,7 @@ import { MemoryRouter, RouterProvider, createMemoryRouter } from "react-router-d
 import { ThemeProvider } from "@mui/material/styles";
 import { RenderOptions, render } from "@testing-library/react";
 
-import { routes } from "@/app/routes";
+import { getAllRoutes } from "@/app/modules/modules.helpers";
 import { defaultTheme } from "@/lib/theme/theme";
 
 export function TestProviders({ children }: { children: React.ReactNode }) {
@@ -19,7 +19,7 @@ export function TestProvidersWithRouter({ children }: { children: React.ReactNod
 }
 
 export function TestApp({ initialEntries }: { initialEntries?: string[] }) {
-  const router = createMemoryRouter(routes, {
+  const router = createMemoryRouter(getAllRoutes(), {
     initialEntries,
   });
 

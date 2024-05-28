@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Outlet } from "react-router-dom";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,15 +14,13 @@ import MuiDrawer from "@mui/material/Drawer";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
-import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-import { Chart } from "../components/Chart";
-import { Deposits } from "../components/Deposits";
-import { mainListItems, secondaryListItems } from "../components/listItems";
-import { Orders } from "../components/Orders";
+import { LocaleSelector } from "@/i18n/components/LocaleSelector";
+
+import { AdminMenuItems } from "../components/AdminMenuItems";
 
 const drawerWidth: number = 240;
 
@@ -71,7 +70,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
   },
 }));
 
-export function Dashboard() {
+export function AdminLayout({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -106,6 +105,7 @@ export function Dashboard() {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          <LocaleSelector />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -123,9 +123,7 @@ export function Dashboard() {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {mainListItems}
-          <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
+          <AdminMenuItems />
         </List>
       </Drawer>
       <Box
@@ -141,38 +139,8 @@ export function Dashboard() {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}
-              >
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}
-              >
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Orders />
-              </Paper>
-            </Grid>
+            <Outlet />
+            {children}
           </Grid>
         </Container>
       </Box>

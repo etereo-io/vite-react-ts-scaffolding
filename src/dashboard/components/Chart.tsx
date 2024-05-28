@@ -1,10 +1,11 @@
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 import { useTheme } from "@mui/material/styles";
 import { LineChart, axisClasses } from "@mui/x-charts";
 import { ChartsTextStyle } from "@mui/x-charts/ChartsText";
 
-import { Title } from "./Title";
+import { Title } from "@/shared/components/Title";
 
 // Generate Sales Data
 function createData(time: string, amount?: number): { time: string; amount: number | null } {
@@ -25,10 +26,11 @@ const data = [
 
 export function Chart() {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>{t("dashboard.chart.today")}</Title>
       <div style={{ width: "100%", flexGrow: 1, overflow: "hidden" }}>
         <LineChart
           dataset={data}

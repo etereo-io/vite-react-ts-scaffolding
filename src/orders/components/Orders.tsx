@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
@@ -7,7 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-import { Title } from "./Title";
+import { Title } from "@/shared/components/Title";
 
 // Generate Order Data
 function createData(id: number, date: string, name: string, shipTo: string, paymentMethod: string, amount: number) {
@@ -27,9 +28,11 @@ function preventDefault(event: React.MouseEvent) {
 }
 
 export function Orders() {
+  const { t } = useTranslation();
+
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
+      <Title>{t("orders.recent")}</Title>
       <Table size="small">
         <TableHead>
           <TableRow>

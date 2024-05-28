@@ -11,6 +11,8 @@ import { ResizeObserver as ResizeObserverPolyfill } from "@juggle/resize-observe
 import { cleanup } from "@testing-library/react";
 import { afterEach, beforeEach, vi } from "vitest";
 
+import "./src/app/modules/modules";
+
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
