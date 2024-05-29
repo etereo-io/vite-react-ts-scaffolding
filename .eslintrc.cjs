@@ -14,7 +14,12 @@ module.exports = {
     ...react.env,
   },
   parser: "@typescript-eslint/parser",
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
+  ],
   ignorePatterns: ["dist"],
   plugins: [...imports.plugins, ...typescript.plugins, ...react.plugins, "react-refresh"],
   rules: {

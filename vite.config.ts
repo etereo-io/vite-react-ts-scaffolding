@@ -1,11 +1,23 @@
 import path from "node:path";
 
 import react from "@vitejs/plugin-react-swc";
+import bodyParser from "body-parser";
+import mockServer from "vite-plugin-mock-server";
 import { defineConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    mockServer({
+      urlPrefixes: ["/api/"],
+      logLevel: "error",
+      mockRootDir: "./src",
+      middlewares: [bodyParser.json()],
+      mockJsSuffix: ".server.mock.js",
+      mockTsSuffix: ".server.mock.ts",
+    }),
+  ],
 
   resolve: {
     alias: {

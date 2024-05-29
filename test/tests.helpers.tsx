@@ -1,20 +1,15 @@
 import { MemoryRouter, RouterProvider, createMemoryRouter } from "react-router-dom";
 
-import { ThemeProvider } from "@mui/material/styles";
 import { RenderOptions, render } from "@testing-library/react";
 
+import { AppProviders } from "@/app/components/AppProviders";
 import { getAllRoutes } from "@/app/modules/modules.helpers";
-import { defaultTheme } from "@/lib/theme/theme";
-
-export function TestProviders({ children }: { children: React.ReactNode }) {
-  return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>;
-}
 
 export function TestProvidersWithRouter({ children }: { children: React.ReactNode }) {
   return (
-    <TestProviders>
+    <AppProviders>
       <MemoryRouter>{children}</MemoryRouter>
-    </TestProviders>
+    </AppProviders>
   );
 }
 
@@ -24,9 +19,9 @@ export function TestApp({ initialEntries }: { initialEntries?: string[] }) {
   });
 
   return (
-    <TestProviders>
+    <AppProviders>
       <RouterProvider router={router} />
-    </TestProviders>
+    </AppProviders>
   );
 }
 

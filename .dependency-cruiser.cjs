@@ -148,8 +148,8 @@ module.exports = {
         'section of your package.json. If this module is development only - add it to the ' +
         'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
       from: {
-        path: '^(src)',
-        pathNot: '[.](?:spec|test|d)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx|ls|coffee|litcoffee|coffee[.]md)$'
+        path: '^(src)(?!.*__mocks__)',
+        pathNot: '[.](?:spec|test|d|server.mock)[.](?:js|mjs|cjs|jsx|ts|mts|cts|tsx|ls|coffee|litcoffee|coffee[.]md)$'
       },
       to: {
         dependencyTypes: [
