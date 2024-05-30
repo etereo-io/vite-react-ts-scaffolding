@@ -17,7 +17,13 @@ export const handlers = [
 
     await delay(DEFAULT_DELAY);
     return HttpResponse.json({
-      data: orders.slice(offset, limit),
+      data: orders.slice(offset, offset + limit),
+      pagination: {
+        offset,
+        limit,
+        count: orders.length,
+        hasMore: orders.length > offset + limit,
+      },
     });
   }),
 
@@ -32,14 +38,14 @@ export const handlers = [
         },
         { status: 400 },
       );
-
-      return;
     }
 
     const orderIndex = orders.findIndex((order) => order.id === orderId);
-    orders.splice(orderIndex, 1);
+    if (orderIndex === -1) {
+      orders.splice(orderIndex, 1);
+    }
 
     await delay(DEFAULT_DELAY);
-    return HttpResponse.json(null, { status: 204 });
+    return HttpResponse.json({}, { status: 204 });
   }),
 ];

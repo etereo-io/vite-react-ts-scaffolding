@@ -1,6 +1,9 @@
 {
   "translation": {
     "orders.title": "Orders",
-    "orders.recent": "Recent Orders"
+    "orders.recent": "Recent Orders",
+    "orders.fetch.error": "Error fetching orders",
+    "orders.delete.error": "Error deleting order",
+    "orders.delete.success": "Order deleted successfully"
   }
 }
