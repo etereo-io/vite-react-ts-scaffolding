@@ -1,4 +1,3 @@
-import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -10,36 +9,14 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-import { API_DEFAULT_LIMIT } from "@/app/api";
 import { Title } from "@/shared/components/Title";
 
-import { useOrderDelete } from "../hooks/useOrderDelete";
-import { useOrders } from "../hooks/useOrders";
-
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
+import { useOrdersController } from "../hooks/useOrdersController";
 
 export function Orders() {
   const { t } = useTranslation();
 
-  const [offset, setOffset] = useState(0);
-
-  const handleOnPaginationChange = (_: unknown, page: number) => {
-    setOffset((page - 1) * API_DEFAULT_LIMIT);
-  };
-
-  const { data: orders } = useOrders(offset);
-  const mutation = useOrderDelete();
-
-  const handleOrderDelete = useCallback(
-    (orderId: string) => () => {
-      mutation.mutate(orderId);
-    },
-    [mutation],
-  );
-
-  const page = Math.floor((offset ?? 0) / (orders?.pagination.limit ?? 0)) + 1 || 0;
+  const { page, orders, handleOnPaginationChange, handleOrderDelete, handleSeeMoreOrders } = useOrdersController();
 
   return (
     <>
@@ -82,7 +59,7 @@ export function Orders() {
         }}
       />
 
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+      <Link color="primary" href="#" onClick={handleSeeMoreOrders} sx={{ mt: 3 }}>
         See more orders
       </Link>
     </>
