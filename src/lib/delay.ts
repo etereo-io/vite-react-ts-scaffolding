@@ -1,5 +1,5 @@
 export const delay = (fn: () => void, ms?: number) => {
-  const DEFAULT_DELAY = import.meta.env?.VITE_DEFAULT_DELAY ? parseInt(import.meta.env.VITE_DEFAULT_DELAY) : 500;
+  const DEFAULT_DELAY = process.env.VITE_DEFAULT_DELAY ? parseInt(process.env.VITE_DEFAULT_DELAY) : 500;
 
   return new Promise<void>((resolve) => {
     setTimeout(() => {

@@ -72,8 +72,10 @@
     "lint-staged": "^15.2.5",
     "matchmedia-polyfill": "^0.3.2",
     "npm": "^10.8.0",
+    "react-remove-attr": "^0.0.6",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
+    "vite-plugin-checker": "^0.6.4",
     "vite-plugin-mock-server": "^1.2.0",
     "vitest": "^1.6.0"
   }
