@@ -1,30 +1,139 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a scaffolding project for building a React application using TypeScript and Vite. It includes various tools and configurations to streamline development, linting, testing, and building processes.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js (>=16.0.0)
+- npm (>=10.8.0)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Installation
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/vite-react-ts-scaffolding.git
+   cd vite-react-ts-scaffolding
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+### Development
+
+To start the development server:
+
+```sh
+npm start
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+This will start the Vite development server and open the application in your default web browser.
+
+### Building
+
+To create a production build:
+
+```sh
+npm run build
+```
+
+This will compile the TypeScript files and bundle the application using Vite.
+
+### Linting
+
+To lint the project:
+
+```sh
+npm run lint
+```
+
+To fix linting errors:
+
+```sh
+npm run lint:fix
+```
+
+### Type Checking
+
+To check for type errors:
+
+```sh
+npm run types:check
+```
+
+### Dependency Cruising
+
+To check for circular dependencies:
+
+```sh
+npm run lint:deps
+```
+
+### Git Hooks
+
+Pre-commit checks (type checking and dependency linting) are enforced using Husky and lint-staged:
+
+```sh
+npm run git:pre-commit
+```
+
+### Testing
+
+To run the tests:
+
+```sh
+npm run test
+```
+
+To run the tests with coverage:
+
+```sh
+npm run test:coverage
+```
+
+To run the tests with a UI:
+
+```sh
+npm run test:ui
+```
+
+### Preview
+
+To preview the production build:
+
+```sh
+npm run preview
+```
+
+## Dependencies
+
+### Core Dependencies
+
+- React
+- React DOM
+- React Router DOM
+- Emotion (for CSS-in-JS)
+- Material-UI
+- React Query (for data fetching)
+- i18next (for internationalization)
+
+### Development Dependencies
+
+- TypeScript
+- Vite
+- ESLint (with plugins for TypeScript, React, and Prettier)
+- Vitest (for testing)
+- Testing Library (for testing React components)
+- Husky (for Git hooks)
+- Lint-staged (for running linters on staged files)
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License.
