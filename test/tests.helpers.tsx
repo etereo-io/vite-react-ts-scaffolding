@@ -5,7 +5,7 @@ import { RenderOptions, render } from "@testing-library/react";
 import { AppProviders } from "@/app/components/AppProviders";
 import { getAllRoutes } from "@/app/modules/modules.helpers";
 
-export function TestProvidersWithRouter({ children }: { children: React.ReactNode }) {
+export function TestProviders({ children }: { children: React.ReactNode }) {
   return (
     <AppProviders>
       <MemoryRouter>{children}</MemoryRouter>
@@ -27,5 +27,5 @@ export function TestApp({ initialEntries }: { initialEntries?: string[] }) {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function renderWithTestProviders(ui: React.ReactElement, options?: RenderOptions) {
-  return render(ui, { wrapper: TestProvidersWithRouter, ...options });
+  return render(ui, { wrapper: TestProviders, ...options });
 }

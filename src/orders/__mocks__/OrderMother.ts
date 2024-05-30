@@ -1,5 +1,7 @@
 import { faker } from "@faker-js/faker";
 
+import { API_DEFAULT_LIMIT } from "@/app/api";
+
 import { Order } from "../orders.types";
 
 export class OrderMother {
@@ -12,10 +14,16 @@ export class OrderMother {
       paymentMethod: faker.commerce.price(),
       amount: faker.finance.amount(),
       ...order,
-    };
+    } as Order;
   }
 
-  static getRandomList(length = 10, order?: Partial<Order>) {
+  static getRandomList(length = API_DEFAULT_LIMIT, order?: Partial<Order>) {
     return Array.from({ length }, () => this.getRandomOrder(order));
+  }
+
+  static getRandomPage(offset = 0, limit = API_DEFAULT_LIMIT, order?: Partial<Order>) {
+    return Array.from({ length: limit }, (_, index) =>
+      this.getRandomOrder({ ...order, id: `order-${offset + index}` }),
+    );
   }
 }

@@ -3,25 +3,21 @@ import removeAttr from "react-remove-attr";
 import path from "node:path";
 
 import react from "@vitejs/plugin-react-swc";
-import bodyParser from "body-parser";
 import { loadEnv } from "vite";
 import checker from "vite-plugin-checker";
-import mockServer from "vite-plugin-mock-server";
 import { defineConfig } from "vitest/config";
 
-export default defineConfig(({ mode, command }) => {
+export default defineConfig(({ mode }) => {
   process.env.NODE_ENV = mode; // Make sure NODE_ENV matches mode when building
 
-  const inDevMode = mode === "development";
   const inProdMode = mode === "production";
-  const inTestMode = mode === "test";
-  const inServeMode = command === "serve";
 
   // expose .env vars to server environment
   const env = loadEnv(mode, process.cwd(), "");
   process.env["VITE_DEFAULT_DELAY"] = env.VITE_DEFAULT_DELAY;
   process.env["VITE_APP_CONTEXT_PATH"] = env.VITE_APP_CONTEXT_PATH;
   process.env["VITE_APP_ENDPOINT"] = env.VITE_APP_ENDPOINT;
+  process.env["VITE_ENABLE_MSW"] = env.VITE_ENABLE_MSW;
 
   return {
     plugins: [
@@ -34,20 +30,10 @@ export default defineConfig(({ mode, command }) => {
           attributes: ["data-testid"],
         }),
       react(),
-      inServeMode &&
-        !inTestMode &&
-        mockServer({
-          urlPrefixes: ["/api/"],
-          logLevel: "error",
-          mockRootDir: "./src",
-          middlewares: [bodyParser.json()],
-          mockJsSuffix: ".server.mock.js",
-          mockTsSuffix: ".server.mock.ts",
-        }),
     ],
 
     build: {
-      sourcemap: inDevMode,
+      sourcemap: !inProdMode,
       reportCompressedSize: false,
     },
 

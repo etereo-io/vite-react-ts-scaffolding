@@ -6,12 +6,14 @@ import "intersection-observer";
 import "matchmedia-polyfill";
 import "matchmedia-polyfill/matchMedia.addListener";
 
-// Resize observer polyfill
 import { ResizeObserver as ResizeObserverPolyfill } from "@juggle/resize-observer";
 import { cleanup } from "@testing-library/react";
-import { afterEach, beforeEach, vi } from "vitest";
+import { afterAll, afterEach, beforeAll, beforeEach, vi } from "vitest";
 
 import "./src/app/modules/modules";
+
+import { mockServerConfig } from "@/mock-server/constants";
+import { server } from "@/mock-server/node";
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
@@ -45,8 +47,17 @@ if (typeof document !== "undefined") {
   Element.prototype.scrollTo = vi.fn<any, typeof Element.prototype.scrollTo>();
 }
 
+beforeAll(() => {
+  server.listen(mockServerConfig);
+});
+
 beforeEach(() => {});
 
+afterAll(() => {
+  server.close();
+});
+
 afterEach(() => {
+  server.resetHandlers();
   cleanup();
 });

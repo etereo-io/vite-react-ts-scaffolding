@@ -15,7 +15,7 @@ i18next
   .use(initReactI18next)
   .init({
     debug: isDevelopment,
-    fallbackLng: "en",
+    fallbackLng: Locale.EN,
     supportedLngs: Object.values(Locale),
     interpolation: {
       escapeValue: false,

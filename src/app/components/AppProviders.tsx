@@ -1,8 +1,8 @@
 import { Theme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { queryClient as defaultQueryClient } from "@/lib/queryClient";
-import { defaultTheme } from "@/lib/theme/theme";
+import { queryClient as defaultQueryClient } from "../queryClient";
+import { defaultTheme } from "../theme/theme";
 
 export function AppProviders({
   children,

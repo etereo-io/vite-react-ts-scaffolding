@@ -1,5 +1,7 @@
 import { RouteObject } from "react-router-dom";
 
+import type { RequestHandler } from "msw";
+
 import { User } from "@/auth/auth.types";
 import { LocaleResources } from "@/i18n/i18n.types";
 
@@ -17,4 +19,5 @@ export interface Module {
   locales?: LocaleResources;
   menuItems?: MenuItem[];
   routes?: RouteObject[];
+  mockHandlers?: RequestHandler[];
 }

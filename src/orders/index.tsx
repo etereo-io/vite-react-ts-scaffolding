@@ -9,6 +9,7 @@ import { AdminLayout } from "@/shared/layouts/AdminLayout";
 
 import locales from "./assets/locales";
 import { MODULE_ORDERS } from "./orders.constants";
+import { handlers } from "./orders.mock.handlers";
 import { OrdersPage } from "./pages/OrdersPage";
 
 const routes: RouteObject[] = [
@@ -38,4 +39,5 @@ registerModule({
   routes,
   menuItems,
   locales,
+  mockHandlers: handlers,
 });
