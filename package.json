@@ -13,7 +13,7 @@
     "types:check": "tsc --noEmit",
     "git:pre-commit": "npm run types:check && npm run lint:deps && lint-staged",
     "test:base": "vitest --passWithNoTests",
-    "test": "npm run test:run",
+    "test": "npm run test:coverage",
     "test:ui": "npm run test:base -- --ui",
     "test:run": "npm run test:base -- --run",
     "test:coverage": "npm run test:base -- --run --coverage",

@@ -69,7 +69,7 @@ export default defineConfig(({ mode }) => {
       coverage: {
         provider: "v8",
         include: ["src/**/*"],
-        exclude: ["src/main.tsx", "src/mocks/**/*", "*.test.*"],
+        exclude: ["src/main.tsx", "src/mock-server/**/*", "*.test.*", "*/__mocks__/*"],
         reporter: ["text", "html", "lcov"],
         reportsDirectory: "reports/vite-coverage",
         enabled: false,
