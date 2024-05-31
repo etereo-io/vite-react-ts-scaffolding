@@ -5,6 +5,7 @@ import { queryToObject } from "@/lib/queryparams/queryparams.helpers";
 import { DEFAULT_DELAY } from "@/mock-server/constants";
 
 import { OrderMother } from "./__mocks__/OrderMother";
+import { ERROR_ORDERID_REQUIRED } from "./orders.constants";
 
 const orders = OrderMother.getRandomList(100);
 
@@ -17,7 +18,13 @@ export const handlers = [
 
     await delay(DEFAULT_DELAY);
     return HttpResponse.json({
-      data: orders.slice(offset, limit),
+      data: orders.slice(offset, offset + limit),
+      pagination: {
+        offset,
+        limit,
+        count: orders.length,
+        hasMore: orders.length > offset + limit,
+      },
     });
   }),
 
@@ -27,19 +34,19 @@ export const handlers = [
     if (!orderId) {
       return HttpResponse.json(
         {
-          code: "required:orderId",
+          code: ERROR_ORDERID_REQUIRED,
           message: "orderId is required",
         },
         { status: 400 },
       );
-
-      return;
     }
 
     const orderIndex = orders.findIndex((order) => order.id === orderId);
-    orders.splice(orderIndex, 1);
+    if (orderIndex === -1) {
+      orders.splice(orderIndex, 1);
+    }
 
     await delay(DEFAULT_DELAY);
-    return HttpResponse.json(null, { status: 204 });
+    return new HttpResponse(null, { status: 204 });
   }),
 ];

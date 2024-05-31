@@ -1,6 +1,7 @@
-import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton, Pagination } from "@mui/material";
 import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,19 +11,15 @@ import TableRow from "@mui/material/TableRow";
 
 import { Title } from "@/shared/components/Title";
 
-import { useOrders } from "../hooks/useOrders";
-
-function preventDefault(event: React.MouseEvent) {
-  event.preventDefault();
-}
+import { useOrdersController } from "../hooks/useOrdersController";
 
 export function Orders() {
   const { t } = useTranslation();
 
-  const { data: orders } = useOrders();
+  const { page, orders, handleOnPaginationChange, handleOrderDelete, handleSeeMoreOrders } = useOrdersController();
 
   return (
-    <React.Fragment>
+    <>
       <Title>{t("orders.recent")}</Title>
       <Table size="small">
         <TableHead>
@@ -32,23 +29,39 @@ export function Orders() {
             <TableCell>Ship To</TableCell>
             <TableCell>Payment Method</TableCell>
             <TableCell align="right">Sale Amount</TableCell>
+            <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {orders?.map((order) => (
+          {orders?.data.map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.date}</TableCell>
               <TableCell>{order.name}</TableCell>
               <TableCell>{order.shipTo}</TableCell>
               <TableCell>{order.paymentMethod}</TableCell>
               <TableCell align="right">{`$${order.amount}`}</TableCell>
+              <TableCell align="right">
+                <IconButton aria-label="delete" onClick={handleOrderDelete(order.id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+
+      <Pagination
+        count={orders?.pagination.count || 0}
+        page={page}
+        onChange={handleOnPaginationChange}
+        sx={{
+          mt: 3,
+        }}
+      />
+
+      <Link color="primary" href="#" onClick={handleSeeMoreOrders} sx={{ mt: 3 }}>
         See more orders
       </Link>
-    </React.Fragment>
+    </>
   );
 }
