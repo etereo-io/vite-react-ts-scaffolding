@@ -7,7 +7,14 @@ import { LocaleResources } from "@/i18n/i18n.types";
 
 import { MenuItem, Module } from "../app.types";
 
-const modules: Module[] = [];
+export type GlobalThis = typeof globalThis & { APP_MODULES: Module[] };
+
+// use globalThis to store modules as singleton
+// avoid problems with vite.setup cached imports
+if (!(globalThis as GlobalThis).APP_MODULES) {
+  (globalThis as GlobalThis).APP_MODULES = [];
+}
+const modules: Module[] = (globalThis as GlobalThis).APP_MODULES;
 
 export const getAllowedMenuItems = (user: User) => () => {
   return modules

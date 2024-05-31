@@ -23,3 +23,5 @@ export interface PaginatedResponse<T> extends ApiListResponse<T> {
 }
 
 export const API_DEFAULT_LIMIT = 20;
+
+export const ERROR_INTERNAL = "error:internal";

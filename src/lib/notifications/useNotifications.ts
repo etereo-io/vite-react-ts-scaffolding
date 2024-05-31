@@ -1,4 +1,4 @@
-import { notifications } from "@/lib/notifications";
+import { notifications } from "./notifications";
 
 export function useNotifications() {
   return notifications;

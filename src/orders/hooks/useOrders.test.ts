@@ -9,7 +9,7 @@ import { OrderMother } from "../__mocks__/OrderMother";
 import { TestProviders } from "#/tests.helpers";
 
 const mockNotificationError = vi.fn();
-vi.mock("@/lib/notifications", () => ({
+vi.mock("@/lib/notifications/notifications", () => ({
   notifications: {
     error: (...args: unknown[]) => mockNotificationError(...args),
   },

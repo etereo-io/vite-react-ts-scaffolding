@@ -47,6 +47,9 @@ if (typeof document !== "undefined") {
   Element.prototype.scrollTo = vi.fn<any, typeof Element.prototype.scrollTo>();
 }
 
+// https://github.com/vitest-dev/vitest/issues/1450
+vi.resetModules();
+
 beforeAll(() => {
   server.listen(mockServerConfig);
 });

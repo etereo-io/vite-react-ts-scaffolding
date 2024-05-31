@@ -10,6 +10,13 @@ import { OrderMother } from "../__mocks__/OrderMother";
 
 import { TestProviders } from "#/tests.helpers";
 
+const mockEvent = vi.fn();
+vi.mock("@/lib/metrics/useMetrics", () => ({
+  useMetrics: () => ({
+    event: (name: string) => mockEvent(name),
+  }),
+}));
+
 describe("useOrdersController", () => {
   const orderPage = {
     data: OrderMother.getRandomPage(),

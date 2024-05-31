@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { MutationCache, QueryCache, QueryClient, QueryClientConfig } from "@tanstack/react-query";
 
-import { notifications } from "@/lib/notifications";
+import { notifications } from "@/lib/notifications/notifications";
 
 const defaultQueryCache = new QueryCache({
   onError: (error, query) => {

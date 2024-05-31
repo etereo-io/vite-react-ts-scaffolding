@@ -5,6 +5,7 @@ import { queryToObject } from "@/lib/queryparams/queryparams.helpers";
 import { DEFAULT_DELAY } from "@/mock-server/constants";
 
 import { OrderMother } from "./__mocks__/OrderMother";
+import { ERROR_ORDERID_REQUIRED } from "./orders.constants";
 
 const orders = OrderMother.getRandomList(100);
 
@@ -33,7 +34,7 @@ export const handlers = [
     if (!orderId) {
       return HttpResponse.json(
         {
-          code: "required:orderId",
+          code: ERROR_ORDERID_REQUIRED,
           message: "orderId is required",
         },
         { status: 400 },
@@ -46,6 +47,6 @@ export const handlers = [
     }
 
     await delay(DEFAULT_DELAY);
-    return HttpResponse.json({}, { status: 204 });
+    return new HttpResponse(null, { status: 204 });
   }),
 ];

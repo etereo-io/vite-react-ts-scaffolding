@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { useMetrics } from "@/app/hooks/useMetrics";
+import { useMetrics } from "@/lib/metrics/useMetrics";
 
 import { EVENT_ORDER_DELETE, QUERY_KEY_ORDERS } from "../orders.constants";
 import { deleteOrder } from "../orders.services";
