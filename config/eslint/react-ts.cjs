@@ -49,6 +49,7 @@ module.exports = {
     ],
     "react/jsx-uses-react": ["warn"],
     "react/jsx-uses-vars": ["warn"],
+    "react/prefer-read-only-props": ["warn"],
   },
   settings: {
     react: {

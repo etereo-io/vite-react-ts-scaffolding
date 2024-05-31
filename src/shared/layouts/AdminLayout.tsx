@@ -70,7 +70,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
   },
 }));
 
-export function AdminLayout({ children }: { children?: React.ReactNode }) {
+export function AdminLayout({ children }: { readonly children?: React.ReactNode }) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);

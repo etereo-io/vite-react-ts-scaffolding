@@ -3,7 +3,7 @@ import * as React from "react";
 import Typography from "@mui/material/Typography";
 
 interface TitleProps {
-  children?: React.ReactNode;
+  readonly children?: React.ReactNode;
 }
 
 export function Title(props: TitleProps) {

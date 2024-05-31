@@ -9,9 +9,9 @@ export function AppProviders({
   queryClient = defaultQueryClient,
   theme = defaultTheme,
 }: {
-  children: React.ReactNode;
-  queryClient?: QueryClient;
-  theme?: Theme;
+  readonly children: React.ReactNode;
+  readonly queryClient?: QueryClient;
+  readonly theme?: Theme;
 }) {
   return (
     <QueryClientProvider client={queryClient}>

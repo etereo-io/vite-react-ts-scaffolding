@@ -5,7 +5,7 @@ import { RenderOptions, render } from "@testing-library/react";
 import { AppProviders } from "@/app/components/AppProviders";
 import { getAllRoutes } from "@/app/modules/modules.helpers";
 
-export function TestProviders({ children }: { children: React.ReactNode }) {
+export function TestProviders({ children }: { readonly children: React.ReactNode }) {
   return (
     <AppProviders>
       <MemoryRouter>{children}</MemoryRouter>
@@ -13,7 +13,7 @@ export function TestProviders({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function TestApp({ initialEntries }: { initialEntries?: string[] }) {
+export function TestApp({ initialEntries }: { readonly initialEntries?: string[] }) {
   const router = createMemoryRouter(getAllRoutes(), {
     initialEntries,
   });
