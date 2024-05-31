@@ -12,12 +12,13 @@ export default defineConfig(({ mode }) => {
 
   const inProdMode = mode === "production";
 
-  // expose .env vars to server environment
+  // expose .env vars to server environment (only VITE_ prefixed vars)
   const env = loadEnv(mode, process.cwd(), "");
-  process.env["VITE_DEFAULT_DELAY"] = env.VITE_DEFAULT_DELAY;
-  process.env["VITE_APP_CONTEXT_PATH"] = env.VITE_APP_CONTEXT_PATH;
-  process.env["VITE_APP_ENDPOINT"] = env.VITE_APP_ENDPOINT;
-  process.env["VITE_ENABLE_MSW"] = env.VITE_ENABLE_MSW;
+  Object.keys(env).forEach((key) => {
+    if (key.startsWith("VITE_")) {
+      process.env[key] = env[key];
+    }
+  });
 
   return {
     plugins: [
@@ -58,10 +59,11 @@ export default defineConfig(({ mode }) => {
 
       setupFiles: path.resolve(__dirname, "vitest.setup.ts"),
 
-      reporters: ["default", "json"],
+      reporters: ["default", "json", "vitest-sonar-reporter"],
       outputFile: {
         json: "reports/test-report/test-report.json",
         html: "reports/test-report/test-report.html",
+        "vitest-sonar-reporter": "reports/vite-sonar/sonar-report.xml",
       },
 
       coverage: {
@@ -74,6 +76,10 @@ export default defineConfig(({ mode }) => {
       },
 
       clearMocks: true,
+      mockReset: true,
+      restoreMocks: true,
+      unstubGlobals: true,
+      unstubEnvs: true,
     },
   };
 });
