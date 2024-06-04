@@ -6,12 +6,12 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
 import { getAllowedMenuItems } from "@/app/modules/modules.helpers";
-import { useUser } from "@/auth/hooks/useUser";
+import { useLoggedUser } from "@/auth/hooks/useLoggedUser";
 
 export function AdminMenuItems() {
   const { t } = useTranslation();
 
-  const user = useUser();
+  const { user } = useLoggedUser();
 
   return getAllowedMenuItems(user)().map((menuItem) => (
     <Link to={menuItem.path} key={menuItem.path}>

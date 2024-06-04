@@ -9,6 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
+import { AllowedAuth } from "@/auth/components/AllowedAuth";
 import { Title } from "@/shared/components/Title";
 
 import { useOrdersController } from "../hooks/useOrdersController";
@@ -16,12 +17,13 @@ import { useOrdersController } from "../hooks/useOrdersController";
 export function Orders() {
   const { t } = useTranslation();
 
-  const { page, orders, handleOnPaginationChange, handleOrderDelete, handleSeeMoreOrders } = useOrdersController();
+  const { canDelete, page, orders, handleOnPaginationChange, handleOrderDelete, handleSeeMoreOrders } =
+    useOrdersController();
 
   return (
     <>
       <Title>{t("orders.recent")}</Title>
-      <Table size="small">
+      <Table size="small" data-testid="orders-table">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
@@ -41,9 +43,13 @@ export function Orders() {
               <TableCell>{order.paymentMethod}</TableCell>
               <TableCell align="right">{`$${order.amount}`}</TableCell>
               <TableCell align="right">
-                <IconButton aria-label="delete" onClick={handleOrderDelete(order.id)}>
-                  <DeleteIcon />
-                </IconButton>
+                {/* this could be also valid, but just to show an example with already evaluated permission */}
+                {/* <AllowedAuth permissions={PERMISSION_ORDERS_DELETE}> */}
+                <AllowedAuth permissions={canDelete}>
+                  <IconButton aria-label="delete" onClick={handleOrderDelete(order.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </AllowedAuth>
               </TableCell>
             </TableRow>
           ))}

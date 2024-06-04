@@ -2,11 +2,14 @@ import { useCallback, useState } from "react";
 
 import { API_DEFAULT_LIMIT } from "@/app/api";
 
+import { useOrdersPermissions } from "./useOrdersPermissions";
 import { useOrderDelete } from "../hooks/useOrderDelete";
 import { useOrders } from "../hooks/useOrders";
 
 export function useOrdersController() {
   const [offset, setOffset] = useState(0);
+
+  const { canDelete } = useOrdersPermissions();
 
   const handleOnPaginationChange = (_: unknown, page: number) => {
     setOffset((page - 1) * API_DEFAULT_LIMIT);
@@ -24,6 +27,7 @@ export function useOrdersController() {
   const page = isFetching ? 0 : Math.floor((offset ?? 0) / (orders?.pagination.limit ?? 0)) + 1 || 0;
 
   return {
+    canDelete,
     page,
     orders,
     mutation,
