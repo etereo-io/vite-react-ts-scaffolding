@@ -5,6 +5,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { MenuItem } from "@/app/app.types";
 import { registerModule } from "@/app/modules/modules.helpers";
 import { User, UserRoles } from "@/auth/auth.types";
+import { queryToObject } from "@/lib/queryparams/queryparams.helpers";
 import { AdminLayout } from "@/shared/layouts/AdminLayout";
 
 import locales from "./assets/locales";
@@ -15,6 +16,7 @@ import {
   PERMISSION_ORDERS_VIEW,
 } from "./orders.constants";
 import { handlers } from "./orders.mock.handlers";
+import { OrderStatus } from "./orders.types";
 import { OrdersPage } from "./pages/OrdersPage";
 
 const routes: RouteObject[] = [
@@ -33,9 +35,25 @@ const routes: RouteObject[] = [
 const menuItems: MenuItem[] = [
   {
     title: "orders.title",
-    icon: <ShoppingCartIcon />,
     path: "/admin/orders",
+    icon: <ShoppingCartIcon />,
     isAllowed: (user: User) => Object.values(UserRoles).some((role) => user.roles.includes(role)),
+    children: [
+      {
+        title: "orders.open.title",
+        path: `/admin/orders?status=${OrderStatus.PENDING}`,
+        isActive: (location) =>
+          location.pathname.includes("/admin/orders") && queryToObject(location.search).status === OrderStatus.PENDING,
+        isAllowed: (user: User) => Object.values(UserRoles).some((role) => user.roles.includes(role)),
+      },
+      {
+        title: "orders.closed.title",
+        path: `/admin/orders?status=${OrderStatus.CLOSED}`,
+        isActive: (location) =>
+          location.pathname.includes("/admin/orders") && queryToObject(location.search).status === OrderStatus.CLOSED,
+        isAllowed: (user: User) => Object.values(UserRoles).some((role) => user.roles.includes(role)),
+      },
+    ],
   },
 ];
 

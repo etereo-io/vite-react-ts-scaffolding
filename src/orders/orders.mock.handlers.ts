@@ -15,10 +15,11 @@ export const handlers = [
 
     const offset = +(query.offset ?? 0);
     const limit = +(query.limit ?? API_DEFAULT_LIMIT);
+    const status = query.status;
 
     await delay(DEFAULT_DELAY);
     return HttpResponse.json({
-      data: orders.slice(offset, offset + limit),
+      data: orders.filter((order) => (status ? order.status === status : true)).slice(offset, offset + limit),
       pagination: {
         offset,
         limit,

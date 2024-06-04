@@ -1,22 +1,37 @@
 import { useCallback, useState } from "react";
 
+import { SelectChangeEvent } from "@mui/material";
+
 import { API_DEFAULT_LIMIT } from "@/app/api";
+import { useQueryParamState } from "@/lib/queryparams/hooks/useQueryParamState";
 
 import { useOrdersPermissions } from "./useOrdersPermissions";
 import { useOrderDelete } from "../hooks/useOrderDelete";
 import { useOrders } from "../hooks/useOrders";
+import { QUERY_PARAM_ORDERS_STATUS } from "../orders.constants";
+import { OrderStatus } from "../orders.types";
 
 export function useOrdersController() {
   const [offset, setOffset] = useState(0);
 
   const { canDelete } = useOrdersPermissions();
 
+  const { value: status, setValue: setStatus } = useQueryParamState<OrderStatus | null>(QUERY_PARAM_ORDERS_STATUS);
+
+  const { data: orders, isFetching } = useOrders({ offset, status: status ?? undefined });
+  const mutation = useOrderDelete();
+
   const handleOnPaginationChange = (_: unknown, page: number) => {
     setOffset((page - 1) * API_DEFAULT_LIMIT);
   };
 
-  const { data: orders, isFetching } = useOrders(offset);
-  const mutation = useOrderDelete();
+  const handleOrderStatusChange = useCallback(
+    (event: SelectChangeEvent<OrderStatus>) => {
+      setStatus(event.target.value as OrderStatus);
+      setOffset(0);
+    },
+    [setStatus],
+  );
 
   const handleOrderDelete = useCallback((orderId: string) => () => mutation.mutate(orderId), [mutation]);
 
@@ -31,6 +46,8 @@ export function useOrdersController() {
     page,
     orders,
     mutation,
+    status,
+    handleOrderStatusChange,
     handleOnPaginationChange,
     handleOrderDelete,
     handleSeeMoreOrders,

@@ -1,5 +1,6 @@
 {
   "translation": {
-    "shared.error.page.permissions": "You do not have permission to access this page"
+    "shared.error.page.permissions": "You do not have permission to access this page",
+    "shared.all": "All"
   }
 }

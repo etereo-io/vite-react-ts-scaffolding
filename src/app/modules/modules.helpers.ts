@@ -1,4 +1,4 @@
-import { RouteObject } from "react-router-dom";
+import { Location, RouteObject } from "react-router-dom";
 
 import { deepmerge } from "deepmerge-ts";
 
@@ -47,4 +47,8 @@ export const getAllMockHandlers = () => {
 
 export function registerModule(module: Module) {
   modules.push(module);
+}
+
+export function defaultIsActiveHandler(location: Location, path?: string) {
+  return !!path && location.pathname.includes(path);
 }

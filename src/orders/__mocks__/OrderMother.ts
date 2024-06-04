@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 
 import { API_DEFAULT_LIMIT } from "@/app/api";
 
-import { Order } from "../orders.types";
+import { Order, OrderStatus } from "../orders.types";
 
 export class OrderMother {
   static getRandomOrder(order?: Partial<Order>) {
@@ -13,6 +13,7 @@ export class OrderMother {
       shipTo: faker.location.direction(),
       paymentMethod: faker.commerce.price(),
       amount: faker.finance.amount(),
+      status: faker.helpers.enumValue(OrderStatus),
       ...order,
     } as Order;
   }

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import DeleteIcon from "@mui/icons-material/Delete";
-import { IconButton, Pagination } from "@mui/material";
+import { IconButton, MenuItem, Pagination, Select } from "@mui/material";
 import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,16 +13,43 @@ import { AllowedAuth } from "@/auth/components/AllowedAuth";
 import { Title } from "@/shared/components/Title";
 
 import { useOrdersController } from "../hooks/useOrdersController";
+import { OrderStatus } from "../orders.types";
 
 export function Orders() {
   const { t } = useTranslation();
 
-  const { canDelete, page, orders, handleOnPaginationChange, handleOrderDelete, handleSeeMoreOrders } =
-    useOrdersController();
+  const {
+    canDelete,
+    page,
+    orders,
+    status,
+    handleOrderStatusChange,
+    handleOnPaginationChange,
+    handleOrderDelete,
+    handleSeeMoreOrders,
+  } = useOrdersController();
 
   return (
     <>
-      <Title>{t("orders.recent")}</Title>
+      <Title>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          {t("orders.recent")}
+          <Select value={status ?? ""} displayEmpty label="status" onChange={handleOrderStatusChange}>
+            <MenuItem value="">{t("shared.all")}</MenuItem>
+            {Object.values(OrderStatus).map((status) => (
+              <MenuItem key={status} value={status}>
+                {status.toUpperCase()}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+      </Title>
       <Table size="small" data-testid="orders-table">
         <TableHead>
           <TableRow>
@@ -30,6 +57,7 @@ export function Orders() {
             <TableCell>Name</TableCell>
             <TableCell>Ship To</TableCell>
             <TableCell>Payment Method</TableCell>
+            <TableCell>Status</TableCell>
             <TableCell align="right">Sale Amount</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
@@ -41,6 +69,7 @@ export function Orders() {
               <TableCell>{order.name}</TableCell>
               <TableCell>{order.shipTo}</TableCell>
               <TableCell>{order.paymentMethod}</TableCell>
+              <TableCell>{order.status}</TableCell>
               <TableCell align="right">{`$${order.amount}`}</TableCell>
               <TableCell align="right">
                 {/* this could be also valid, but just to show an example with already evaluated permission */}
