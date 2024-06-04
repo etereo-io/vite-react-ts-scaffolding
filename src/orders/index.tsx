@@ -8,7 +8,12 @@ import { User, UserRoles } from "@/auth/auth.types";
 import { AdminLayout } from "@/shared/layouts/AdminLayout";
 
 import locales from "./assets/locales";
-import { MODULE_ORDERS } from "./orders.constants";
+import {
+  MODULE_ORDERS,
+  PERMISSION_ORDERS_DELETE,
+  PERMISSION_ORDERS_LIST,
+  PERMISSION_ORDERS_VIEW,
+} from "./orders.constants";
 import { handlers } from "./orders.mock.handlers";
 import { OrdersPage } from "./pages/OrdersPage";
 
@@ -40,4 +45,5 @@ registerModule({
   menuItems,
   locales,
   mockHandlers: handlers,
+  permissions: [PERMISSION_ORDERS_LIST, PERMISSION_ORDERS_VIEW, PERMISSION_ORDERS_DELETE],
 });

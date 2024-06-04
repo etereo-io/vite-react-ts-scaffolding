@@ -16,6 +16,10 @@ if (!(globalThis as GlobalThis).APP_MODULES) {
 }
 const modules: Module[] = (globalThis as GlobalThis).APP_MODULES;
 
+export const getModules = () => {
+  return modules;
+};
+
 export const getAllowedMenuItems = (user: User) => () => {
   return modules
 

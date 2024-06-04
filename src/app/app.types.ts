@@ -19,5 +19,8 @@ export interface Module {
   locales?: LocaleResources;
   menuItems?: MenuItem[];
   routes?: RouteObject[];
+  // all module mock handlers
   mockHandlers?: RequestHandler[];
+  // all module permissions definitions
+  permissions?: string[];
 }

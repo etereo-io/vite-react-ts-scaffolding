@@ -1,7 +1,13 @@
-import { PERMISSION_ORDERS_DELETE, PERMISSION_ORDERS_LIST, PERMISSION_ORDERS_VIEW } from "@/orders/orders.constants";
+import { getModules } from "@/app/modules/modules.helpers";
 
 export class PermissionMother {
   static getAll() {
-    return [PERMISSION_ORDERS_LIST, PERMISSION_ORDERS_VIEW, PERMISSION_ORDERS_DELETE];
+    return getModules()
+      .filter((module) => module.permissions)
+      .flatMap((module) => module.permissions) as string[];
+  }
+
+  static getAllByModuleName(module: string) {
+    return getModules().find((m) => m.name === module)?.permissions ?? [];
   }
 }
