@@ -24,7 +24,7 @@ export function Deposit() {
         ${totalAmount}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019 --
+        on {new Date().toLocaleDateString()}
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
