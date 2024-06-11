@@ -14,7 +14,7 @@ import { useDepositControllers } from "../hooks/useDepositControllers";
 
 export function DepositList() {
   const { t } = useTranslation();
-  const { deposits } = useDepositControllers();
+  const { deposits, handleDepositDelete } = useDepositControllers();
 
   return (
     <>
@@ -37,7 +37,7 @@ export function DepositList() {
               <TableCell>{deposit.name}</TableCell>
               <TableCell>${deposit.amount}</TableCell>
               <TableCell align="right">
-                <IconButton aria-label="delete">
+                <IconButton aria-label="delete" onClick={handleDepositDelete(deposit.id)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>

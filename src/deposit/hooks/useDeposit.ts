@@ -7,11 +7,5 @@ export function useDeposit() {
   return useQuery({
     queryKey: [QUERY_KEY_DEPOSIT],
     queryFn: () => fetchDeposits(),
-
-    // // TODO
-    // // ensure query has error handling
-    // meta: {
-    //   errorMessage: "deposits.fetch.error",
-    // },
   });
 }
