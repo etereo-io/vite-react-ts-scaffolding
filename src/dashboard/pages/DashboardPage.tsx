@@ -1,10 +1,10 @@
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
+import { Deposit } from "@/deposit/components/Deposit";
 import { Orders } from "@/orders/components/Orders";
 
 import { Chart } from "../components/Chart";
-import { Deposits } from "../components/Deposits";
 
 export function DashboardPage() {
   return (
@@ -32,7 +32,7 @@ export function DashboardPage() {
             height: 240,
           }}
         >
-          <Deposits />
+          <Deposit />
         </Paper>
       </Grid>
       {/* Recent Orders */}

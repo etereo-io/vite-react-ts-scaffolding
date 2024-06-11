@@ -1,6 +1,7 @@
 import "@/auth";
 import "@/dashboard";
+import "@/deposit";
 import "@/orders";
 
-import "@/shared";
 import "@/i18n";
+import "@/shared";
