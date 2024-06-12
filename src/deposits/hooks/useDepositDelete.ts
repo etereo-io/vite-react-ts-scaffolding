@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { QUERY_KEY_DEPOSIT } from "../deposit.constants";
-import { deleteDeposit } from "../deposit.services";
+import { QUERY_KEY_DEPOSITS } from "../deposits.constants";
+import { deleteDeposit } from "../deposits.services";
 
 export function useDepositDelete() {
   const queryClient = useQueryClient();
@@ -15,7 +15,7 @@ export function useDepositDelete() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_DEPOSIT],
+        queryKey: [QUERY_KEY_DEPOSITS],
       });
     },
     meta: {

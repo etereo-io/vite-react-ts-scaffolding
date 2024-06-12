@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import { Title } from "@/shared/components/Title";
 
-import { useDepositControllers } from "../hooks/useDepositControllers";
+import { useDepositsControllers } from "../hooks/useDepositsControllers";
 
 function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
@@ -15,7 +15,7 @@ function preventDefault(event: React.MouseEvent) {
 export function Deposit() {
   const { t } = useTranslation();
 
-  const { totalAmount } = useDepositControllers();
+  const { totalAmount } = useDepositsControllers();
 
   return (
     <React.Fragment>

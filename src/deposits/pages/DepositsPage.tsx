@@ -6,10 +6,10 @@ import Paper from "@mui/material/Paper";
 import { AllowedAuth } from "@/auth/components/AllowedAuth";
 
 import { Deposit } from "../components/Deposit";
-import { DepositList } from "../components/DepositList";
-import { PERMISSION_DEPOSIT_LIST } from "../deposit.constants";
+import { DepositsList } from "../components/DepositsList";
+import { PERMISSION_DEPOSITS_LIST } from "../deposits.constants";
 
-export function DepositPage() {
+export function DepositsPage() {
   return (
     <>
       {/* Recent Deposits */}
@@ -22,7 +22,7 @@ export function DepositPage() {
             height: 180,
           }}
         >
-          <AllowedAuth permissions={PERMISSION_DEPOSIT_LIST} error={<Trans i18nKey="shared.error.page.permissions" />}>
+          <AllowedAuth permissions={PERMISSION_DEPOSITS_LIST} error={<Trans i18nKey="shared.error.page.permissions" />}>
             <Deposit />
           </AllowedAuth>
         </Paper>
@@ -34,8 +34,8 @@ export function DepositPage() {
             flexDirection: "column",
           }}
         >
-          <AllowedAuth permissions={PERMISSION_DEPOSIT_LIST} error={<Trans i18nKey="shared.error.page.permissions" />}>
-            <DepositList />
+          <AllowedAuth permissions={PERMISSION_DEPOSITS_LIST} error={<Trans i18nKey="shared.error.page.permissions" />}>
+            <DepositsList />
           </AllowedAuth>
         </Paper>
       </Grid>

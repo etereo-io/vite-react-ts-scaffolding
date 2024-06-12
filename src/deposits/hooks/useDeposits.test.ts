@@ -3,8 +3,8 @@ import { http, HttpResponse } from "msw";
 
 import { server } from "@/mock-server/node";
 
-import { useDeposit } from "./useDeposit";
-import { DepositMother } from "../__mocks__/DepositMother";
+import { useDeposits } from "./useDeposits";
+import { DepositsMother } from "../__mocks__/DepositsMother";
 
 import { TestProviders } from "#/tests.helpers";
 
@@ -16,7 +16,7 @@ vi.mock("@/lib/notifications/notifications", () => ({
 }));
 
 describe("useDeposit", () => {
-  const data = DepositMother.getRandomList();
+  const data = DepositsMother.getRandomList();
 
   beforeEach(() => {
     //server mock return data
@@ -30,7 +30,7 @@ describe("useDeposit", () => {
   });
 
   it("fetches deposits successfully", async () => {
-    const { result } = renderHook(() => useDeposit(), { wrapper: TestProviders });
+    const { result } = renderHook(() => useDeposits(), { wrapper: TestProviders });
 
     await waitFor(() => expect(result.current.isPending).toBe(false));
     expect(result.current.data?.data).toStrictEqual(data);
@@ -39,7 +39,7 @@ describe("useDeposit", () => {
   it("should notify on error", async () => {
     //server mock return error
     server.use(http.get("/api/deposits", () => HttpResponse.error()));
-    const { result } = renderHook(() => useDeposit(), { wrapper: TestProviders });
+    const { result } = renderHook(() => useDeposits(), { wrapper: TestProviders });
 
     await waitFor(() => expect(result.current.isError).toBeTruthy());
     expect(mockNotificationError).toHaveBeenCalledTimes(1);

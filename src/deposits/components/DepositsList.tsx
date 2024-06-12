@@ -11,11 +11,11 @@ import TableRow from "@mui/material/TableRow";
 import { AllowedAuth } from "@/auth/components/AllowedAuth";
 import { Title } from "@/shared/components/Title";
 
-import { useDepositControllers } from "../hooks/useDepositControllers";
+import { useDepositsControllers } from "../hooks/useDepositsControllers";
 
-export function DepositList() {
+export function DepositsList() {
   const { t } = useTranslation();
-  const { deposits, canDelete, handleDepositDelete } = useDepositControllers();
+  const { deposits, canDelete, handleDepositDelete } = useDepositsControllers();
 
   return (
     <>

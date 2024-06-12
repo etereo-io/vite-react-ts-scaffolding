@@ -2,10 +2,10 @@ import { delay, http, HttpResponse } from "msw";
 
 import { DEFAULT_DELAY } from "@/mock-server/constants";
 
-import { DepositMother } from "./__mocks__/DepositMother";
-import { ERROR_DEPOSITID_REQUIRED } from "./deposit.constants";
+import { DepositsMother } from "./__mocks__/DepositsMother";
+import { ERROR_DEPOSITID_REQUIRED } from "./deposits.constants";
 
-const deposits = DepositMother.getRandomList();
+const deposits = DepositsMother.getRandomList();
 
 export const handlers = [
   http.get("/api/deposits", async () => {

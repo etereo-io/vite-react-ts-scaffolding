@@ -1,12 +1,12 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { describe } from "vitest";
 
-import { useDepositControllers } from "./useDepositControllers";
-import { DepositMother } from "../__mocks__/DepositMother";
+import { useDepositsControllers } from "./useDepositsControllers";
+import { DepositsMother } from "../__mocks__/DepositsMother";
 
 import { TestProviders } from "#/tests.helpers";
 
-const depositData = DepositMother.getRandomList();
+const depositData = DepositsMother.getRandomList();
 
 vi.mock("./useDeposit", () => ({
   useDeposit: () => ({
@@ -17,13 +17,13 @@ vi.mock("./useDeposit", () => ({
 describe("useDepositControllers", () => {
   const expectedTotalAmount = depositData.reduce((acc, deposit) => acc + parseFloat(deposit.amount), 0);
   it("should calculate totalAmount correctly", () => {
-    const { result } = renderHook(() => useDepositControllers(), { wrapper: TestProviders });
+    const { result } = renderHook(() => useDepositsControllers(), { wrapper: TestProviders });
 
     expect(result.current.totalAmount).toBe(expectedTotalAmount);
   });
 
   it("should call mutation.mutate when handleDepositDelete is called", async () => {
-    const { result } = renderHook(() => useDepositControllers(), { wrapper: TestProviders });
+    const { result } = renderHook(() => useDepositsControllers(), { wrapper: TestProviders });
 
     act(() => {
       result.current.handleDepositDelete("depositId")();

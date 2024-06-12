@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
 
-import { Deposit } from "../deposit.types";
+import { Deposit } from "../deposits.types";
 
-export class DepositMother {
+export class DepositsMother {
   static getDeposits(deposit?: Partial<Deposit>) {
     return {
       id: faker.string.uuid(),

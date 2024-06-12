@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
-import { Deposit } from "@/deposit/components/Deposit";
+import { Deposit } from "@/deposits/components/Deposit";
 import { Orders } from "@/orders/components/Orders";
 
 import { Chart } from "../components/Chart";

@@ -1,0 +1,11 @@
+{
+  "translation": {
+    "deposit.title": "Depósitos",
+    "deposit.total": "Depósitos totales",
+    "deposit.balance": "Ver balance",
+    "deposit.recent": "Depósitos recientes",
+    "deposit.fetch.error": "Error al obtener los depósitos",
+    "deposit.delete.error": "Error al eliminar el depósito",
+    "deposit.delete.success": "Depósito eliminado con éxito"
+  }
+}

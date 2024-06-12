@@ -3,8 +3,8 @@ import { http, HttpResponse } from "msw";
 
 import { server } from "@/mock-server/node";
 
-import { DepositList } from "./DepositList";
-import { DepositMother } from "../__mocks__/DepositMother";
+import { DepositsList } from "./DepositsList";
+import { DepositsMother } from "../__mocks__/DepositsMother";
 
 import { renderWithTestProviders } from "#/tests.helpers";
 
@@ -14,7 +14,7 @@ vi.mock("react-i18next", () => ({
 }));
 
 describe("DepositList", () => {
-  const deposits = DepositMother.getRandomList();
+  const deposits = DepositsMother.getRandomList();
 
   beforeEach(() => {
     //server mock return data
@@ -28,7 +28,7 @@ describe("DepositList", () => {
   });
 
   it("renders table correctly with deposits", async () => {
-    const { container } = renderWithTestProviders(<DepositList />);
+    const { container } = renderWithTestProviders(<DepositsList />);
 
     // Verify colums title
     expect(screen.getByText("Date")).toBeInTheDocument();

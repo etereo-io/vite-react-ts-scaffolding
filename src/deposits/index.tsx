@@ -9,13 +9,13 @@ import { AdminLayout } from "@/shared/layouts/AdminLayout";
 
 import locales from "./assets/locales";
 import {
-  MODULE_DEPOSIT,
-  PERMISSION_DEPOSIT_DELETE,
-  PERMISSION_DEPOSIT_LIST,
-  PERMISSION_DEPOSIT_VIEW,
-} from "./deposit.constants";
-import { handlers } from "./deposit.mock.handlers";
-import { DepositPage } from "./pages/DepositPage";
+  PERMISSION_DEPOSITS_LIST,
+  PERMISSION_DEPOSITS_VIEW,
+  PERMISSION_DEPOSITS_DELETE,
+  MODULE_DEPOSITS,
+} from "./deposits.constants";
+import { handlers } from "./deposits.mock.handlers";
+import { DepositsPage } from "./pages/DepositsPage";
 
 const routes: RouteObject[] = [
   {
@@ -23,8 +23,8 @@ const routes: RouteObject[] = [
     element: <AdminLayout />,
     children: [
       {
-        path: "deposit",
-        element: <DepositPage />,
+        path: "deposits",
+        element: <DepositsPage />,
       },
     ],
   },
@@ -34,16 +34,16 @@ const menuItems: MenuItem[] = [
   {
     title: "deposit.title",
     icon: <EuroSymbolIcon />,
-    path: "/admin/deposit",
+    path: "/admin/deposits",
     isAllowed: (user: User) => Object.values(UserRoles).some((role) => user.roles.includes(role)),
   },
 ];
 
 registerModule({
-  name: MODULE_DEPOSIT,
+  name: MODULE_DEPOSITS,
   routes,
   menuItems,
   mockHandlers: handlers,
   locales,
-  permissions: [PERMISSION_DEPOSIT_LIST, PERMISSION_DEPOSIT_VIEW, PERMISSION_DEPOSIT_DELETE],
+  permissions: [PERMISSION_DEPOSITS_LIST, PERMISSION_DEPOSITS_VIEW, PERMISSION_DEPOSITS_DELETE],
 });
