@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 import { useDeposit } from "./useDeposit";
 import { useDepositDelete } from "./useDepositDelete";
@@ -6,9 +6,10 @@ import { useDepositDelete } from "./useDepositDelete";
 export function useDepositControllers() {
   const { data: deposits } = useDeposit();
 
-  const totalAmount = deposits
-    ? deposits.data.reduce((total, deposit) => total + parseFloat(deposit.amount), 0).toFixed(2)
-    : 0;
+  const totalAmount = useMemo(() => {
+    if (!deposits) return 0;
+    return deposits.data.reduce((total, deposit) => total + parseFloat(deposit.amount), 0).toFixed(2);
+  }, [deposits]);
 
   const mutation = useDepositDelete();
 
