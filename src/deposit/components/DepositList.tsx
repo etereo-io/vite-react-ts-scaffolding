@@ -8,13 +8,14 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
+import { AllowedAuth } from "@/auth/components/AllowedAuth";
 import { Title } from "@/shared/components/Title";
 
 import { useDepositControllers } from "../hooks/useDepositControllers";
 
 export function DepositList() {
   const { t } = useTranslation();
-  const { deposits, handleDepositDelete } = useDepositControllers();
+  const { deposits, canDelete, handleDepositDelete } = useDepositControllers();
 
   return (
     <>
@@ -37,9 +38,11 @@ export function DepositList() {
               <TableCell>{deposit.name}</TableCell>
               <TableCell>${deposit.amount}</TableCell>
               <TableCell align="right">
-                <IconButton aria-label="delete" onClick={handleDepositDelete(deposit.id)}>
-                  <DeleteIcon />
-                </IconButton>
+                <AllowedAuth permissions={canDelete}>
+                  <IconButton aria-label="delete" onClick={handleDepositDelete(deposit.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </AllowedAuth>
               </TableCell>
             </TableRow>
           ))}

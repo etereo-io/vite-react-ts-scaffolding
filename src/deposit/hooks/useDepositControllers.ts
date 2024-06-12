@@ -2,9 +2,11 @@ import { useCallback, useMemo } from "react";
 
 import { useDeposit } from "./useDeposit";
 import { useDepositDelete } from "./useDepositDelete";
+import { useDepositPermissions } from "./useDepositPermissions";
 
 export function useDepositControllers() {
   const { data: deposits } = useDeposit();
+  const { canDelete } = useDepositPermissions();
 
   const totalAmount = useMemo(() => {
     if (!deposits) return 0;
@@ -17,6 +19,7 @@ export function useDepositControllers() {
 
   return {
     deposits,
+    canDelete,
     totalAmount,
     mutation,
     handleDepositDelete,
