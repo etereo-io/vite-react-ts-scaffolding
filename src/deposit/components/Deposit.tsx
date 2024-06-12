@@ -21,7 +21,7 @@ export function Deposit() {
     <React.Fragment>
       <Title>{t("deposit.total")}</Title>
       <Typography component="p" variant="h4">
-        ${totalAmount}
+        ${totalAmount.toFixed(2)}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         on {new Date().toLocaleDateString()}
