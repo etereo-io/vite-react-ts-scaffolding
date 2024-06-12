@@ -6,6 +6,10 @@
     "deposit.recent": "Recent deposits",
     "deposit.fetch.error": "Error fetching deposits",
     "deposit.delete.error": "Error deleting deposit",
-    "deposit.delete.success": "Deposit successfully deleted"
+    "deposit.delete.success": "Deposit successfully deleted",
+    "deposit.table.date": "DATE",
+    "deposit.table.id": "ID",
+    "deposit.table.name": "NAME",
+    "deposit.table.amount": "AMOUNT"
   }
 }

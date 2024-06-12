@@ -23,10 +23,10 @@ export function DepositsList() {
       <Table size="small" data-testid="deposits-table">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Amount</TableCell>
+            <TableCell>{t("deposit.table.date")}</TableCell>
+            <TableCell>{t("deposit.table.id")}</TableCell>
+            <TableCell>{t("deposit.table.name")}</TableCell>
+            <TableCell>{t("deposit.table.amount")}</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
