@@ -3,6 +3,9 @@
     "deposit.title": "Depositos",
     "deposit.total": "Depositos totales",
     "deposit.balance": "View balance",
-    "deposit.recent": "Depositos recientes"
+    "deposit.recent": "Depositos recientes",
+    "deposit.fetch.error": "Error al obtener los depositos",
+    "deposit.delete.error": "Error al eliminar el deposito",
+    "deposit.delete.success": "Deposito eliminado con éxito"
   }
 }
