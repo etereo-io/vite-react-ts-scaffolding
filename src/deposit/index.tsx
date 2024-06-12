@@ -8,7 +8,12 @@ import { User, UserRoles } from "@/auth/auth.types";
 import { AdminLayout } from "@/shared/layouts/AdminLayout";
 
 import locales from "./assets/locales";
-import { MODULE_DEPOSIT } from "./deposit.constants";
+import {
+  MODULE_DEPOSIT,
+  PERMISSION_DEPOSIT_DELETE,
+  PERMISSION_DEPOSIT_LIST,
+  PERMISSION_DEPOSIT_VIEW,
+} from "./deposit.constants";
 import { handlers } from "./deposit.mock.handlers";
 import { DepositPage } from "./pages/DepositPage";
 
@@ -40,4 +45,5 @@ registerModule({
   menuItems,
   mockHandlers: handlers,
   locales,
+  permissions: [PERMISSION_DEPOSIT_LIST, PERMISSION_DEPOSIT_VIEW, PERMISSION_DEPOSIT_DELETE],
 });
