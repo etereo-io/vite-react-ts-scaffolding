@@ -8,7 +8,7 @@ export function useDepositControllers() {
 
   const totalAmount = useMemo(() => {
     if (!deposits) return 0;
-    return deposits.data.reduce((total, deposit) => total + parseFloat(deposit.amount), 0).toFixed(2);
+    return deposits.data.reduce((total, deposit) => total + parseFloat(deposit.amount), 0);
   }, [deposits]);
 
   const mutation = useDepositDelete();
@@ -18,6 +18,7 @@ export function useDepositControllers() {
   return {
     deposits,
     totalAmount,
+    mutation,
     handleDepositDelete,
   };
 }
