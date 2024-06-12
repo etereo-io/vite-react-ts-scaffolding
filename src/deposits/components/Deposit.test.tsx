@@ -1,8 +1,13 @@
 import { I18nextProvider, initReactI18next } from "react-i18next";
 
+import { waitFor } from "@testing-library/react";
 import i18next from "i18next";
+import { http, HttpResponse } from "msw";
+
+import { server } from "@/mock-server/node";
 
 import { Deposit } from "./Deposit";
+import { DepositsMother } from "../__mocks__/DepositsMother";
 import resources from "../assets/locales";
 
 import { renderWithTestProviders } from "#/tests.helpers";
@@ -13,23 +18,30 @@ i18next.use(initReactI18next).init({
   resources,
 });
 
-vi.mock("../hooks/useDepositControllers", () => ({
-  useDepositControllers: () => ({
-    totalAmount: 100,
-    mutation: { isPending: false },
-    handleDepositDelete: vi.fn(),
-  }),
-}));
-
 describe("Deposit", () => {
-  // // Mock value return by useDepositControllers
-  // const mockTotalAmount = 100;
+  const deposits = DepositsMother.getRandomList();
+  const mockTotalAmount = deposits.reduce((total, deposit) => total + parseFloat(deposit.amount), 0);
 
-  // // it("renders total amount correctly", () => {
-  // //   renderWithTestProviders(<Deposit />);
+  beforeEach(() => {
+    //server mock return data
+    server.use(
+      http.get("/api/deposits", () =>
+        HttpResponse.json({
+          data: deposits,
+        }),
+      ),
+    );
+  });
 
-  // //   expect(screen.getByText(`$${mockTotalAmount}`)).toBeInTheDocument();
-  // // });
+  it("renders total amount correctly", async () => {
+    const { getByText } = renderWithTestProviders(
+      <I18nextProvider i18n={i18next}>
+        <Deposit />
+      </I18nextProvider>,
+    );
+
+    await waitFor(() => expect(getByText(`$${mockTotalAmount.toFixed(2)}`)).toBeInTheDocument());
+  });
 
   it("renders title and balance link", () => {
     const { getByText } = renderWithTestProviders(

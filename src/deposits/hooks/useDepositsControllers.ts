@@ -5,7 +5,7 @@ import { useDeposits } from "./useDeposits";
 import { useDepositPermissions } from "./useDepositsPermissions";
 
 export function useDepositsControllers() {
-  const { data: deposits } = useDeposits();
+  const { data: deposits, isPending } = useDeposits();
   const { canDelete } = useDepositPermissions();
 
   const totalAmount = useMemo(() => {
@@ -19,6 +19,7 @@ export function useDepositsControllers() {
 
   return {
     deposits,
+    isPending,
     canDelete,
     totalAmount,
     mutation,
