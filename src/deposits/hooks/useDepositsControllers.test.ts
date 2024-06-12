@@ -11,7 +11,7 @@ import { TestProviders } from "#/tests.helpers";
 
 describe("useDepositControllers", () => {
   const deposits = DepositsMother.getRandomList();
-  // const expectedTotalAmount = deposits.reduce((acc, deposit) => acc + parseFloat(deposit.amount), 0);
+  const expectedTotalAmount = deposits.reduce((acc, deposit) => acc + parseFloat(deposit.amount), 0);
 
   beforeEach(() => {
     //server mock return data
@@ -24,12 +24,12 @@ describe("useDepositControllers", () => {
     );
   });
 
-  // it("should calculate totalAmount correctly", async () => {
-  //   const { result } = renderHook(() => useDepositsControllers(), { wrapper: TestProviders });
-  //   console.log("🚀 --------- result", result);
+  it("should calculate totalAmount correctly", async () => {
+    const { result } = renderHook(() => useDepositsControllers(), { wrapper: TestProviders });
 
-  //   expect(result.current.totalAmount).toBe(expectedTotalAmount);
-  // });
+    await waitFor(() => expect(result.current.isPending).toBe(false));
+    expect(result.current.totalAmount).toBe(expectedTotalAmount);
+  });
 
   it("should call mutation.mutate when handleDepositDelete is called", async () => {
     const { result } = renderHook(() => useDepositsControllers(), { wrapper: TestProviders });
