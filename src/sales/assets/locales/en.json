@@ -1,0 +1,30 @@
+{
+  "translation": {
+    "forms.new_sale_form.bundle_info": "Packages",
+    "forms.new_sale_form.bundle_type": "Sector",
+    "forms.new_sale_form.bundle.internet": "Internet",
+    "forms.new_sale_form.bundle.mobile-only": "Mobile",
+    "forms.new_sale_form.bundle.mi-fijo": "Mi Fijo",
+    "forms.new_sale_form.client_info": "Client Information",
+    "forms.new_sale_form.sector": "Sector",
+    "forms.new_sale_form.sector.residential": "Residential",
+    "forms.new_sale_form.sector.company": "Enterprise",
+    "forms.new_sale_form.sector.freelancer": "Freelancer",
+    "forms.new_sale_form.select_sector": "Select a sector",
+    "forms.new_sale_form.document": "Document",
+    "forms.new_sale_form.identity_type": "Identity Type",
+    "forms.new_sale_form.identity_type.nif": "NIF",
+    "forms.new_sale_form.identity_type.nie": "NIE",
+    "forms.new_sale_form.first_name": "First Name",
+    "forms.new_sale_form.last_name": "Last Name",
+    "forms.new_sale_form.gender": "Gender",
+    "forms.new_sale_form.male": "Male",
+    "forms.new_sale_form.female": "Female",
+    "forms.new_sale_form.country": "Country",
+    "forms.new_sale_form.language": "Language",
+    "forms.new_sale_form.phone_number": "Phone Number",
+    "forms.new_sale_form.email_address": "Email Address",
+    "forms.new_sale_form.physical_address": "Physical Address",
+    "forms.new_sale_form.submit": "Confirm Sale"
+  }
+}

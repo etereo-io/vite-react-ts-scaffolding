@@ -2,10 +2,9 @@ import { Location, RouteObject } from "react-router-dom";
 
 import { deepmerge } from "deepmerge-ts";
 
-import { User } from "@/auth/auth.types";
 import { LocaleResources } from "@/i18n/i18n.types";
 
-import { MenuItem, Module } from "../app.types";
+import { Module } from "../app.types";
 
 export type GlobalThis = typeof globalThis & { APP_MODULES: Module[] };
 
@@ -18,15 +17,6 @@ const modules: Module[] = (globalThis as GlobalThis).APP_MODULES;
 
 export const getModules = () => {
   return modules;
-};
-
-export const getAllowedMenuItems = (user: User) => () => {
-  return modules
-
-    .flatMap((module) => module.menuItems)
-    .filter(Boolean)
-    .filter((menuItem) => menuItem!.isAllowed?.(user) ?? true)
-    .toSorted((a, b) => (a!.priority || 0) - (b!.priority || 0)) as MenuItem[];
 };
 
 export const getAllLocalesResources = () => {

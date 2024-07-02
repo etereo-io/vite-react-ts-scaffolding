@@ -1,0 +1,31 @@
+{
+  "translation": {
+    "forms.new_sale_form.bundle_info": "Paquetes",
+    "forms.new_sale_form.bundle_type": "Sector",
+    "forms.new_sale_form.bundle.internet": "Internet",
+    "forms.new_sale_form.bundle.mobile-only": "Móvil",
+    "forms.new_sale_form.bundle.mi-fijo": "Mi Fijo",
+    "forms.new_sale_form.client_info": "Información del Cliente",
+    "forms.new_sale_form.sector": "Sector",
+    "forms.new_sale_form.sector.residential": "Residencial",
+    "forms.new_sale_form.sector.company": "Empresa",
+    "forms.new_sale_form.sector.freelancer": "Autónomo",
+    "forms.new_sale_form.select_sector": "Seleccione un sector",
+    "forms.new_sale_form.document": "Documento",
+    "forms.new_sale_form.identity_type": "Tipo de Identidad",
+    "forms.new_sale_form.identity_type.nif": "NIF",
+    "forms.new_sale_form.identity_type.nie": "NIE",
+    "forms.new_sale_form.first_name": "Nombre",
+    "forms.new_sale_form.last_name": "Apellido",
+    "forms.new_sale_form.gender": "Género",
+    "forms.new_sale_form.male": "Hombre",
+    "forms.new_sale_form.female": "Mujer",
+    "forms.new_sale_form.country": "País",
+    "forms.new_sale_form.language": "Idioma",
+    "forms.new_sale_form.phone_number": "Número de Teléfono",
+    "forms.new_sale_form.email_address": "Dirección de Correo Electrónico",
+    "forms.new_sale_form.physical_address": "Dirección Física",
+    "forms.new_sale_form.submit": "Confirmar Venta"
+  }
+}
+

@@ -1,9 +1,0 @@
-{
-  "translation": {
-    "orders.title": "Pedidos",
-    "orders.recent": "Pedidos Recientes",
-    "orders.fetch.error": "Error al obtener los pedidos",
-    "orders.delete.error": "Error al eliminar el pedido",
-    "orders.delete.success": "Pedido eliminado con éxito"
-  }
-}

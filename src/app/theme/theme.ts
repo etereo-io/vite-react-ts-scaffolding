@@ -3,16 +3,25 @@ import { createTheme } from "@mui/material";
 export const defaultTheme = createTheme({
   palette: {
     primary: {
-      main: "#556cd6",
+      main: "#000",
     },
     secondary: {
-      main: "#19857b",
+      main: "#ff7800",
     },
     error: {
       main: "#f44336",
     },
     background: {
       default: "#fff",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: "#fff",
+        },
+      },
     },
   },
 });

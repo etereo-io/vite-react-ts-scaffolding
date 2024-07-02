@@ -24,7 +24,7 @@ export function SignInPage() {
     //   email: data.get("email"),
     //   password: data.get("password"),
     // });
-    navigate("/admin/dashboard");
+    navigate("/sales");
   };
 
   return (

@@ -19,7 +19,6 @@ export interface Module {
   name: string;
   parent?: string;
   locales?: LocaleResources;
-  menuItems?: MenuItem[];
   routes?: RouteObject[];
   // all module mock handlers
   mockHandlers?: RequestHandler[];

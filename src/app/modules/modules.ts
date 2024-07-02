@@ -1,6 +1,7 @@
 import "@/auth";
-import "@/dashboard";
-import "@/orders";
+import "@/bundles";
+import "@/sales";
+import "@/clients";
 
 import "@/shared";
 import "@/i18n";
