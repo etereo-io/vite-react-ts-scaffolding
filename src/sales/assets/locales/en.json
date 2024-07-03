@@ -25,6 +25,9 @@
     "forms.new_sale_form.phone_number": "Phone Number",
     "forms.new_sale_form.email_address": "Email Address",
     "forms.new_sale_form.physical_address": "Physical Address",
-    "forms.new_sale_form.submit": "Confirm Sale"
+    "forms.new_sale_form.submit": "Confirm Sale",
+    "sales.bundle.internet": "Internet",
+    "sales.bundle.mobile-only": "Móvil",
+    "sales.bundle.mi-fijo": "Mi Fijo"
   }
 }

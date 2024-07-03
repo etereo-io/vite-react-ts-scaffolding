@@ -15,10 +15,5 @@
   "editor.autoIndent": "full",
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#fb6e074a",
-    "titleBar.activeBackground": "#fb6e074a",
-    "titleBar.activeForeground": "#F4FBFA"
-  },
   "typescript.tsdk": "node_modules/typescript/lib",
 }

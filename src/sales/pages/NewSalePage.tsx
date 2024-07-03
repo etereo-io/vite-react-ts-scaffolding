@@ -2,8 +2,10 @@ import { Box, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 
 import NewSaleForm from "../components/forms/NewSaleForm";
+import { useSalesController } from "../hooks/useSalesController";
 
 export function NewSalePage() {
+  const { handleCreateNewSale, createMutation } = useSalesController();
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 4, m: 4 }}>
       <Box>
@@ -15,7 +17,7 @@ export function NewSalePage() {
         </Typography>
       </Box>
       <Paper sx={{ p: 4, display: "flex", flexDirection: "column", maxWidth: 500 }}>
-        <NewSaleForm isLoading={false} onSubmit={() => {}} />
+        <NewSaleForm isLoading={createMutation.isPending} onSubmit={handleCreateNewSale} />
       </Paper>
     </Box>
   );

@@ -6,12 +6,11 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-import Grid from "@mui/material/Grid";
 import Toolbar from "@mui/material/Toolbar";
 
 import { LocaleSelector } from "@/i18n/components/LocaleSelector";
 
-import { ModuleNavigator } from "../components/ModuleNavigator";
+import { NavigationMenu } from "../components/NavigationMenu";
 
 export function AdminLayout({ children }: { readonly children?: React.ReactNode }) {
   return (
@@ -29,7 +28,7 @@ export function AdminLayout({ children }: { readonly children?: React.ReactNode 
               src={new URL("/src/assets/images/mas-orange-logo.svg", import.meta.url).href}
             />
           </Box>
-          <ModuleNavigator />
+          <NavigationMenu />
           <Divider sx={{ mx: 1 }} />
           <LocaleSelector />
         </Toolbar>
@@ -37,19 +36,16 @@ export function AdminLayout({ children }: { readonly children?: React.ReactNode 
       <Box
         component="main"
         sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light" ? theme.palette.grey[100] : theme.palette.grey[900],
+          backgroundColor: (theme) => theme.palette.grey[50],
           flexGrow: 1,
           height: "100vh",
           overflow: "auto",
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            <Outlet />
-            {children}
-          </Grid>
+        <Container maxWidth="lg" sx={{ mt: 2, mb: 2 }}>
+          <Outlet />
+          {children}
         </Container>
       </Box>
     </Box>

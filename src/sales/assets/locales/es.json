@@ -25,7 +25,10 @@
     "forms.new_sale_form.phone_number": "Número de Teléfono",
     "forms.new_sale_form.email_address": "Dirección de Correo Electrónico",
     "forms.new_sale_form.physical_address": "Dirección Física",
-    "forms.new_sale_form.submit": "Confirmar Venta"
+    "forms.new_sale_form.submit": "Confirmar Venta",
+    "sales.bundle.internet": "Internet",
+    "sales.bundle.mobile-only": "Mobile",
+    "sales.bundle.mi-fijo": "Mi Fijo"
   }
 }
 

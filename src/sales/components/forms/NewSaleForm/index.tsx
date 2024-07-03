@@ -13,14 +13,14 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-import { SaleBundleTypes } from "@/bundles/bundles.types";
+import { BundleTypes } from "@/bundles/bundles.types";
 import { SectorTypes, ClientIdentityTypes, ClientGenderTypes } from "@/clients/clients.types";
 
-import { FormValues, NewSaleFormProps } from "./types";
+import { NewSaleFormValues, NewSaleFormProps } from "./types";
 
 export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
   const { t } = useTranslation();
-  const { handleSubmit, control } = useForm<FormValues>();
+  const { handleSubmit, control } = useForm<NewSaleFormValues>();
 
   /**
    * Renders the bundle container with sector selection.
@@ -50,7 +50,7 @@ export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
                 <MenuItem value="" disabled>
                   {t("forms.new_sale_form.select_sector")}
                 </MenuItem>
-                {Object.values(SaleBundleTypes).map((bundle) => (
+                {Object.values(BundleTypes).map((bundle) => (
                   <MenuItem key={bundle} value={bundle}>
                     {t(`forms.new_sale_form.bundle.${bundle}`)}
                   </MenuItem>
@@ -196,7 +196,14 @@ export default function NewSaleForm({ onSubmit, isLoading }: NewSaleFormProps) {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <TextField {...field} label={t("forms.new_sale_form.phone_number")} variant="outlined" fullWidth />
+            <TextField
+              {...field}
+              label={t("forms.new_sale_form.phone_number")}
+              variant="outlined"
+              fullWidth
+              type="number"
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+            />
           )}
         />
         <Controller

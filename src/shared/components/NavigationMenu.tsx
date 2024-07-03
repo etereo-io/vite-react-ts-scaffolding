@@ -4,14 +4,14 @@ import { Person2, ShoppingCart } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import { NavItem } from "./types";
+import { NavItem } from "./NavigationMenu.types";
 
 const navItems: NavItem[] = [
-  { icon: Person2, path: "/clients/", label: "Clients" },
+  { icon: Person2, path: "/sales", label: "Clients" },
   { icon: ShoppingCart, path: "/sales/new", label: "New Sale" },
 ];
 
-export function ModuleNavigator(): JSX.Element {
+export function NavigationMenu(): JSX.Element {
   const location = useLocation();
 
   return (
@@ -25,9 +25,10 @@ export function ModuleNavigator(): JSX.Element {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            color: location.pathname.includes(path)
-              ? (theme) => theme.palette.secondary.main
-              : (theme) => theme.palette.background.default,
+            color:
+              location.pathname === path ?? location.pathname.includes(path)
+                ? (theme) => theme.palette.secondary.main
+                : (theme) => theme.palette.background.default,
             textDecoration: "none",
           }}
         >

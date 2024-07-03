@@ -1,7 +1,7 @@
 /**
  * Enum representing different sale bundle types.
  */
-export enum SaleBundleTypes {
+export enum BundleTypes {
   INTERNET = "internet",
   MOBILE_ONLY = "mobile-only",
   MI_FIJO = "mi-fijo",
@@ -12,5 +12,5 @@ export enum SaleBundleTypes {
  */
 export interface Bundle {
   id: string;
-  type: SaleBundleTypes;
+  type: BundleTypes;
 }

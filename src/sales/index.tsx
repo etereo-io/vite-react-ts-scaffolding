@@ -5,6 +5,7 @@ import { AdminLayout } from "@/shared/layouts/AdminLayout";
 
 import locales from "./assets/locales";
 import { NewSalePage } from "./pages/NewSalePage";
+import { SalesPage } from "./pages/SalesPage";
 import { MODULE_SALES } from "./sales.constants";
 import { handlers } from "./sales.mock.handlers";
 
@@ -13,6 +14,10 @@ const routes: RouteObject[] = [
     path: "/sales",
     element: <AdminLayout />,
     children: [
+      {
+        path: "",
+        element: <SalesPage />,
+      },
       {
         path: "new",
         element: <NewSalePage />,

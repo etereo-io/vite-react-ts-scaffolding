@@ -23,5 +23,15 @@ export const defaultTheme = createTheme({
         },
       },
     },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          "&.MuiChip-colorSecondary": {
+            color: "#fff",
+            fontWeight: "bold",
+          },
+        },
+      },
+    },
   },
 });
