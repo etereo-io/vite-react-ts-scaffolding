@@ -8,7 +8,7 @@ import { RequiredPermissions, User } from "./auth.types";
  */
 export function isUserAllowed({
   user,
-  permissions,
+  permissions
 }: { user?: User; permissions: RequiredPermissions }) {
   if (!user) {
     return false;
@@ -21,14 +21,14 @@ export function isUserAllowed({
   if (Array.isArray(permissions)) {
     if (typeof permissions[0] === "string") {
       return (permissions as string[]).some((permission) =>
-        user.permissions.includes(permission),
+        user.permissions.includes(permission)
       );
     }
 
     return permissions.every((permissionGroup) =>
       (permissionGroup as string[]).some((permission) =>
-        user.permissions.includes(permission),
-      ),
+        user.permissions.includes(permission)
+      )
     );
   }
 

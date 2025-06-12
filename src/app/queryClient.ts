@@ -4,7 +4,7 @@ import {
   MutationCache,
   QueryCache,
   QueryClient,
-  QueryClientConfig,
+  QueryClientConfig
 } from "@tanstack/react-query";
 
 import { notifications } from "@/lib/notifications/notifications";
@@ -20,7 +20,7 @@ const defaultQueryCache = new QueryCache({
       notifications.error(query.meta.errorMessage as string);
       return;
     }
-  },
+  }
 });
 
 const defaultMutationCache = new MutationCache({
@@ -31,7 +31,7 @@ const defaultMutationCache = new MutationCache({
           error,
           variables,
           context,
-          mutation,
+          mutation
         );
         message && notifications.error(message);
         return;
@@ -47,7 +47,7 @@ const defaultMutationCache = new MutationCache({
           data,
           variables,
           context,
-          mutation,
+          mutation
         );
         message && notifications.success(message);
         return;
@@ -55,7 +55,7 @@ const defaultMutationCache = new MutationCache({
       notifications.success(mutation.meta.successMessage as string);
       return;
     }
-  },
+  }
 });
 
 export const QUERY_CACHE_TIME = 1000 * 60 * 60; // 1 hour
@@ -67,11 +67,11 @@ export const defaultQueryClientOptions = {
       staleTime: 0,
       refetchOnWindowFocus: false,
       retry: false,
-      retryOnMount: false,
-    },
+      retryOnMount: false
+    }
   },
   queryCache: defaultQueryCache,
-  mutationCache: defaultMutationCache,
+  mutationCache: defaultMutationCache
 };
 
 export function queryClientFactory(options?: QueryClientConfig) {
@@ -84,8 +84,8 @@ export function useQueryClientCacheOptions() {
   return useMemo(
     () => ({
       gcTime: QUERY_CACHE_TIME,
-      staleTime: Number.POSITIVE_INFINITY,
+      staleTime: Number.POSITIVE_INFINITY
     }),
-    [],
+    []
   );
 }

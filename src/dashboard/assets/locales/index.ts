@@ -5,5 +5,5 @@ import es from "./es.json";
 
 export default {
   en,
-  es,
+  es
 } as LocaleResources;

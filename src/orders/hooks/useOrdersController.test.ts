@@ -13,8 +13,8 @@ import { TestProviders } from "#/tests.helpers";
 const mockEvent = vi.fn();
 vi.mock("@/lib/metrics/useMetrics", () => ({
   useMetrics: () => ({
-    event: (name: string) => mockEvent(name),
-  }),
+    event: (name: string) => mockEvent(name)
+  })
 }));
 
 describe("useOrdersController", () => {
@@ -24,8 +24,8 @@ describe("useOrdersController", () => {
       offset: 0,
       limit: API_DEFAULT_LIMIT,
       count: 100,
-      hasMore: true,
-    },
+      hasMore: true
+    }
   };
   beforeEach(() => {
     server.use(http.get("/api/orders", () => HttpResponse.json(orderPage)));
@@ -33,7 +33,7 @@ describe("useOrdersController", () => {
 
   test("should handle pagination change", async () => {
     const { result } = renderHook(() => useOrdersController(), {
-      wrapper: TestProviders,
+      wrapper: TestProviders
     });
 
     await waitFor(() => expect(result.current.page).toBe(1));
@@ -42,9 +42,9 @@ describe("useOrdersController", () => {
       http.get("/api/orders", () =>
         HttpResponse.json({
           ...orderPage,
-          pagination: { ...orderPage.pagination, offset: 10 },
-        }),
-      ),
+          pagination: { ...orderPage.pagination, offset: 10 }
+        })
+      )
     );
 
     act(() => {
@@ -56,7 +56,7 @@ describe("useOrdersController", () => {
 
   test("should handle order delete", async () => {
     const { result } = renderHook(() => useOrdersController(), {
-      wrapper: TestProviders,
+      wrapper: TestProviders
     });
 
     act(() => {
@@ -69,12 +69,12 @@ describe("useOrdersController", () => {
   test("should handle see more orders", () => {
     const preventDefaultMock = vi.fn();
     const { result } = renderHook(() => useOrdersController(), {
-      wrapper: TestProviders,
+      wrapper: TestProviders
     });
 
     act(() => {
       result.current.handleSeeMoreOrders({
-        preventDefault: preventDefaultMock,
+        preventDefault: preventDefaultMock
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       } as any);
     });
@@ -84,20 +84,19 @@ describe("useOrdersController", () => {
 
   test("should calculate page correctly", async () => {
     const { result } = renderHook(() => useOrdersController(), {
-      wrapper: TestProviders,
+      wrapper: TestProviders
     });
 
     await waitFor(() =>
       expect(result.current.orders?.pagination.limit).toBe(
-        orderPage.pagination.limit,
-      ),
+        orderPage.pagination.limit
+      )
     );
 
     await waitFor(() =>
       expect(result.current.page).toBe(
-        Math.floor(orderPage.pagination.offset / orderPage.pagination.limit) +
-          1,
-      ),
+        Math.floor(orderPage.pagination.offset / orderPage.pagination.limit) + 1
+      )
     );
   });
 });

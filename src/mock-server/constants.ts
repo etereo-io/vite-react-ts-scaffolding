@@ -15,5 +15,5 @@ export const mockServerConfig: StartOptions = {
     }
 
     return bypass(request);
-  },
+  }
 };

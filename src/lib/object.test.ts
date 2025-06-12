@@ -8,15 +8,15 @@ describe("removeEmptyOrNull", () => {
       address: {
         street: "",
         city: "New York",
-        state: null,
-      },
+        state: null
+      }
     };
 
     const expected = {
       name: "John",
       address: {
-        city: "New York",
-      },
+        city: "New York"
+      }
     };
 
     const actual = removeEmptyOrNull(obj);

@@ -9,7 +9,7 @@ import { OrdersPage } from "./OrdersPage";
 import { renderWithTestProviders } from "#/tests.helpers";
 
 vi.mock("@/auth/hooks/useLoggedUser", () => ({
-  useLoggedUser: vi.fn(),
+  useLoggedUser: vi.fn()
 }));
 
 describe("OrdersPage", () => {
@@ -17,12 +17,12 @@ describe("OrdersPage", () => {
     (useLoggedUser as Mock).mockImplementation(() => {
       return {
         user: UserMother.getMockUser(),
-        isPending: false,
+        isPending: false
       };
     });
     renderWithTestProviders(<OrdersPage />);
     await waitFor(() =>
-      expect(screen.getByTestId("orders-table")).toBeInTheDocument(),
+      expect(screen.getByTestId("orders-table")).toBeInTheDocument()
     );
   });
 
@@ -30,13 +30,13 @@ describe("OrdersPage", () => {
     (useLoggedUser as Mock).mockImplementation(() => {
       return {
         user: UserMother.getMockUser({ permissions: [] }),
-        isPending: false,
+        isPending: false
       };
     });
 
     renderWithTestProviders(<OrdersPage />);
     await waitFor(() =>
-      expect(screen.queryByTestId("orders-table")).not.toBeInTheDocument(),
+      expect(screen.queryByTestId("orders-table")).not.toBeInTheDocument()
     );
   });
 });

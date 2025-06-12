@@ -21,13 +21,13 @@ export function useOrderDelete() {
     onSuccess: () => {
       // ensure refetch orders after delete
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_ORDERS],
+        queryKey: [QUERY_KEY_ORDERS]
       });
     },
     // ensure mutation has error/success handling
     meta: {
       errorMessage: t("orders.delete.error"),
-      successMessage: t("orders.delete.success"),
-    },
+      successMessage: t("orders.delete.success")
+    }
   });
 }

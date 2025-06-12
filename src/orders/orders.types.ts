@@ -1,6 +1,6 @@
 export enum OrderStatus {
   PENDING = "pending",
-  CLOSED = "closed",
+  CLOSED = "closed"
 }
 
 export interface Order {

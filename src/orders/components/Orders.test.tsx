@@ -25,37 +25,37 @@ describe("Orders", () => {
             offset: 0,
             limit: 10,
             count: 100,
-            hasMore: true,
-          },
-        }),
-      ),
+            hasMore: true
+          }
+        })
+      )
     );
   });
 
   it("render delete button", async () => {
     (useLoggedUser as Mock).mockImplementation(() => ({
-      user: UserMother.getMockUser(),
+      user: UserMother.getMockUser()
     }));
 
     const { container } = renderWithTestProviders(<Orders />);
     await waitFor(() =>
-      expect(screen.getByText(orders[0].name)).toBeInTheDocument(),
+      expect(screen.getByText(orders[0].name)).toBeInTheDocument()
     );
     expect(container.querySelectorAll('[aria-label="delete"]')).toHaveLength(
-      20,
+      20
     );
   });
 
   it("not render delete button", async () => {
     (useLoggedUser as Mock).mockImplementation(() => ({
       user: UserMother.getMockUser({
-        permissions: [],
-      }),
+        permissions: []
+      })
     }));
 
     const { container } = renderWithTestProviders(<Orders />);
     await waitFor(() =>
-      expect(screen.getByText(orders[0].name)).toBeInTheDocument(),
+      expect(screen.getByText(orders[0].name)).toBeInTheDocument()
     );
     expect(container.querySelectorAll('[aria-label="delete"]')).toHaveLength(0);
   });

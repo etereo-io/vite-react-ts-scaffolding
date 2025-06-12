@@ -9,11 +9,11 @@ export function useUserAuth() {
 
   const isAllowed = useCallback(
     (permissions: RequiredPermissions) => isUserAllowed({ user, permissions }),
-    [user],
+    [user]
   );
 
   return {
     isAllowed,
-    isPending,
+    isPending
   };
 }

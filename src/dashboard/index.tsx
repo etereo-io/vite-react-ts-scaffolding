@@ -1,6 +1,6 @@
-import { Navigate, RouteObject } from "react-router-dom";
+import { Navigate, RouteObject } from "react-router";
 
-import DashboardIcon from "@mui/icons-material/Dashboard";
+import { BarChart3 } from "lucide-react";
 
 import { MenuItem } from "@/app/app.types";
 import { registerModule } from "@/app/modules/modules.helpers";
@@ -18,29 +18,29 @@ const routes: RouteObject[] = [
     children: [
       {
         path: "",
-        element: <Navigate to="dashboard" />,
+        element: <Navigate to="dashboard" />
       },
       {
         path: "dashboard",
-        element: <DashboardPage />,
-      },
-    ],
-  },
+        element: <DashboardPage />
+      }
+    ]
+  }
 ];
 
 const menuItems: MenuItem[] = [
   {
     title: "dashboard.dashboard.title",
-    icon: <DashboardIcon />,
+    icon: <BarChart3 className="w-5 h-5" />,
     path: "/admin/dashboard",
     isAllowed: (user: User) =>
-      Object.values(UserRoles).some((role) => user.roles.includes(role)),
-  },
+      Object.values(UserRoles).some((role) => user.roles.includes(role))
+  }
 ];
 
 registerModule({
   name: MODULE_DASHBOARD,
   routes,
   menuItems,
-  locales,
+  locales
 });

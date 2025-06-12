@@ -26,8 +26,8 @@ export const handlers = [
         offset,
         limit,
         count: orders.length,
-        hasMore: orders.length > offset + limit,
-      },
+        hasMore: orders.length > offset + limit
+      }
     });
   }),
 
@@ -38,9 +38,9 @@ export const handlers = [
       return HttpResponse.json(
         {
           code: ERROR_ORDERID_REQUIRED,
-          message: "orderId is required",
+          message: "orderId is required"
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -51,5 +51,5 @@ export const handlers = [
 
     await delay(DEFAULT_DELAY);
     return new HttpResponse(null, { status: 204 });
-  }),
+  })
 ];

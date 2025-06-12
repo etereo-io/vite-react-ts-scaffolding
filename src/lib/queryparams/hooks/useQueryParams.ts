@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { NavigateOptions, useLocation, useNavigate } from "react-router-dom";
+import { NavigateOptions, useLocation, useNavigate } from "react-router";
 
 export function useQueryParams() {
   const { search } = useLocation();
@@ -9,7 +9,7 @@ export function useQueryParams() {
 
   const clear = useCallback(() => {
     navigate({
-      search: "",
+      search: ""
     });
   }, [navigate]);
 
@@ -17,12 +17,12 @@ export function useQueryParams() {
     (params: URLSearchParams, options?: NavigateOptions) => {
       navigate(
         {
-          search: params.toString(),
+          search: params.toString()
         },
-        options,
+        options
       );
     },
-    [navigate],
+    [navigate]
   );
 
   const removeParams = useCallback(
@@ -35,7 +35,7 @@ export function useQueryParams() {
 
       applyParams(params, options);
     },
-    [applyParams, params],
+    [applyParams, params]
   );
 
   return { params, clear, applyParams, removeParams };

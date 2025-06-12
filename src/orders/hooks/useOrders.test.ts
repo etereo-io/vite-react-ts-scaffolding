@@ -11,8 +11,8 @@ import { TestProviders } from "#/tests.helpers";
 const mockNotificationError = vi.fn();
 vi.mock("@/lib/notifications/notifications", () => ({
   notifications: {
-    error: (...args: unknown[]) => mockNotificationError(...args),
-  },
+    error: (...args: unknown[]) => mockNotificationError(...args)
+  }
 }));
 
 describe("useOrders", () => {
@@ -28,16 +28,16 @@ describe("useOrders", () => {
             offset: 0,
             limit: 10,
             count: 100,
-            hasMore: true,
-          },
-        }),
-      ),
+            hasMore: true
+          }
+        })
+      )
     );
   });
 
   it("should return data", async () => {
     const { result } = renderHook(() => useOrders(), {
-      wrapper: TestProviders,
+      wrapper: TestProviders
     });
 
     await waitFor(() => expect(result.current.isPending).toBe(false));
@@ -48,7 +48,7 @@ describe("useOrders", () => {
   it("should notify on error", async () => {
     server.use(http.get("/api/orders", () => HttpResponse.error()));
     const { result } = renderHook(() => useOrders(), {
-      wrapper: TestProviders,
+      wrapper: TestProviders
     });
 
     await waitFor(() => expect(result.current.isError).toBeTruthy());

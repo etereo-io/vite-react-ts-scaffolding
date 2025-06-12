@@ -4,7 +4,7 @@ import { useUserAuth } from "../hooks/useUserAuth";
 export function AllowedAuth({
   permissions,
   children,
-  error,
+  error
 }: {
   readonly permissions: RequiredPermissions;
   readonly children: React.ReactNode;

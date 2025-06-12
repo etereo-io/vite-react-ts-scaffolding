@@ -1,6 +1,3 @@
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-
 import { Orders } from "@/orders/components/Orders";
 
 import { Chart } from "../components/Chart";
@@ -9,38 +6,23 @@ import { Deposits } from "../components/Deposits";
 export function DashboardPage() {
   return (
     <>
-      {/* Chart */}
-      <Grid item xs={12} md={8} lg={9}>
-        <Paper
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            height: 240,
-          }}
-        >
+      <div className="col-span-1 md:col-span-2 lg:col-span-3">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 h-60 flex flex-col">
           <Chart />
-        </Paper>
-      </Grid>
-      {/* Recent Deposits */}
-      <Grid item xs={12} md={4} lg={3}>
-        <Paper
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            height: 240,
-          }}
-        >
+        </div>
+      </div>
+
+      <div className="col-span-1">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 h-60 flex flex-col">
           <Deposits />
-        </Paper>
-      </Grid>
-      {/* Recent Orders */}
-      <Grid item xs={12}>
-        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+        </div>
+      </div>
+
+      <div className="col-span-1 md:col-span-3">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex flex-col">
           <Orders />
-        </Paper>
-      </Grid>
+        </div>
+      </div>
     </>
   );
 }

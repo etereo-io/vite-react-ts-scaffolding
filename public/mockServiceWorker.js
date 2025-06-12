@@ -32,13 +32,13 @@ self.addEventListener("message", async function (event) {
   }
 
   const allClients = await self.clients.matchAll({
-    type: "window",
+    type: "window"
   });
 
   switch (event.data) {
     case "KEEPALIVE_REQUEST": {
       sendToClient(client, {
-        type: "KEEPALIVE_RESPONSE",
+        type: "KEEPALIVE_RESPONSE"
       });
       break;
     }
@@ -48,8 +48,8 @@ self.addEventListener("message", async function (event) {
         type: "INTEGRITY_CHECK_RESPONSE",
         payload: {
           packageVersion: PACKAGE_VERSION,
-          checksum: INTEGRITY_CHECKSUM,
-        },
+          checksum: INTEGRITY_CHECKSUM
+        }
       });
       break;
     }
@@ -59,7 +59,7 @@ self.addEventListener("message", async function (event) {
 
       sendToClient(client, {
         type: "MOCKING_ENABLED",
-        payload: true,
+        payload: true
       });
       break;
     }
@@ -134,10 +134,10 @@ async function handleRequest(event, requestId) {
             status: responseClone.status,
             statusText: responseClone.statusText,
             body: responseClone.body,
-            headers: Object.fromEntries(responseClone.headers.entries()),
-          },
+            headers: Object.fromEntries(responseClone.headers.entries())
+          }
         },
-        [responseClone.body],
+        [responseClone.body]
       );
     })();
   }
@@ -157,7 +157,7 @@ async function resolveMainClient(event) {
   }
 
   const allClients = await self.clients.matchAll({
-    type: "window",
+    type: "window"
   });
 
   return allClients
@@ -223,10 +223,10 @@ async function getResponse(event, client, requestId) {
         referrer: request.referrer,
         referrerPolicy: request.referrerPolicy,
         body: requestBuffer,
-        keepalive: request.keepalive,
-      },
+        keepalive: request.keepalive
+      }
     },
-    [requestBuffer],
+    [requestBuffer]
   );
 
   switch (clientMessage.type) {
@@ -256,7 +256,7 @@ function sendToClient(client, message, transferrables = []) {
 
     client.postMessage(
       message,
-      [channel.port2].concat(transferrables.filter(Boolean)),
+      [channel.port2].concat(transferrables.filter(Boolean))
     );
   });
 }
@@ -274,7 +274,7 @@ async function respondWithMock(response) {
 
   Reflect.defineProperty(mockedResponse, IS_MOCKED_RESPONSE, {
     value: true,
-    enumerable: true,
+    enumerable: true
   });
 
   return mockedResponse;

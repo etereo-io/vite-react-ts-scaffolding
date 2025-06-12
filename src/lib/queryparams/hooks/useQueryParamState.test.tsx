@@ -1,4 +1,4 @@
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 
 import { act, renderHook } from "@testing-library/react";
 
@@ -20,11 +20,11 @@ describe("useQueryParamState", () => {
         useQueryParamState(key, {
           fallbackStore: true,
           defaultValue,
-          storePrefix: "",
+          storePrefix: ""
         }),
       {
-        wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
-      },
+        wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
+      }
     );
 
     expect(result.current.value).toStrictEqual(defaultValue);
@@ -49,11 +49,11 @@ describe("useQueryParamState", () => {
         useQueryParamState(key, {
           fallbackStore: false,
           defaultValue,
-          storePrefix: "",
+          storePrefix: ""
         }),
       {
-        wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
-      },
+        wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
+      }
     );
 
     expect(result.current.value).toStrictEqual(defaultValue);
@@ -76,11 +76,11 @@ describe("useQueryParamState", () => {
         useQueryParamState(key, {
           fallbackStore: false,
           defaultValue,
-          storePrefix: "",
+          storePrefix: ""
         }),
       {
-        wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
-      },
+        wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
+      }
     );
 
     act(() => {
@@ -108,11 +108,11 @@ describe("useQueryParamState", () => {
         useQueryParamState(key, {
           fallbackStore: true,
           defaultValue,
-          storePrefix: "",
+          storePrefix: ""
         }),
       {
-        wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
-      },
+        wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
+      }
     );
 
     act(() => {

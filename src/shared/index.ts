@@ -5,5 +5,5 @@ import { MODULE_SHARED } from "./shared.constants";
 
 registerModule({
   name: MODULE_SHARED,
-  locales,
+  locales
 });

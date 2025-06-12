@@ -4,14 +4,14 @@ import { isUserAllowed } from "./auth.helpers";
 describe("auth.helpers", () => {
   describe("isUserAllowed", () => {
     const user = UserMother.getMockUser({
-      permissions: ["permission1", "permission2"],
+      permissions: ["permission1", "permission2"]
     });
 
     test("should return false if user is not provided", () => {
       expect(
         isUserAllowed({
-          permissions: "permission1",
-        }),
+          permissions: "permission1"
+        })
       ).toBe(false);
     });
 

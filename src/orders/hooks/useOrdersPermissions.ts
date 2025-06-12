@@ -3,7 +3,7 @@ import { useUserAuth } from "@/auth/hooks/useUserAuth";
 import {
   PERMISSION_ORDERS_DELETE,
   PERMISSION_ORDERS_LIST,
-  PERMISSION_ORDERS_VIEW,
+  PERMISSION_ORDERS_VIEW
 } from "../orders.constants";
 
 export function useOrdersPermissions() {
@@ -17,6 +17,6 @@ export function useOrdersPermissions() {
     isPending,
     canList,
     canView,
-    canDelete,
+    canDelete
   };
 }

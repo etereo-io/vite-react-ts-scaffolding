@@ -1,15 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
-
-import { List } from "@mui/material";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import { useLocation, useNavigate } from "react-router";
 
 import {
   defaultIsActiveHandler,
-  getAllowedMenuItems,
+  getAllowedMenuItems
 } from "@/app/modules/modules.helpers";
 import { useLoggedUser } from "@/auth/hooks/useLoggedUser";
 
@@ -24,36 +19,62 @@ export function AdminMenuItems() {
     path && navigate(path);
   };
 
-  return getAllowedMenuItems(user)().map((menuItem) => {
-    return (
-      <React.Fragment key={menuItem.path}>
-        <ListItemButton
-          selected={(menuItem.isActive ?? defaultIsActiveHandler)(
-            location,
-            menuItem.path,
-          )}
-          onClick={handleNavigate(menuItem.path ?? "")}
-        >
-          <ListItemIcon>{menuItem.icon}</ListItemIcon>
-          <ListItemText primary={t(menuItem.title)} />
-        </ListItemButton>
-        {!!menuItem.children?.length &&
-          menuItem.children.map((child) => (
-            <List disablePadding key={child.title}>
-              <ListItemButton
-                sx={{ pl: 4 }}
-                selected={(child.isActive ?? defaultIsActiveHandler)(
-                  location,
-                  child.path,
-                )}
-                onClick={handleNavigate(child.path ?? "")}
+  return (
+    <ul className="space-y-1 px-3">
+      {getAllowedMenuItems(user)().map((menuItem) => {
+        const isActive = (menuItem.isActive ?? defaultIsActiveHandler)(
+          location,
+          menuItem.path
+        );
+
+        return (
+          <React.Fragment key={menuItem.path}>
+            <li>
+              <button
+                onClick={handleNavigate(menuItem.path ?? "")}
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                  isActive
+                    ? "bg-blue-100 text-blue-700 font-medium"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
               >
-                <ListItemIcon>{child.icon}</ListItemIcon>
-                <ListItemText primary={t(child.title)} />
-              </ListItemButton>
-            </List>
-          ))}
-      </React.Fragment>
-    );
-  });
+                <span className="flex-shrink-0">{menuItem.icon}</span>
+                <span className="truncate">{t(menuItem.title)}</span>
+              </button>
+            </li>
+
+            {!!menuItem.children?.length && (
+              <li>
+                <ul className="ml-6 space-y-1">
+                  {menuItem.children.map((child) => {
+                    const childIsActive = (
+                      child.isActive ?? defaultIsActiveHandler
+                    )(location, child.path);
+
+                    return (
+                      <li key={child.title}>
+                        <button
+                          onClick={handleNavigate(child.path ?? "")}
+                          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                            childIsActive
+                              ? "bg-blue-100 text-blue-700 font-medium"
+                              : "text-gray-600 hover:bg-gray-100"
+                          }`}
+                        >
+                          <span className="flex-shrink-0">{child.icon}</span>
+                          <span className="truncate text-sm">
+                            {t(child.title)}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </li>
+            )}
+          </React.Fragment>
+        );
+      })}
+    </ul>
+  );
 }

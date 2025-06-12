@@ -1,4 +1,3 @@
-import { SelectChangeEvent } from "@mui/material";
 import { useCallback, useState } from "react";
 
 import { API_DEFAULT_LIMIT } from "@/app/api";
@@ -20,7 +19,7 @@ export function useOrdersController() {
 
   const { data: orders, isFetching } = useOrders({
     offset,
-    status: status ?? undefined,
+    status: status ?? undefined
   });
   const mutation = useOrderDelete();
 
@@ -29,16 +28,16 @@ export function useOrdersController() {
   };
 
   const handleOrderStatusChange = useCallback(
-    (event: SelectChangeEvent<OrderStatus>) => {
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
       setStatus(event.target.value as OrderStatus);
       setOffset(0);
     },
-    [setStatus],
+    [setStatus]
   );
 
   const handleOrderDelete = useCallback(
     (orderId: string) => () => mutation.mutate(orderId),
-    [mutation],
+    [mutation]
   );
 
   const handleSeeMoreOrders = (event: React.MouseEvent) => {
@@ -58,6 +57,6 @@ export function useOrdersController() {
     handleOrderStatusChange,
     handleOnPaginationChange,
     handleOrderDelete,
-    handleSeeMoreOrders,
+    handleSeeMoreOrders
   };
 }

@@ -2,6 +2,7 @@ import removeAttr from "react-remove-attr";
 
 import path from "node:path";
 
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
 import { loadEnv } from "vite";
 import checker from "vite-plugin-checker";
@@ -23,26 +24,27 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       checker({
-        typescript: true,
+        typescript: true
       }),
+      tailwindcss(),
       inProdMode &&
         removeAttr({
           extensions: ["tsx"],
-          attributes: ["data-testid"],
+          attributes: ["data-testid"]
         }),
-      react(),
+      react()
     ],
 
     build: {
       sourcemap: !inProdMode,
-      reportCompressedSize: false,
+      reportCompressedSize: false
     },
 
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
-        "#": path.resolve(__dirname, "test"),
-      },
+        "#": path.resolve(__dirname, "test")
+      }
     },
 
     test: {
@@ -51,14 +53,14 @@ export default defineConfig(({ mode }) => {
       environment: "jsdom",
 
       environmentOptions: {
-        url: "http://localhost",
+        url: "http://localhost"
       },
 
       include: [
         "**/*.test.js",
         "**/*.test.ts",
         "**/*.test.jsx",
-        "**/*.test.tsx",
+        "**/*.test.tsx"
       ],
       exclude: ["**/node_modules/**"],
 
@@ -68,7 +70,7 @@ export default defineConfig(({ mode }) => {
       outputFile: {
         json: "reports/test-report/test-report.json",
         html: "reports/test-report/test-report.html",
-        "vitest-sonar-reporter": "reports/vite-sonar/sonar-report.xml",
+        "vitest-sonar-reporter": "reports/vite-sonar/sonar-report.xml"
       },
 
       coverage: {
@@ -78,18 +80,18 @@ export default defineConfig(({ mode }) => {
           "src/main.tsx",
           "src/mock-server/**/*",
           "*.test.*",
-          "*/__mocks__/*",
+          "*/__mocks__/*"
         ],
         reporter: ["text", "html", "lcov"],
         reportsDirectory: "reports/vite-coverage",
-        enabled: false,
+        enabled: false
       },
 
       clearMocks: true,
       mockReset: true,
       restoreMocks: true,
       unstubGlobals: true,
-      unstubEnvs: true,
-    },
+      unstubEnvs: true
+    }
   };
 });

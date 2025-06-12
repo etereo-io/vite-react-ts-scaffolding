@@ -7,7 +7,7 @@ export class UserMother {
     return {
       ...mockUser,
       permissions: PermissionMother.getAll(),
-      ...user,
+      ...user
     } as User;
   }
 }

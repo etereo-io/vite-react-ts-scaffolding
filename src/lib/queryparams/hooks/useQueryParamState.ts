@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { NavigateOptions } from "react-router-dom";
+import { NavigateOptions } from "react-router";
 
 import { useQueryParams } from "./useQueryParams";
 
@@ -14,14 +14,14 @@ interface UseQueryParamStateOptions<T> {
 // T has to be a string like type
 export function useQueryParamState<T = string>(
   key: string,
-  options: UseQueryParamStateOptions<T> = {},
+  options: UseQueryParamStateOptions<T> = {}
 ) {
   const { params, applyParams, removeParams } = useQueryParams();
 
   const finalOptions: UseQueryParamStateOptions<T> = {
     storePrefix: "app-",
     defaultValue: null as T,
-    ...options,
+    ...options
   };
 
   const setValue = useCallback(
@@ -33,21 +33,21 @@ export function useQueryParamState<T = string>(
       }
       applyParams(params, setValueOptions);
     },
-    [key, params, applyParams, removeParams],
+    [key, params, applyParams, removeParams]
   );
 
   const resetFallback = useCallback(() => {
     if (finalOptions?.fallbackStore) {
       localStorage.setItem(
         `${finalOptions.storePrefix}${key}`,
-        finalOptions.defaultValue as string,
+        finalOptions.defaultValue as string
       );
     }
   }, [
     finalOptions.defaultValue,
     finalOptions?.fallbackStore,
     finalOptions.storePrefix,
-    key,
+    key
   ]);
 
   const value =
@@ -62,7 +62,7 @@ export function useQueryParamState<T = string>(
     if (finalOptions?.fallbackStore) {
       localStorage.setItem(
         `${finalOptions.storePrefix}${key}`,
-        value as string,
+        value as string
       );
     }
   }, [finalOptions?.fallbackStore, finalOptions.storePrefix, key, value]);

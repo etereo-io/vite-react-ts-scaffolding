@@ -1,8 +1,5 @@
 import * as React from "react";
 
-import Link from "@mui/material/Link";
-import Typography from "@mui/material/Typography";
-
 import { Title } from "@/shared/components/Title";
 
 function preventDefault(event: React.MouseEvent) {
@@ -13,16 +10,16 @@ export function Deposits() {
   return (
     <React.Fragment>
       <Title>Recent Deposits</Title>
-      <Typography component="p" variant="h4">
-        $3,024.00
-      </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
-      </Typography>
+      <div className="text-3xl font-bold text-gray-900 mb-2">$3,024.00</div>
+      <div className="text-sm text-gray-500 flex-1">on 15 March, 2019</div>
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
+        <a
+          href="#"
+          onClick={preventDefault}
+          className="text-blue-600 hover:text-blue-800 text-sm transition-colors"
+        >
           View balance
-        </Link>
+        </a>
       </div>
     </React.Fragment>
   );

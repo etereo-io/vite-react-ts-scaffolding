@@ -1,6 +1,6 @@
-import { RouteObject } from "react-router-dom";
+import { RouteObject } from "react-router";
 
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ShoppingCart } from "lucide-react";
 
 import { MenuItem } from "@/app/app.types";
 import { registerModule } from "@/app/modules/modules.helpers";
@@ -13,7 +13,7 @@ import {
   MODULE_ORDERS,
   PERMISSION_ORDERS_DELETE,
   PERMISSION_ORDERS_LIST,
-  PERMISSION_ORDERS_VIEW,
+  PERMISSION_ORDERS_VIEW
 } from "./orders.constants";
 import { handlers } from "./orders.mock.handlers";
 import { OrderStatus } from "./orders.types";
@@ -26,17 +26,17 @@ const routes: RouteObject[] = [
     children: [
       {
         path: "orders",
-        element: <OrdersPage />,
-      },
-    ],
-  },
+        element: <OrdersPage />
+      }
+    ]
+  }
 ];
 
 const menuItems: MenuItem[] = [
   {
     title: "orders.title",
     path: "/admin/orders",
-    icon: <ShoppingCartIcon />,
+    icon: <ShoppingCart className="w-5 h-5" />,
     isAllowed: (user: User) =>
       Object.values(UserRoles).some((role) => user.roles.includes(role)),
     children: [
@@ -47,7 +47,7 @@ const menuItems: MenuItem[] = [
           location.pathname.includes("/admin/orders") &&
           queryToObject(location.search).status === OrderStatus.PENDING,
         isAllowed: (user: User) =>
-          Object.values(UserRoles).some((role) => user.roles.includes(role)),
+          Object.values(UserRoles).some((role) => user.roles.includes(role))
       },
       {
         title: "orders.closed.title",
@@ -56,10 +56,10 @@ const menuItems: MenuItem[] = [
           location.pathname.includes("/admin/orders") &&
           queryToObject(location.search).status === OrderStatus.CLOSED,
         isAllowed: (user: User) =>
-          Object.values(UserRoles).some((role) => user.roles.includes(role)),
-      },
-    ],
-  },
+          Object.values(UserRoles).some((role) => user.roles.includes(role))
+      }
+    ]
+  }
 ];
 
 registerModule({
@@ -71,6 +71,6 @@ registerModule({
   permissions: [
     PERMISSION_ORDERS_LIST,
     PERMISSION_ORDERS_VIEW,
-    PERMISSION_ORDERS_DELETE,
-  ],
+    PERMISSION_ORDERS_DELETE
+  ]
 });

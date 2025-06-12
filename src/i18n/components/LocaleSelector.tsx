@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-
 import { Locale } from "../i18n.types";
 
 export function LocaleSelector() {
@@ -10,7 +8,9 @@ export function LocaleSelector() {
 
   const [language, setLanguage] = useState(i18n.language);
 
-  const handleLanguageChange = (event: SelectChangeEvent<string>) => {
+  const handleLanguageChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setLanguage(event.target.value);
   };
 
@@ -19,12 +19,16 @@ export function LocaleSelector() {
   }, [i18n, language]);
 
   return (
-    <Select value={language} label="language" onChange={handleLanguageChange}>
+    <select
+      value={language}
+      onChange={handleLanguageChange}
+      className="px-2 py-1 text-sm border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+    >
       {Object.values(Locale).map((locale) => (
-        <MenuItem key={locale} value={locale}>
+        <option key={locale} value={locale}>
           {locale.toUpperCase()}
-        </MenuItem>
+        </option>
       ))}
-    </Select>
+    </select>
   );
 }

@@ -1,16 +1,12 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@mui/material/styles";
-import { LineChart, axisClasses } from "@mui/x-charts";
-import { ChartsTextStyle } from "@mui/x-charts/ChartsText";
-
 import { Title } from "@/shared/components/Title";
 
 // Generate Sales Data
 function createData(
   time: string,
-  amount?: number,
+  amount?: number
 ): { time: string; amount: number | null } {
   return { time, amount: amount ?? null };
 }
@@ -24,64 +20,51 @@ const data = [
   createData("15:00", 2000),
   createData("18:00", 2400),
   createData("21:00", 2400),
-  createData("24:00"),
+  createData("24:00", 0)
 ];
 
 export function Chart() {
-  const theme = useTheme();
   const { t } = useTranslation();
+  const maxAmount = 2500;
 
   return (
     <React.Fragment>
       <Title>{t("dashboard.chart.today")}</Title>
-      <div style={{ width: "100%", flexGrow: 1, overflow: "hidden" }}>
-        <LineChart
-          dataset={data}
-          margin={{
-            top: 16,
-            right: 20,
-            left: 70,
-            bottom: 30,
-          }}
-          xAxis={[
-            {
-              scaleType: "point",
-              dataKey: "time",
-              tickNumber: 2,
-              tickLabelStyle: theme.typography.body2 as ChartsTextStyle,
-            },
-          ]}
-          yAxis={[
-            {
-              label: "Sales ($)",
-              labelStyle: {
-                ...(theme.typography.body1 as ChartsTextStyle),
-                fill: theme.palette.text.primary,
-              },
-              tickLabelStyle: theme.typography.body2 as ChartsTextStyle,
-              max: 2500,
-              tickNumber: 3,
-            },
-          ]}
-          series={[
-            {
-              dataKey: "amount",
-              showMark: false,
-              color: theme.palette.primary.light,
-            },
-          ]}
-          sx={{
-            [`.${axisClasses.root} line`]: {
-              stroke: theme.palette.text.secondary,
-            },
-            [`.${axisClasses.root} text`]: {
-              fill: theme.palette.text.secondary,
-            },
-            [`& .${axisClasses.left} .${axisClasses.label}`]: {
-              transform: "translateX(-25px)",
-            },
-          }}
-        />
+      <div className="w-full flex-1 overflow-hidden">
+        <div className="h-full flex flex-col">
+          {/* Y-axis label */}
+          <div className="text-sm text-gray-600 mb-2">Sales ($)</div>
+
+          {/* Chart area */}
+          <div className="flex-1 flex items-end justify-between px-4 pb-8 border-l-2 border-b-2 border-gray-300 relative">
+            {/* Y-axis ticks */}
+            <div className="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-500 -ml-12">
+              <span>2500</span>
+              <span>1250</span>
+              <span>0</span>
+            </div>
+
+            {/* Bars */}
+            {data.map((item, index) => {
+              const height = item.amount ? (item.amount / maxAmount) * 100 : 0;
+              return (
+                <div key={index} className="flex flex-col items-center flex-1">
+                  <div
+                    className="w-8 bg-blue-500 rounded-t-sm transition-all duration-300 hover:bg-blue-600"
+                    style={{
+                      height: `${height}%`,
+                      minHeight: height > 0 ? "2px" : "0"
+                    }}
+                    title={`${item.time}: $${item.amount || 0}`}
+                  />
+                  <span className="text-xs text-gray-500 mt-2 transform -rotate-45 origin-top-left">
+                    {item.time}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </React.Fragment>
   );

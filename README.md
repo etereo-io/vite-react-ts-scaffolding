@@ -117,7 +117,7 @@ npm run preview
 - React DOM
 - React Router DOM
 - Emotion (for CSS-in-JS)
-- Material-UI
+- Tailwind
 - React Query (for data fetching)
 - i18next (for internationalization)
 

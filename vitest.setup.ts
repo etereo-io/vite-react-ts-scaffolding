@@ -26,8 +26,8 @@ Object.defineProperty(window, "matchMedia", {
     removeListener: () => null,
     addEventListener: () => null,
     removeEventListener: () => null,
-    dispatchEvent: () => null,
-  }),
+    dispatchEvent: () => null
+  })
 });
 
 if (typeof window !== "undefined") {
@@ -37,17 +37,12 @@ if (typeof window !== "undefined") {
 }
 
 if (typeof Element !== "undefined") {
-  Element.prototype.scrollIntoView = vi.fn<
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    any,
-    typeof Element.prototype.scrollIntoView
-  >();
+  Element.prototype.scrollIntoView = vi.fn();
 }
 
 if (typeof document !== "undefined") {
   document.queryCommandSupported = () => false;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  Element.prototype.scrollTo = vi.fn<any, typeof Element.prototype.scrollTo>();
+  Element.prototype.scrollTo = vi.fn();
 }
 
 // https://github.com/vitest-dev/vitest/issues/1450

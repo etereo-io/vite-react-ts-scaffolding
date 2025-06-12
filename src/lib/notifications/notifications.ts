@@ -13,5 +13,5 @@ export const notifications = {
   },
   error: (name: string) => {
     console.error("error =>", name);
-  },
+  }
 };

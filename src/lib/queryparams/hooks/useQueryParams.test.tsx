@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { MemoryRouter, useLocation } from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router";
 
 import { act, renderHook } from "@testing-library/react";
 import { Mock } from "vitest";
@@ -7,10 +7,10 @@ import { Mock } from "vitest";
 import { useQueryParams } from "./useQueryParams";
 
 const mockNavigate = vi.fn();
-vi.mock("react-router-dom", async () => ({
-  ...(await vi.importActual("react-router-dom")),
+vi.mock("react-router", async () => ({
+  ...(await vi.importActual("react-router")),
   useLocation: vi.fn(),
-  useNavigate: () => mockNavigate,
+  useNavigate: () => mockNavigate
 }));
 
 interface WrapperProps {
@@ -20,7 +20,7 @@ interface WrapperProps {
 describe("useQueryParams", () => {
   beforeEach(() => {
     (useLocation as Mock).mockImplementation(() => ({
-      search: "?param1=value1&param2=value2",
+      search: "?param1=value1&param2=value2"
     }));
   });
 
@@ -54,7 +54,7 @@ describe("useQueryParams", () => {
     expect(mockNavigate).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledWith(
       { search: "param2=value2" },
-      undefined,
+      undefined
     );
 
     act(() => {
@@ -64,7 +64,7 @@ describe("useQueryParams", () => {
     expect(mockNavigate).toHaveBeenCalledTimes(2);
     expect(mockNavigate).toHaveBeenCalledWith(
       { search: "param2=value2" },
-      { replace: true },
+      { replace: true }
     );
   });
 
@@ -82,7 +82,7 @@ describe("useQueryParams", () => {
     expect(mockNavigate).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledWith(
       { search: "param2=value2" },
-      undefined,
+      undefined
     );
 
     act(() => {
@@ -91,7 +91,7 @@ describe("useQueryParams", () => {
     expect(mockNavigate).toHaveBeenCalledTimes(2);
     expect(mockNavigate).toHaveBeenCalledWith(
       { search: "param2=value2" },
-      { replace: true },
+      { replace: true }
     );
   });
 });

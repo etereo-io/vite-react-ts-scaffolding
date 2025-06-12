@@ -1,4 +1,4 @@
-import { Location, RouteObject } from "react-router-dom";
+import { Location, RouteObject } from "react-router";
 
 import { deepmerge } from "deepmerge-ts";
 

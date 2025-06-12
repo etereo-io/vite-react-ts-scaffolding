@@ -1,161 +1,95 @@
+import { Bell, ChevronLeft, Menu } from "lucide-react";
 import * as React from "react";
-import { Outlet } from "react-router-dom";
-
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Badge from "@mui/material/Badge";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import MuiDrawer from "@mui/material/Drawer";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { styled } from "@mui/material/styles";
+import { Outlet } from "react-router";
 
 import { LocaleSelector } from "@/i18n/components/LocaleSelector";
-
 import { AdminMenuItems } from "../components/AdminMenuItems";
 
-const drawerWidth: number = 240;
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  "& .MuiDrawer-paper": {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: "border-box",
-    ...(!open && {
-      overflowX: "hidden",
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
-      },
-    }),
-  },
-}));
+const drawerWidth = 240;
 
 export function AdminLayout({
-  children,
-}: { readonly children?: React.ReactNode }) {
+  children
+}: {
+  readonly children?: React.ReactNode;
+}) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
-    <Box sx={{ display: "flex" }} data-testid="dashboard-page">
-      <CssBaseline />
-      <AppBar position="absolute" open={open}>
-        <Toolbar
-          sx={{
-            pr: "24px", // keep right padding when drawer closed
-          }}
-        >
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
-            sx={{
-              marginRight: "36px",
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
-          >
-            Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <LocaleSelector />
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <Toolbar
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            px: [1],
-          }}
-        >
-          <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </Toolbar>
-        <Divider />
-        <List component="nav">
-          <AdminMenuItems />
-        </List>
-      </Drawer>
-      <Box
-        component="main"
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
-          flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
+    <div className="flex h-screen bg-gray-100" data-testid="dashboard-page">
+      {/* App Bar */}
+      <header
+        className={`fixed top-0 z-20 bg-blue-600 text-white transition-all duration-300 ${
+          open ? `left-${drawerWidth / 4} right-0` : "left-0 right-0"
+        }`}
+        style={{
+          marginLeft: open ? `${drawerWidth}px` : "0",
+          width: open ? `calc(100% - ${drawerWidth}px)` : "100%"
         }}
       >
-        <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
+        <div className="flex items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-4">
+            {!open && (
+              <button
+                onClick={toggleDrawer}
+                className="p-2 rounded hover:bg-blue-700 transition-colors"
+                aria-label="open drawer"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+            )}
+            <h1 className="text-xl font-semibold">Dashboard</h1>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <button className="p-2 rounded hover:bg-blue-700 transition-colors relative">
+              <Bell className="w-6 h-6" />
+              <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                4
+              </span>
+            </button>
+            <LocaleSelector />
+          </div>
+        </div>
+      </header>
+
+      {/* Drawer */}
+      <aside
+        className={`fixed left-0 top-0 h-full bg-white shadow-lg transition-all duration-300 z-30 ${
+          open ? "w-60" : "w-16"
+        }`}
+      >
+        <div className="flex items-center justify-end p-4 border-b border-gray-200">
+          <button
+            onClick={toggleDrawer}
+            className="p-2 rounded hover:bg-gray-100 transition-colors"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+        </div>
+
+        <div className="border-b border-gray-200" />
+
+        <nav className="py-4">
+          <AdminMenuItems />
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <main
+        className={`flex-1 pt-20 transition-all duration-300 ${
+          open ? "ml-60" : "ml-16"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="grid grid-cols-1 gap-6">
             <Outlet />
             {children}
-          </Grid>
-        </Container>
-      </Box>
-    </Box>
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }

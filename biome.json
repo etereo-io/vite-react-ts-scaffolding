@@ -117,7 +117,9 @@
     },
     "ignore": ["**/dist"]
   },
-  "javascript": { "formatter": { "quoteStyle": "double" } },
+  "javascript": {
+    "formatter": { "quoteStyle": "double", "trailingCommas": "none" }
+  },
   "overrides": [
     {
       "include": ["*.ts", "*.tsx", "*.mts", "*.cts"],

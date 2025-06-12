@@ -1,15 +1,13 @@
 import * as React from "react";
 
-import Typography from "@mui/material/Typography";
-
 interface TitleProps {
   readonly children?: React.ReactNode;
 }
 
 export function Title(props: TitleProps) {
   return (
-    <Typography component="h2" variant="h6" color="primary" gutterBottom>
+    <h2 className="text-lg font-semibold text-blue-600 mb-4">
       {props.children}
-    </Typography>
+    </h2>
   );
 }

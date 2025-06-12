@@ -19,7 +19,7 @@ export interface User {
 
 export enum UserRoles {
   ADMIN = "admin",
-  STAFF = "staff",
+  STAFF = "staff"
 }
 
 export type RequiredPermissions = boolean | string | string[] | string[][];

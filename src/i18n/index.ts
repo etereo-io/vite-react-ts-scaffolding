@@ -18,9 +18,9 @@ i18next
     fallbackLng: Locale.EN,
     supportedLngs: Object.values(Locale),
     interpolation: {
-      escapeValue: false,
+      escapeValue: false
     },
-    resources,
+    resources
   });
 
 export default i18next;

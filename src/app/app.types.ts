@@ -1,6 +1,6 @@
-import { Location, RouteObject } from "react-router-dom";
-
 import type { RequestHandler } from "msw";
+import type { ReactElement } from "react";
+import { Location, RouteObject } from "react-router";
 
 import { User } from "@/auth/auth.types";
 import { LocaleResources } from "@/i18n/i18n.types";
@@ -8,7 +8,7 @@ import { LocaleResources } from "@/i18n/i18n.types";
 export interface MenuItem {
   title: string;
   children?: MenuItem[];
-  icon?: JSX.Element;
+  icon?: ReactElement;
   path?: string;
   isActive?: (location: Location, path?: string) => boolean;
   isAllowed?: (user: User) => boolean;

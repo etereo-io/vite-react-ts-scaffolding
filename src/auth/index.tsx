@@ -1,4 +1,4 @@
-import { Navigate, RouteObject } from "react-router-dom";
+import { Navigate, RouteObject } from "react-router";
 
 import { registerModule } from "@/app/modules/modules.helpers";
 
@@ -8,15 +8,15 @@ import { SignInPage } from "./pages/SignInPage";
 const routes: RouteObject[] = [
   {
     path: "/",
-    element: <Navigate to="/login" />,
+    element: <Navigate to="/login" />
   },
   {
     path: "/login",
-    element: <SignInPage />,
-  },
+    element: <SignInPage />
+  }
 ];
 
 registerModule({
   name: MODULE_AUTH,
-  routes,
+  routes
 });

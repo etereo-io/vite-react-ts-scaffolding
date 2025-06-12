@@ -1,6 +1,6 @@
 export enum Locale {
   EN = "en",
-  ES = "es",
+  ES = "es"
 }
 
 export type LocaleResources = Record<

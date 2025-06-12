@@ -15,7 +15,7 @@ describe("AllowedAuth", () => {
   test("should render loading state when isPending is true", () => {
     mockUseUserAuth.mockReturnValue({ isAllowed: vi.fn(), isPending: true });
     const { container } = render(
-      <AllowedAuth permissions={true}>{childrenContent}</AllowedAuth>,
+      <AllowedAuth permissions={true}>{childrenContent}</AllowedAuth>
     );
     expect(container).toBeEmptyDOMElement();
   });
@@ -23,7 +23,7 @@ describe("AllowedAuth", () => {
   test("should render children when permissions is true", () => {
     mockUseUserAuth.mockReturnValue({ isAllowed: vi.fn(), isPending: false });
     const { getByText } = render(
-      <AllowedAuth permissions={true}>{childrenContent}</AllowedAuth>,
+      <AllowedAuth permissions={true}>{childrenContent}</AllowedAuth>
     );
     expect(getByText("Allowed Content")).toBeInTheDocument();
   });
@@ -33,7 +33,7 @@ describe("AllowedAuth", () => {
     const { getByText } = render(
       <AllowedAuth permissions={false} error={errorContent}>
         {childrenContent}
-      </AllowedAuth>,
+      </AllowedAuth>
     );
     expect(getByText("Error Content")).toBeInTheDocument();
   });
@@ -42,12 +42,12 @@ describe("AllowedAuth", () => {
     const isAllowedMock = vi.fn().mockReturnValue(false);
     mockUseUserAuth.mockReturnValue({
       isAllowed: isAllowedMock,
-      isPending: false,
+      isPending: false
     });
     const { getByText } = render(
       <AllowedAuth permissions={["permission1"]} error={errorContent}>
         {childrenContent}
-      </AllowedAuth>,
+      </AllowedAuth>
     );
     expect(getByText("Error Content")).toBeInTheDocument();
     expect(isAllowedMock).toHaveBeenCalledWith(["permission1"]);
@@ -57,12 +57,10 @@ describe("AllowedAuth", () => {
     const isAllowedMock = vi.fn().mockReturnValue(true);
     mockUseUserAuth.mockReturnValue({
       isAllowed: isAllowedMock,
-      isPending: false,
+      isPending: false
     });
     const { getByText } = render(
-      <AllowedAuth permissions={["permission1"]}>
-        {childrenContent}
-      </AllowedAuth>,
+      <AllowedAuth permissions={["permission1"]}>{childrenContent}</AllowedAuth>
     );
     expect(getByText("Allowed Content")).toBeInTheDocument();
     expect(isAllowedMock).toHaveBeenCalledWith(["permission1"]);
@@ -71,7 +69,7 @@ describe("AllowedAuth", () => {
   test("should render empty when permissions is false and no error is provided", () => {
     mockUseUserAuth.mockReturnValue({ isAllowed: vi.fn(), isPending: false });
     const { container } = render(
-      <AllowedAuth permissions={false}>{childrenContent}</AllowedAuth>,
+      <AllowedAuth permissions={false}>{childrenContent}</AllowedAuth>
     );
     expect(container).toBeEmptyDOMElement();
   });
