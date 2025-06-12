@@ -3,7 +3,9 @@ import { MemoryRouter, RouterProvider, createMemoryRouter } from "react-router";
 import { RenderOptions, render } from "@testing-library/react";
 
 import { AppProviders } from "@/app/components/AppProviders";
-import { getAllRoutes } from "@/app/modules/modules.helpers";
+import { getAllRoutes } from "@/app/features/modules/modules.helpers";
+
+import localConfig from "../config/config.local.yml";
 
 export function TestProviders({
   children
@@ -11,7 +13,7 @@ export function TestProviders({
   readonly children: React.ReactNode;
 }) {
   return (
-    <AppProviders>
+    <AppProviders config={localConfig}>
       <MemoryRouter>{children}</MemoryRouter>
     </AppProviders>
   );
@@ -27,7 +29,7 @@ export function TestApp({
   });
 
   return (
-    <AppProviders>
+    <AppProviders config={localConfig}>
       <RouterProvider router={router} />
     </AppProviders>
   );

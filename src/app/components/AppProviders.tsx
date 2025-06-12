@@ -1,15 +1,26 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { queryClient as defaultQueryClient } from "../queryClient";
+import { queryClient as defaultQueryClient } from "@/app/features/queryClient";
+import { ConfigLoader } from "../features/config/components/ConfigLoader";
+import { Config } from "../features/config/config.types";
+import { ConfigProvider } from "../features/config/providers/ConfigProvider";
 
 export function AppProviders({
   children,
-  queryClient = defaultQueryClient
+  queryClient = defaultQueryClient,
+  config = null
 }: {
   readonly children: React.ReactNode;
   readonly queryClient?: QueryClient;
+  readonly config?: Config | null;
 }) {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <ConfigProvider config={config}>
+      <ConfigLoader>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </ConfigLoader>
+    </ConfigProvider>
   );
 }

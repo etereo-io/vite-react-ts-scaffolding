@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router";
 
-import { getAllRoutes } from "../modules/modules.helpers";
+import { getAllRoutes } from "../features/modules/modules.helpers";
 
 const basename = import.meta.env.VITE_APP_CONTEXT_PATH;
 

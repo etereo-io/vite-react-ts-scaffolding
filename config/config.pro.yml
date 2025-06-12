@@ -1,0 +1,11 @@
+app:
+  environment: production
+
+endpoints:
+  default: https://api.myapp.com/
+
+features:
+  msw: false
+  debugMode: false
+  analytics: true
+  betaFeatures: false

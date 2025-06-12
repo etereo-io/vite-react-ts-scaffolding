@@ -1,14 +1,15 @@
 import "@/assets/styles/global.css";
 
-import "../modules/modules";
+import "../features/modules/modules";
 
 import { AppRoutes } from "@/app/components/AppRoutes";
 
+import { Config } from "../features/config/config.types";
 import { AppProviders } from "./AppProviders";
 
-export function App() {
+export function App({ config }: { readonly config?: Config | null }) {
   return (
-    <AppProviders>
+    <AppProviders config={config}>
       <AppRoutes />
     </AppProviders>
   );

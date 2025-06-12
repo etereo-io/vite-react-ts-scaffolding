@@ -1,0 +1,11 @@
+app:
+  environment: development
+
+endpoints:
+  default: /api/
+
+features:
+  msw: true
+  debugMode: true
+  analytics: false
+  betaFeatures: true

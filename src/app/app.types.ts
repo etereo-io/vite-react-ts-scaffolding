@@ -2,8 +2,8 @@ import type { RequestHandler } from "msw";
 import type { ReactElement } from "react";
 import { Location, RouteObject } from "react-router";
 
-import { User } from "@/auth/auth.types";
-import { LocaleResources } from "@/i18n/i18n.types";
+import { User } from "@/app/features/auth/auth.types";
+import { LocaleResources } from "@/app/features/i18n/i18n.types";
 
 export interface MenuItem {
   title: string;

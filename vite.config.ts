@@ -2,6 +2,7 @@ import removeAttr from "react-remove-attr";
 
 import path from "node:path";
 
+import ViteYaml from "@modyfi/vite-plugin-yaml";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
 import { loadEnv } from "vite";
@@ -32,7 +33,8 @@ export default defineConfig(({ mode }) => {
           extensions: ["tsx"],
           attributes: ["data-testid"]
         }),
-      react()
+      react(),
+      ViteYaml()
     ],
 
     build: {

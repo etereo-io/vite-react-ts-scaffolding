@@ -2,11 +2,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
+import { useLoggedUser } from "@/app/features/auth/hooks/useLoggedUser";
 import {
   defaultIsActiveHandler,
   getAllowedMenuItems
-} from "@/app/modules/modules.helpers";
-import { useLoggedUser } from "@/auth/hooks/useLoggedUser";
+} from "@/app/features/modules/modules.helpers";
 
 export function AdminMenuItems() {
   const { t } = useTranslation();

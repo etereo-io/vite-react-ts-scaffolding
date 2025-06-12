@@ -2,7 +2,7 @@ import { Bell, ChevronLeft, Menu } from "lucide-react";
 import * as React from "react";
 import { Outlet } from "react-router";
 
-import { LocaleSelector } from "@/i18n/components/LocaleSelector";
+import { LocaleSelector } from "@/app/features/i18n/components/LocaleSelector";
 import { AdminMenuItems } from "../components/AdminMenuItems";
 
 const drawerWidth = 240;

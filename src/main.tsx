@@ -3,13 +3,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { App } from "./app/components/App";
-import { mockServerConfig } from "./mock-server/constants";
+import { getConfig } from "./app/features/config/config.service";
+import { mockServerConfig } from "./app/features/mock-server/constants";
 
 export async function enableMocking() {
-  if (!import.meta.env.VITE_ENABLE_MSW) {
+  if (
+    !getConfig("features.msw", {
+      defaultValue: true,
+      required: false
+    })
+  ) {
     return;
   }
-  const { worker } = await import("@/mock-server/browser");
+
+  const { worker } = await import("@/app/features/mock-server/browser");
   return worker.start(mockServerConfig);
 }
 

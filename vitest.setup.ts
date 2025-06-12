@@ -10,10 +10,10 @@ import { ResizeObserver as ResizeObserverPolyfill } from "@juggle/resize-observe
 import { cleanup } from "@testing-library/react";
 import { afterAll, afterEach, beforeAll, beforeEach, vi } from "vitest";
 
-import "@/app/modules/modules";
+import "@/app/features/modules";
 
-import { mockServerConfig } from "@/mock-server/constants";
-import { server } from "@/mock-server/node";
+import { mockServerConfig } from "@/app/features/mock-server/constants";
+import { server } from "@/app/features/mock-server/node";
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
