@@ -21,7 +21,9 @@ describe("OrdersPage", () => {
       };
     });
     renderWithTestProviders(<OrdersPage />);
-    await waitFor(() => expect(screen.getByTestId("orders-table")).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByTestId("orders-table")).toBeInTheDocument(),
+    );
   });
 
   it("should not render Orders", async () => {
@@ -33,6 +35,8 @@ describe("OrdersPage", () => {
     });
 
     renderWithTestProviders(<OrdersPage />);
-    await waitFor(() => expect(screen.queryByTestId("orders-table")).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByTestId("orders-table")).not.toBeInTheDocument(),
+    );
   });
 });

@@ -16,7 +16,12 @@ describe("useQueryParamState", () => {
     const value = "new value";
 
     const { result } = renderHook(
-      () => useQueryParamState(key, { fallbackStore: true, defaultValue, storePrefix: "" }),
+      () =>
+        useQueryParamState(key, {
+          fallbackStore: true,
+          defaultValue,
+          storePrefix: "",
+        }),
       {
         wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
       },
@@ -40,7 +45,12 @@ describe("useQueryParamState", () => {
     window.history.pushState({}, "", `/?${key}=${defaultValue}`);
 
     const { result } = renderHook(
-      () => useQueryParamState(key, { fallbackStore: false, defaultValue, storePrefix: "" }),
+      () =>
+        useQueryParamState(key, {
+          fallbackStore: false,
+          defaultValue,
+          storePrefix: "",
+        }),
       {
         wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
       },
@@ -62,7 +72,12 @@ describe("useQueryParamState", () => {
     const initialQueryParamValue = "initial";
 
     const { result } = renderHook(
-      () => useQueryParamState(key, { fallbackStore: false, defaultValue, storePrefix: "" }),
+      () =>
+        useQueryParamState(key, {
+          fallbackStore: false,
+          defaultValue,
+          storePrefix: "",
+        }),
       {
         wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
       },
@@ -89,7 +104,12 @@ describe("useQueryParamState", () => {
     const defaultValue = "fallback";
 
     const { result } = renderHook(
-      () => useQueryParamState(key, { fallbackStore: true, defaultValue, storePrefix: "" }),
+      () =>
+        useQueryParamState(key, {
+          fallbackStore: true,
+          defaultValue,
+          storePrefix: "",
+        }),
       {
         wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>,
       },

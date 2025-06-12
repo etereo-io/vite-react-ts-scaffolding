@@ -37,21 +37,26 @@ const menuItems: MenuItem[] = [
     title: "orders.title",
     path: "/admin/orders",
     icon: <ShoppingCartIcon />,
-    isAllowed: (user: User) => Object.values(UserRoles).some((role) => user.roles.includes(role)),
+    isAllowed: (user: User) =>
+      Object.values(UserRoles).some((role) => user.roles.includes(role)),
     children: [
       {
         title: "orders.open.title",
         path: `/admin/orders?status=${OrderStatus.PENDING}`,
         isActive: (location) =>
-          location.pathname.includes("/admin/orders") && queryToObject(location.search).status === OrderStatus.PENDING,
-        isAllowed: (user: User) => Object.values(UserRoles).some((role) => user.roles.includes(role)),
+          location.pathname.includes("/admin/orders") &&
+          queryToObject(location.search).status === OrderStatus.PENDING,
+        isAllowed: (user: User) =>
+          Object.values(UserRoles).some((role) => user.roles.includes(role)),
       },
       {
         title: "orders.closed.title",
         path: `/admin/orders?status=${OrderStatus.CLOSED}`,
         isActive: (location) =>
-          location.pathname.includes("/admin/orders") && queryToObject(location.search).status === OrderStatus.CLOSED,
-        isAllowed: (user: User) => Object.values(UserRoles).some((role) => user.roles.includes(role)),
+          location.pathname.includes("/admin/orders") &&
+          queryToObject(location.search).status === OrderStatus.CLOSED,
+        isAllowed: (user: User) =>
+          Object.values(UserRoles).some((role) => user.roles.includes(role)),
       },
     ],
   },
@@ -63,5 +68,9 @@ registerModule({
   menuItems,
   locales,
   mockHandlers: handlers,
-  permissions: [PERMISSION_ORDERS_LIST, PERMISSION_ORDERS_VIEW, PERMISSION_ORDERS_DELETE],
+  permissions: [
+    PERMISSION_ORDERS_LIST,
+    PERMISSION_ORDERS_VIEW,
+    PERMISSION_ORDERS_DELETE,
+  ],
 });

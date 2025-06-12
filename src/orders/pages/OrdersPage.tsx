@@ -12,7 +12,10 @@ export function OrdersPage() {
   return (
     <Grid item xs={12}>
       <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-        <AllowedAuth permissions={PERMISSION_ORDERS_LIST} error={<Trans i18nKey="shared.error.page.permissions" />}>
+        <AllowedAuth
+          permissions={PERMISSION_ORDERS_LIST}
+          error={<Trans i18nKey="shared.error.page.permissions" />}
+        >
           <Orders />
         </AllowedAuth>
       </Paper>

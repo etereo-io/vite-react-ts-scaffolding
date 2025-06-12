@@ -1,4 +1,4 @@
-import { delay, http, HttpResponse } from "msw";
+import { http, HttpResponse, delay } from "msw";
 
 import { API_DEFAULT_LIMIT } from "@/app/api";
 import { queryToObject } from "@/lib/queryparams/queryparams.helpers";
@@ -19,7 +19,9 @@ export const handlers = [
 
     await delay(DEFAULT_DELAY);
     return HttpResponse.json({
-      data: orders.filter((order) => (status ? order.status === status : true)).slice(offset, offset + limit),
+      data: orders
+        .filter((order) => (status ? order.status === status : true))
+        .slice(offset, offset + limit),
       pagination: {
         offset,
         limit,

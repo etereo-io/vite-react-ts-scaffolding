@@ -2,7 +2,7 @@
 export function useMetrics() {
   return {
     event: (name: string) => {
-      // eslint-disable-next-line no-console
+      // biome-ignore lint/suspicious/noConsole: <explanation>
       console.log("event =>", name);
     },
   };

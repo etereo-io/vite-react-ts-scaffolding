@@ -4,7 +4,7 @@
     "paths": {
       "*": ["@types/*"],
       "@/*": ["src/*"],
-      "#/*": ["test/*"],
+      "#/*": ["test/*"]
     },
 
     /* Base */
@@ -29,7 +29,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "types": ["node", "vitest/globals", "@testing-library/jest-dom/vitest"],
+    "types": ["node", "vitest/globals", "@testing-library/jest-dom/vitest"]
   },
   "include": ["src/**/*", "@types", "test", "vitest.setup.ts"],
   "exclude": ["node_modules/**"],

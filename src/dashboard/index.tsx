@@ -33,7 +33,8 @@ const menuItems: MenuItem[] = [
     title: "dashboard.dashboard.title",
     icon: <DashboardIcon />,
     path: "/admin/dashboard",
-    isAllowed: (user: User) => Object.values(UserRoles).some((role) => user.roles.includes(role)),
+    isAllowed: (user: User) =>
+      Object.values(UserRoles).some((role) => user.roles.includes(role)),
   },
 ];
 

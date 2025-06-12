@@ -26,7 +26,9 @@ describe("useQueryParams", () => {
 
   it("should clear params", () => {
     const wrapper = ({ children }: WrapperProps) => (
-      <MemoryRouter initialEntries={["/test?param1=value1"]}>{children}</MemoryRouter>
+      <MemoryRouter initialEntries={["/test?param1=value1"]}>
+        {children}
+      </MemoryRouter>
     );
     const { result } = renderHook(() => useQueryParams(), { wrapper });
 
@@ -37,7 +39,9 @@ describe("useQueryParams", () => {
   });
 
   it("should apply new params", () => {
-    const wrapper = ({ children }: WrapperProps) => <MemoryRouter initialEntries={["/test"]}>{children}</MemoryRouter>;
+    const wrapper = ({ children }: WrapperProps) => (
+      <MemoryRouter initialEntries={["/test"]}>{children}</MemoryRouter>
+    );
     const { result } = renderHook(() => useQueryParams(), { wrapper });
 
     const params = new URLSearchParams();
@@ -48,19 +52,27 @@ describe("useQueryParams", () => {
     });
 
     expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith({ search: "param2=value2" }, undefined);
+    expect(mockNavigate).toHaveBeenCalledWith(
+      { search: "param2=value2" },
+      undefined,
+    );
 
     act(() => {
       result.current.applyParams(params, { replace: true });
     });
 
     expect(mockNavigate).toHaveBeenCalledTimes(2);
-    expect(mockNavigate).toHaveBeenCalledWith({ search: "param2=value2" }, { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith(
+      { search: "param2=value2" },
+      { replace: true },
+    );
   });
 
   it("should remove specific params", () => {
     const wrapper = ({ children }: WrapperProps) => (
-      <MemoryRouter initialEntries={["/test?param1=value1&param2=value2"]}>{children}</MemoryRouter>
+      <MemoryRouter initialEntries={["/test?param1=value1&param2=value2"]}>
+        {children}
+      </MemoryRouter>
     );
     const { result } = renderHook(() => useQueryParams(), { wrapper });
 
@@ -68,12 +80,18 @@ describe("useQueryParams", () => {
       result.current.removeParams("param1");
     });
     expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith({ search: "param2=value2" }, undefined);
+    expect(mockNavigate).toHaveBeenCalledWith(
+      { search: "param2=value2" },
+      undefined,
+    );
 
     act(() => {
       result.current.removeParams("param1", { replace: true });
     });
     expect(mockNavigate).toHaveBeenCalledTimes(2);
-    expect(mockNavigate).toHaveBeenCalledWith({ search: "param2=value2" }, { replace: true });
+    expect(mockNavigate).toHaveBeenCalledWith(
+      { search: "param2=value2" },
+      { replace: true },
+    );
   });
 });

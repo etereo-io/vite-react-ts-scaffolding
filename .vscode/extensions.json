@@ -1,6 +1,3 @@
 {
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "hediet.vscode-drawio"
-  ]
+  "recommendations": ["hediet.vscode-drawio", "biomejs.biome"]
 }

@@ -19,9 +19,12 @@ describe("getQueryString and queryToObject", () => {
     },
   ];
 
-  it.each(testCases)(`should correctly convert params to querystring and vice versa:`, (testCase) => {
-    const { params, expectedQuery, expectedObject } = testCase;
-    expect(getQueryString(params)).toStrictEqual(expectedQuery);
-    expect(queryToObject(expectedQuery)).toStrictEqual(expectedObject);
-  });
+  it.each(testCases)(
+    `should correctly convert params to querystring and vice versa:`,
+    (testCase) => {
+      const { params, expectedQuery, expectedObject } = testCase;
+      expect(getQueryString(params)).toStrictEqual(expectedQuery);
+      expect(queryToObject(expectedQuery)).toStrictEqual(expectedObject);
+    },
+  );
 });

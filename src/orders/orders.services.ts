@@ -12,9 +12,15 @@ export function fetchOrders(
     limit: API_DEFAULT_LIMIT,
   },
 ) {
-  const finalParams = Object.assign({}, DEFAULT_ORDERS_FILTERS, filters) as unknown as Record<string, unknown>;
+  const finalParams = Object.assign(
+    {},
+    DEFAULT_ORDERS_FILTERS,
+    filters,
+  ) as unknown as Record<string, unknown>;
   return axios
-    .get<PaginatedResponse<Order[]>>(getEndpoint() + "orders?" + getQueryString(finalParams))
+    .get<PaginatedResponse<Order[]>>(
+      getEndpoint() + "orders?" + getQueryString(finalParams),
+    )
     .then((res) => res.data);
 }
 

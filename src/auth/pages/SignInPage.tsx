@@ -28,7 +28,12 @@ export function SignInPage() {
   };
 
   return (
-    <Grid container component="main" sx={{ height: "100vh" }} data-testid="login-page">
+    <Grid
+      container
+      component="main"
+      sx={{ height: "100vh" }}
+      data-testid="login-page"
+    >
       <CssBaseline />
       <Grid
         item
@@ -38,7 +43,10 @@ export function SignInPage() {
         sx={{
           backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
           backgroundRepeat: "no-repeat",
-          backgroundColor: (t) => (t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900]),
+          backgroundColor: (t) =>
+            t.palette.mode === "light"
+              ? t.palette.grey[50]
+              : t.palette.grey[900],
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -59,7 +67,12 @@ export function SignInPage() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -80,8 +93,16 @@ export function SignInPage() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
               Sign In
             </Button>
             <Grid container>

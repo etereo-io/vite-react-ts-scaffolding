@@ -1,13 +1,16 @@
 import { useCallback } from "react";
 
-import { useLoggedUser } from "./useLoggedUser";
 import { isUserAllowed } from "../auth.helpers";
 import { RequiredPermissions } from "../auth.types";
+import { useLoggedUser } from "./useLoggedUser";
 
 export function useUserAuth() {
   const { user, isPending } = useLoggedUser();
 
-  const isAllowed = useCallback((permissions: RequiredPermissions) => isUserAllowed({ user, permissions }), [user]);
+  const isAllowed = useCallback(
+    (permissions: RequiredPermissions) => isUserAllowed({ user, permissions }),
+    [user],
+  );
 
   return {
     isAllowed,

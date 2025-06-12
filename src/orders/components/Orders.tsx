@@ -40,7 +40,12 @@ export function Orders() {
           }}
         >
           {t("orders.recent")}
-          <Select value={status ?? ""} displayEmpty label="status" onChange={handleOrderStatusChange}>
+          <Select
+            value={status ?? ""}
+            displayEmpty
+            label="status"
+            onChange={handleOrderStatusChange}
+          >
             <MenuItem value="">{t("shared.all")}</MenuItem>
             {Object.values(OrderStatus).map((status) => (
               <MenuItem key={status} value={status}>
@@ -75,7 +80,10 @@ export function Orders() {
                 {/* this could be also valid, but just to show an example with already evaluated permission */}
                 {/* <AllowedAuth permissions={PERMISSION_ORDERS_DELETE}> */}
                 <AllowedAuth permissions={canDelete}>
-                  <IconButton aria-label="delete" onClick={handleOrderDelete(order.id)}>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={handleOrderDelete(order.id)}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </AllowedAuth>
@@ -94,7 +102,12 @@ export function Orders() {
         }}
       />
 
-      <Link color="primary" href="#" onClick={handleSeeMoreOrders} sx={{ mt: 3 }}>
+      <Link
+        color="primary"
+        href="#"
+        onClick={handleSeeMoreOrders}
+        sx={{ mt: 3 }}
+      >
         See more orders
       </Link>
     </>

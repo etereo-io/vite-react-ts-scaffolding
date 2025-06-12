@@ -7,6 +7,7 @@ import { LocaleResources } from "@/i18n/i18n.types";
 
 import { MenuItem, Module } from "../app.types";
 
+// biome-ignore lint/style/useNamingConvention: <explanation>
 export type GlobalThis = typeof globalThis & { APP_MODULES: Module[] };
 
 // use globalThis to store modules as singleton
@@ -38,11 +39,15 @@ export const getAllLocalesResources = () => {
 };
 
 export const getAllRoutes = () => {
-  return modules.filter((module) => !!module.routes).flatMap((module) => module.routes) as RouteObject[];
+  return modules
+    .filter((module) => !!module.routes)
+    .flatMap((module) => module.routes) as RouteObject[];
 };
 
 export const getAllMockHandlers = () => {
-  return modules.filter((module) => !!module.mockHandlers).flatMap((module) => module.mockHandlers ?? []);
+  return modules
+    .filter((module) => !!module.mockHandlers)
+    .flatMap((module) => module.mockHandlers ?? []);
 };
 
 export function registerModule(module: Module) {

@@ -1,11 +1,11 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
-import { HttpResponse, http } from "msw";
+import { http, HttpResponse } from "msw";
 
 import { ERROR_INTERNAL } from "@/app/api";
 import { server } from "@/mock-server/node";
 
-import { useOrderDelete } from "./useOrderDelete";
 import { EVENT_ORDER_DELETE } from "../orders.constants";
+import { useOrderDelete } from "./useOrderDelete";
 
 import { TestProviders } from "#/tests.helpers";
 
@@ -37,7 +37,9 @@ describe("useOrderDelete", () => {
   const orderId = "orderId";
 
   it("delete single", async () => {
-    const { result } = renderHook(() => useOrderDelete(), { wrapper: TestProviders });
+    const { result } = renderHook(() => useOrderDelete(), {
+      wrapper: TestProviders,
+    });
 
     act(() => {
       result.current.mutate(orderId);
@@ -47,8 +49,12 @@ describe("useOrderDelete", () => {
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(mockEvent).toHaveBeenCalledWith(EVENT_ORDER_DELETE);
     await waitFor(() => expect(mockInvalidateQueries).toHaveBeenCalledTimes(1));
-    await waitFor(() => expect(mockNotificationSuccess).toHaveBeenCalledTimes(1));
-    expect(mockNotificationSuccess).toHaveBeenCalledWith("Order deleted successfully");
+    await waitFor(() =>
+      expect(mockNotificationSuccess).toHaveBeenCalledTimes(1),
+    );
+    expect(mockNotificationSuccess).toHaveBeenCalledWith(
+      "Order deleted successfully",
+    );
   });
 
   it("notify on error", async () => {
@@ -64,7 +70,9 @@ describe("useOrderDelete", () => {
       }),
     );
 
-    const { result } = renderHook(() => useOrderDelete(), { wrapper: TestProviders });
+    const { result } = renderHook(() => useOrderDelete(), {
+      wrapper: TestProviders,
+    });
 
     act(() => {
       result.current.mutate(orderId);

@@ -54,7 +54,12 @@ export default defineConfig(({ mode }) => {
         url: "http://localhost",
       },
 
-      include: ["**/*.test.js", "**/*.test.ts", "**/*.test.jsx", "**/*.test.tsx"],
+      include: [
+        "**/*.test.js",
+        "**/*.test.ts",
+        "**/*.test.jsx",
+        "**/*.test.tsx",
+      ],
       exclude: ["**/node_modules/**"],
 
       setupFiles: path.resolve(__dirname, "vitest.setup.ts"),
@@ -69,7 +74,12 @@ export default defineConfig(({ mode }) => {
       coverage: {
         provider: "v8",
         include: ["src/**/*"],
-        exclude: ["src/main.tsx", "src/mock-server/**/*", "*.test.*", "*/__mocks__/*"],
+        exclude: [
+          "src/main.tsx",
+          "src/mock-server/**/*",
+          "*.test.*",
+          "*/__mocks__/*",
+        ],
         reporter: ["text", "html", "lcov"],
         reportsDirectory: "reports/vite-coverage",
         enabled: false,

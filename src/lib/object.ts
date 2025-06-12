@@ -24,7 +24,9 @@ export function isNullish(value: unknown): value is null | undefined {
   return value === null || value === undefined;
 }
 
-export function isObjectEmpty(obj: Record<string, unknown> | null | undefined): boolean {
+export function isObjectEmpty(
+  obj: Record<string, unknown> | null | undefined,
+): boolean {
   if (!obj) return true;
 
   return Object.keys(obj).length === 0;

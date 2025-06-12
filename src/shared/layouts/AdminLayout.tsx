@@ -14,9 +14,9 @@ import MuiDrawer from "@mui/material/Drawer";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
-import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
 
 import { LocaleSelector } from "@/i18n/components/LocaleSelector";
 
@@ -46,7 +46,9 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }) => ({
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
   "& .MuiDrawer-paper": {
     position: "relative",
     whiteSpace: "nowrap",
@@ -70,7 +72,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
   },
 }));
 
-export function AdminLayout({ children }: { readonly children?: React.ReactNode }) {
+export function AdminLayout({
+  children,
+}: { readonly children?: React.ReactNode }) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -97,7 +101,13 @@ export function AdminLayout({ children }: { readonly children?: React.ReactNode 
           >
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1 }}
+          >
             Dashboard
           </Typography>
           <IconButton color="inherit">
@@ -130,7 +140,9 @@ export function AdminLayout({ children }: { readonly children?: React.ReactNode 
         component="main"
         sx={{
           backgroundColor: (theme) =>
-            theme.palette.mode === "light" ? theme.palette.grey[100] : theme.palette.grey[900],
+            theme.palette.mode === "light"
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900],
           flexGrow: 1,
           height: "100vh",
           overflow: "auto",

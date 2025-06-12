@@ -22,7 +22,11 @@ export class OrderMother {
     return Array.from({ length }, () => this.getRandomOrder(order));
   }
 
-  static getRandomPage(offset = 0, limit = API_DEFAULT_LIMIT, order?: Partial<Order>) {
+  static getRandomPage(
+    offset = 0,
+    limit = API_DEFAULT_LIMIT,
+    order?: Partial<Order>,
+  ) {
     return Array.from({ length: limit }, (_, index) =>
       this.getRandomOrder({ ...order, id: `order-${offset + index}` }),
     );

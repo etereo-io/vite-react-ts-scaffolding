@@ -12,6 +12,7 @@ This is a scaffolding project for building a React application using TypeScript 
 ### Installation
 
 1. Clone the repository:
+
    ```sh
    git clone https://github.com/your-username/vite-react-ts-scaffolding.git
    cd vite-react-ts-scaffolding
@@ -124,7 +125,7 @@ npm run preview
 
 - TypeScript
 - Vite
-- ESLint (with plugins for TypeScript, React, and Prettier)
+- BiomeJS (with plugins for TypeScript, React, and Prettier)
 - Vitest (for testing)
 - Testing Library (for testing React components)
 - Husky (for Git hooks)

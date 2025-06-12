@@ -1,12 +1,12 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
-import { HttpResponse, http } from "msw";
-import { describe, test, expect, beforeEach } from "vitest";
+import { http, HttpResponse } from "msw";
+import { beforeEach, describe, expect, test } from "vitest";
 
 import { API_DEFAULT_LIMIT } from "@/app/api";
 import { server } from "@/mock-server/node";
 
-import { useOrdersController } from "./useOrdersController";
 import { OrderMother } from "../__mocks__/OrderMother";
+import { useOrdersController } from "./useOrdersController";
 
 import { TestProviders } from "#/tests.helpers";
 
@@ -40,7 +40,10 @@ describe("useOrdersController", () => {
 
     server.use(
       http.get("/api/orders", () =>
-        HttpResponse.json({ ...orderPage, pagination: { ...orderPage.pagination, offset: 10 } }),
+        HttpResponse.json({
+          ...orderPage,
+          pagination: { ...orderPage.pagination, offset: 10 },
+        }),
       ),
     );
 
@@ -70,8 +73,10 @@ describe("useOrdersController", () => {
     });
 
     act(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      result.current.handleSeeMoreOrders({ preventDefault: preventDefaultMock } as any);
+      result.current.handleSeeMoreOrders({
+        preventDefault: preventDefaultMock,
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      } as any);
     });
 
     expect(preventDefaultMock).toHaveBeenCalled();
@@ -82,10 +87,17 @@ describe("useOrdersController", () => {
       wrapper: TestProviders,
     });
 
-    await waitFor(() => expect(result.current.orders?.pagination.limit).toBe(orderPage.pagination.limit));
+    await waitFor(() =>
+      expect(result.current.orders?.pagination.limit).toBe(
+        orderPage.pagination.limit,
+      ),
+    );
 
     await waitFor(() =>
-      expect(result.current.page).toBe(Math.floor(orderPage.pagination.offset / orderPage.pagination.limit) + 1),
+      expect(result.current.page).toBe(
+        Math.floor(orderPage.pagination.offset / orderPage.pagination.limit) +
+          1,
+      ),
     );
   });
 });

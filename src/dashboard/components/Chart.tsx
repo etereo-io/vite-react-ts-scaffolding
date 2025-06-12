@@ -8,7 +8,10 @@ import { ChartsTextStyle } from "@mui/x-charts/ChartsText";
 import { Title } from "@/shared/components/Title";
 
 // Generate Sales Data
-function createData(time: string, amount?: number): { time: string; amount: number | null } {
+function createData(
+  time: string,
+  amount?: number,
+): { time: string; amount: number | null } {
   return { time, amount: amount ?? null };
 }
 
@@ -68,8 +71,12 @@ export function Chart() {
             },
           ]}
           sx={{
-            [`.${axisClasses.root} line`]: { stroke: theme.palette.text.secondary },
-            [`.${axisClasses.root} text`]: { fill: theme.palette.text.secondary },
+            [`.${axisClasses.root} line`]: {
+              stroke: theme.palette.text.secondary,
+            },
+            [`.${axisClasses.root} text`]: {
+              fill: theme.palette.text.secondary,
+            },
             [`& .${axisClasses.left} .${axisClasses.label}`]: {
               transform: "translateX(-25px)",
             },

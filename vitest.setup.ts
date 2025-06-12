@@ -17,7 +17,7 @@ import { server } from "@/mock-server/node";
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   value: (query: any) => ({
     matches: false,
     media: query,
@@ -37,13 +37,16 @@ if (typeof window !== "undefined") {
 }
 
 if (typeof Element !== "undefined") {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Element.prototype.scrollIntoView = vi.fn<any, typeof Element.prototype.scrollIntoView>();
+  Element.prototype.scrollIntoView = vi.fn<
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    any,
+    typeof Element.prototype.scrollIntoView
+  >();
 }
 
 if (typeof document !== "undefined") {
   document.queryCommandSupported = () => false;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   Element.prototype.scrollTo = vi.fn<any, typeof Element.prototype.scrollTo>();
 }
 
@@ -54,6 +57,7 @@ beforeAll(() => {
   server.listen(mockServerConfig);
 });
 
+// biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
 beforeEach(() => {});
 
 afterAll(() => {

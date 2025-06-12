@@ -7,7 +7,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-import { defaultIsActiveHandler, getAllowedMenuItems } from "@/app/modules/modules.helpers";
+import {
+  defaultIsActiveHandler,
+  getAllowedMenuItems,
+} from "@/app/modules/modules.helpers";
 import { useLoggedUser } from "@/auth/hooks/useLoggedUser";
 
 export function AdminMenuItems() {
@@ -25,7 +28,10 @@ export function AdminMenuItems() {
     return (
       <React.Fragment key={menuItem.path}>
         <ListItemButton
-          selected={(menuItem.isActive ?? defaultIsActiveHandler)(location, menuItem.path)}
+          selected={(menuItem.isActive ?? defaultIsActiveHandler)(
+            location,
+            menuItem.path,
+          )}
           onClick={handleNavigate(menuItem.path ?? "")}
         >
           <ListItemIcon>{menuItem.icon}</ListItemIcon>
@@ -36,7 +42,10 @@ export function AdminMenuItems() {
             <List disablePadding key={child.title}>
               <ListItemButton
                 sx={{ pl: 4 }}
-                selected={(child.isActive ?? defaultIsActiveHandler)(location, child.path)}
+                selected={(child.isActive ?? defaultIsActiveHandler)(
+                  location,
+                  child.path,
+                )}
                 onClick={handleNavigate(child.path ?? "")}
               >
                 <ListItemIcon>{child.icon}</ListItemIcon>

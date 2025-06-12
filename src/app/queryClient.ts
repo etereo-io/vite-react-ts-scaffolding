@@ -1,6 +1,11 @@
 import { useMemo } from "react";
 
-import { MutationCache, QueryCache, QueryClient, QueryClientConfig } from "@tanstack/react-query";
+import {
+  MutationCache,
+  QueryCache,
+  QueryClient,
+  QueryClientConfig,
+} from "@tanstack/react-query";
 
 import { notifications } from "@/lib/notifications/notifications";
 
@@ -22,7 +27,12 @@ const defaultMutationCache = new MutationCache({
   onError: (error, variables, context, mutation) => {
     if (mutation.meta?.errorMessage) {
       if (typeof mutation.meta.errorMessage === "function") {
-        const message = mutation.meta?.errorMessage(error, variables, context, mutation);
+        const message = mutation.meta?.errorMessage(
+          error,
+          variables,
+          context,
+          mutation,
+        );
         message && notifications.error(message);
         return;
       }
@@ -33,7 +43,12 @@ const defaultMutationCache = new MutationCache({
   onSuccess: (data, variables, context, mutation) => {
     if (mutation.meta?.successMessage) {
       if (typeof mutation.meta.successMessage === "function") {
-        const message = mutation.meta.successMessage(data, variables, context, mutation);
+        const message = mutation.meta.successMessage(
+          data,
+          variables,
+          context,
+          mutation,
+        );
         message && notifications.success(message);
         return;
       }

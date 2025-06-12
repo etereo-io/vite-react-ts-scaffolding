@@ -18,7 +18,7 @@ export function AllowedAuth({
   }
 
   if (typeof permissions === "boolean") {
-    return permissions ? children : error ?? <></>;
+    return permissions ? children : (error ?? <></>);
   }
 
   if (!isAllowed(permissions)) {
