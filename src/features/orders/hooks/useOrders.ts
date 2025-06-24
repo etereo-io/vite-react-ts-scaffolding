@@ -4,7 +4,7 @@ import { API_DEFAULT_LIMIT } from "@/app/features/api/api.contants";
 
 import { QUERY_KEY_ORDERS } from "../orders.constants";
 import { fetchOrders } from "../orders.services";
-import { OrdersFilters } from "../orders.types";
+import type { OrdersFilters } from "../orders.types";
 
 export function useOrders(
   filters: OrdersFilters = { offset: 0, limit: API_DEFAULT_LIMIT }

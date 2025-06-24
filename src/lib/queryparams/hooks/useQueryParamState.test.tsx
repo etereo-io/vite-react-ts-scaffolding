@@ -1,6 +1,5 @@
-import { MemoryRouter } from "react-router";
-
 import { act, renderHook } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 
 import { useQueryParamState } from "./useQueryParamState";
 

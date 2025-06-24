@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
 import { isUserAllowed } from "../auth.helpers";
-import { RequiredPermissions } from "../auth.types";
+import type { RequiredPermissions } from "../auth.types";
 import { useLoggedUser } from "./useLoggedUser";
 
 export function useUserAuth() {

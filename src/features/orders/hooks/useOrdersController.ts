@@ -1,12 +1,10 @@
 import { useCallback, useState } from "react";
-
-import { useQueryParamState } from "@/lib/queryparams/hooks/useQueryParamState";
-
 import { API_DEFAULT_LIMIT } from "@/app/features/api/api.contants";
+import { useQueryParamState } from "@/lib/queryparams/hooks/useQueryParamState";
 import { useOrderDelete } from "../hooks/useOrderDelete";
 import { useOrders } from "../hooks/useOrders";
 import { QUERY_PARAM_ORDERS_STATUS } from "../orders.constants";
-import { OrderStatus } from "../orders.types";
+import type { OrderStatus } from "../orders.types";
 import { useOrdersPermissions } from "./useOrdersPermissions";
 
 export function useOrdersController() {

@@ -1,6 +1,5 @@
-import { MemoryRouter, RouterProvider, createMemoryRouter } from "react-router";
-
-import { RenderOptions, render } from "@testing-library/react";
+import { type RenderOptions, render } from "@testing-library/react";
+import { createMemoryRouter, MemoryRouter, RouterProvider } from "react-router";
 
 import { AppProviders } from "@/app/components/AppProviders";
 import { getAllRoutes } from "@/app/features/modules/modules.helpers";

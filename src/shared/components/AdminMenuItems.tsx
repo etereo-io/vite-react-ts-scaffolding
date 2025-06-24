@@ -31,6 +31,7 @@ export function AdminMenuItems() {
           <React.Fragment key={menuItem.path}>
             <li>
               <button
+                type="button"
                 onClick={handleNavigate(menuItem.path ?? "")}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors ${
                   isActive
@@ -54,6 +55,7 @@ export function AdminMenuItems() {
                     return (
                       <li key={child.title}>
                         <button
+                          type="button"
                           onClick={handleNavigate(child.path ?? "")}
                           className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors ${
                             childIsActive

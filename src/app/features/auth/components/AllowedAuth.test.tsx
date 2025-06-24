@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { Mock } from "vitest";
+import type { Mock } from "vitest";
 
 import { useUserAuth } from "../hooks/useUserAuth";
 import { AllowedAuth } from "./AllowedAuth";

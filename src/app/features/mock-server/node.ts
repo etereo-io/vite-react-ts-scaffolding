@@ -1,5 +1,4 @@
-import { SetupServerApi } from "msw/node";
-import { setupServer } from "msw/node";
+import { type SetupServerApi, setupServer } from "msw/node";
 
 import { getAllMockHandlers } from "@/app/features/modules/modules.helpers";
 

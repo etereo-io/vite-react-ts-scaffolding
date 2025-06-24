@@ -1,12 +1,9 @@
 import { screen, waitFor } from "@testing-library/react";
-import { Mock } from "vitest";
-
+import type { Mock } from "vitest";
+import { renderWithTestProviders } from "#/tests.helpers";
 import { UserMother } from "@/app/features/auth/__mocks__/UserMother";
 import { useLoggedUser } from "@/app/features/auth/hooks/useLoggedUser";
-
 import { OrdersPage } from "./OrdersPage";
-
-import { renderWithTestProviders } from "#/tests.helpers";
 
 vi.mock("@/app/features/auth/hooks/useLoggedUser", () => ({
   useLoggedUser: vi.fn()

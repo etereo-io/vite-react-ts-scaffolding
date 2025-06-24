@@ -1,4 +1,4 @@
-import { http, HttpResponse, delay } from "msw";
+import { delay, HttpResponse, http } from "msw";
 
 import { API_DEFAULT_LIMIT } from "@/app/features/api/api.contants";
 import { DEFAULT_DELAY } from "@/app/features/mock-server/constants";

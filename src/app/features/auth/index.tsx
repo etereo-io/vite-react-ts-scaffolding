@@ -1,4 +1,4 @@
-import { Navigate, RouteObject } from "react-router";
+import { Navigate, type RouteObject } from "react-router";
 
 import { registerModule } from "@/app/features/modules/modules.helpers";
 

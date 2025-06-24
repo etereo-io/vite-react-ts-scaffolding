@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { useConfigContext } from "../providers/ConfigProvider";
 
 interface Props {
@@ -43,7 +43,9 @@ export function ConfigLoader({
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
+                  <title>Configuration error icon</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

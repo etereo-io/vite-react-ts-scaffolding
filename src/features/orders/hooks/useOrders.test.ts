@@ -1,12 +1,9 @@
 import { renderHook, waitFor } from "@testing-library/react";
-import { http, HttpResponse } from "msw";
-
+import { HttpResponse, http } from "msw";
+import { TestProviders } from "#/tests.helpers";
 import { server } from "@/app/features/mock-server/node";
-
 import { OrderMother } from "../__mocks__/OrderMother";
 import { useOrders } from "./useOrders";
-
-import { TestProviders } from "#/tests.helpers";
 
 const mockNotificationError = vi.fn();
 vi.mock("@/lib/notifications/notifications", () => ({

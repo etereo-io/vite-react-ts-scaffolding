@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { NavigateOptions } from "react-router";
+import type { NavigateOptions } from "react-router";
 
 import { useQueryParams } from "./useQueryParams";
 

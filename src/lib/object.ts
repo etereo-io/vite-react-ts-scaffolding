@@ -2,7 +2,7 @@ export const removeEmptyOrNull = (obj: Record<string, unknown>) => {
   for (const clave in obj) {
     const value = obj[clave];
 
-    if (typeof value === "object" && !(value instanceof Array)) {
+    if (typeof value === "object" && !Array.isArray(value)) {
       removeEmptyOrNull(value as Record<string, unknown>);
     }
 

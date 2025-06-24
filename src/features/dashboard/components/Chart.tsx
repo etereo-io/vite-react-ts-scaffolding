@@ -48,6 +48,7 @@ export function Chart() {
             {data.map((item, index) => {
               const height = item.amount ? (item.amount / maxAmount) * 100 : 0;
               return (
+                // biome-ignore lint/suspicious/noArrayIndexKey: poc
                 <div key={index} className="flex flex-col items-center flex-1">
                   <div
                     className="w-8 bg-blue-500 rounded-t-sm transition-all duration-300 hover:bg-blue-600"

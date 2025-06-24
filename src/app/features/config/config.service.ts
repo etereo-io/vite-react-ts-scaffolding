@@ -3,7 +3,6 @@ import type { Config } from "./config.types";
 
 // use globalThis to store the config instance as singleton
 // avoid problems with vite.setup isolation mode
-// biome-ignore lint/style/useNamingConvention: <explanation>
 export type GlobalThis = typeof globalThis & { APP_CONFIG: Config };
 
 if (!(globalThis as GlobalThis).APP_CONFIG) {
@@ -66,7 +65,7 @@ export function getConfig<T = string>(
   try {
     const value = key
       .split(".")
-      .reduce((acc, part) => acc && acc[part], config) as T;
+      .reduce((acc, part) => acc?.[part], config) as T;
     if (value === undefined && required) {
       throw new Error(`Config key not found: ${key}`);
     }

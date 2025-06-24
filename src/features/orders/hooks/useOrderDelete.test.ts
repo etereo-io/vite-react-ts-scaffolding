@@ -1,13 +1,10 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
-import { http, HttpResponse } from "msw";
-
+import { HttpResponse, http } from "msw";
+import { TestProviders } from "#/tests.helpers";
 import { ERROR_INTERNAL } from "@/app/features/api/api.contants";
 import { server } from "@/app/features/mock-server/node";
-
 import { EVENT_ORDER_DELETE } from "../orders.constants";
 import { useOrderDelete } from "./useOrderDelete";
-
-import { TestProviders } from "#/tests.helpers";
 
 const mockInvalidateQueries = vi.fn();
 vi.mock("@tanstack/react-query", async () => ({

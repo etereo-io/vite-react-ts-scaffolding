@@ -1,10 +1,8 @@
-import removeAttr from "react-remove-attr";
-
 import path from "node:path";
-
 import ViteYaml from "@modyfi/vite-plugin-yaml";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
+import removeAttr from "react-remove-attr";
 import { loadEnv } from "vite";
 import checker from "vite-plugin-checker";
 import svgr from "vite-plugin-svgr";

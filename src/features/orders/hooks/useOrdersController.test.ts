@@ -1,14 +1,11 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
-import { http, HttpResponse } from "msw";
+import { HttpResponse, http } from "msw";
 import { beforeEach, describe, expect, test } from "vitest";
-
+import { TestProviders } from "#/tests.helpers";
 import { API_DEFAULT_LIMIT } from "@/app/features/api/api.contants";
 import { server } from "@/app/features/mock-server/node";
-
 import { OrderMother } from "../__mocks__/OrderMother";
 import { useOrdersController } from "./useOrdersController";
-
-import { TestProviders } from "#/tests.helpers";
 
 const mockEvent = vi.fn();
 vi.mock("@/lib/metrics/useMetrics", () => ({
@@ -75,7 +72,7 @@ describe("useOrdersController", () => {
     act(() => {
       result.current.handleSeeMoreOrders({
         preventDefault: preventDefaultMock
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        // biome-ignore lint/suspicious/noExplicitAny: test
       } as any);
     });
 

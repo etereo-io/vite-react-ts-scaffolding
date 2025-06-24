@@ -1,8 +1,8 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { queryClient as defaultQueryClient } from "@/app/features/queryClient";
 import { ConfigLoader } from "../features/config/components/ConfigLoader";
-import { Config } from "../features/config/config.types";
+import type { Config } from "../features/config/config.types";
 import { ConfigProvider } from "../features/config/providers/ConfigProvider";
 
 export function AppProviders({

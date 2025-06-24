@@ -1,7 +1,8 @@
-import React, { createContext, useEffect, useState, useCallback } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import { CONFIG_DEFAULT_URL } from "../config.constants";
 import { loadConfig } from "../config.service";
-import { Config } from "../config.types";
+
+import type { Config } from "../config.types";
 
 export interface ConfigLoadingState {
   readonly isLoading: boolean;

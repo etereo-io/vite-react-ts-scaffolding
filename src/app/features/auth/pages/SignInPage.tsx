@@ -1,5 +1,6 @@
+/** biome-ignore-all lint/nursery/useUniqueElementIds: poc */
 import { Lock } from "lucide-react";
-import * as React from "react";
+import type * as React from "react";
 import { useNavigate } from "react-router";
 
 export function SignInPage() {
@@ -51,7 +52,6 @@ export function SignInPage() {
                 type="email"
                 autoComplete="email"
                 required
-                autoFocus
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
@@ -96,18 +96,18 @@ export function SignInPage() {
             </button>
 
             <div className="flex items-center justify-between text-sm">
-              <a
-                href="#"
+              <button
+                type="button"
                 className="text-blue-600 hover:text-blue-500 transition-colors"
               >
                 Forgot password?
-              </a>
-              <a
-                href="#"
+              </button>
+              <button
+                type="button"
                 className="text-blue-600 hover:text-blue-500 transition-colors"
               >
                 Don't have an account? Sign Up
-              </a>
+              </button>
             </div>
           </form>
         </div>

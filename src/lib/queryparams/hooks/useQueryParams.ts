@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { NavigateOptions, useLocation, useNavigate } from "react-router";
+import { type NavigateOptions, useLocation, useNavigate } from "react-router";
 
 export function useQueryParams() {
   const { search } = useLocation();

@@ -1,5 +1,5 @@
 import { bypass } from "msw";
-import { StartOptions } from "msw/browser";
+import type { StartOptions } from "msw/browser";
 
 // import { getEndpoint } from "@/app/features/api/api";
 // import { API_ENDPOINT_DEFAULT } from "@/app/features/api/api.contants";

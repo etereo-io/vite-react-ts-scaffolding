@@ -13,13 +13,13 @@ export function Deposits() {
       <div className="text-3xl font-bold text-gray-900 mb-2">$3,024.00</div>
       <div className="text-sm text-gray-500 flex-1">on 15 March, 2019</div>
       <div>
-        <a
-          href="#"
+        <button
+          type="button"
           onClick={preventDefault}
           className="text-blue-600 hover:text-blue-800 text-sm transition-colors"
         >
           View balance
-        </a>
+        </button>
       </div>
     </React.Fragment>
   );

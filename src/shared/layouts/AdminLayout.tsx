@@ -33,6 +33,7 @@ export function AdminLayout({
           <div className="flex items-center gap-4">
             {!open && (
               <button
+                type="button"
                 onClick={toggleDrawer}
                 className="p-2 rounded hover:bg-blue-700 transition-colors"
                 aria-label="open drawer"
@@ -44,7 +45,10 @@ export function AdminLayout({
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="p-2 rounded hover:bg-blue-700 transition-colors relative">
+            <button
+              type="button"
+              className="p-2 rounded hover:bg-blue-700 transition-colors relative"
+            >
               <Bell className="w-6 h-6" />
               <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 4
@@ -63,6 +67,7 @@ export function AdminLayout({
       >
         <div className="flex items-center justify-end p-4 border-b border-gray-200">
           <button
+            type="button"
             onClick={toggleDrawer}
             className="p-2 rounded hover:bg-gray-100 transition-colors"
           >

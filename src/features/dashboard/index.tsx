@@ -1,9 +1,8 @@
-import { Navigate, RouteObject } from "react-router";
-
 import { BarChart3 } from "lucide-react";
+import { Navigate, type RouteObject } from "react-router";
 
-import { MenuItem } from "@/app/app.types";
-import { User, UserRoles } from "@/app/features/auth/auth.types";
+import type { MenuItem } from "@/app/app.types";
+import { type User, UserRoles } from "@/app/features/auth/auth.types";
 import { registerModule } from "@/app/features/modules/modules.helpers";
 import { AdminLayout } from "@/shared/layouts/AdminLayout";
 

@@ -2,7 +2,6 @@
 export function useMetrics() {
   return {
     event: (name: string) => {
-      // biome-ignore lint/suspicious/noConsole: <explanation>
       console.log("event =>", name);
     }
   };

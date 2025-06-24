@@ -1,13 +1,13 @@
-import { User } from "../auth.types";
+import type { User } from "../auth.types";
 import { PermissionMother } from "./PermissionMother";
 import mockUser from "./user.mock.json";
 
-export class UserMother {
-  static getMockUser(user?: Partial<User>) {
+export const UserMother = {
+  getMockUser: (user?: Partial<User>) => {
     return {
       ...mockUser,
-      permissions: PermissionMother.getAll(),
+      permissions: PermissionMother.getMockPermissions(),
       ...user
     } as User;
   }
-}
+};

@@ -1,4 +1,4 @@
-import { RequiredPermissions } from "../auth.types";
+import type { RequiredPermissions } from "../auth.types";
 import { useUserAuth } from "../hooks/useUserAuth";
 
 export function AllowedAuth({
@@ -18,11 +18,11 @@ export function AllowedAuth({
   }
 
   if (typeof permissions === "boolean") {
-    return permissions ? children : (error ?? <></>);
+    return permissions ? children : error;
   }
 
   if (!isAllowed(permissions)) {
-    return error ?? <></>;
+    return error;
   }
 
   return children;

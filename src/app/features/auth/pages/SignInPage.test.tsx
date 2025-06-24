@@ -1,11 +1,8 @@
-import { act } from "react";
-
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
+import { act } from "react";
+import { renderWithTestProviders, TestApp } from "#/tests.helpers";
 import { SignInPage } from "./SignInPage";
-
-import { TestApp, renderWithTestProviders } from "#/tests.helpers";
 
 describe("SignInPage", () => {
   it("should render", async () => {

@@ -1,4 +1,4 @@
-import { RequiredPermissions, User } from "./auth.types";
+import type { RequiredPermissions, User } from "./auth.types";
 
 /**
  * permissions examples
@@ -9,7 +9,10 @@ import { RequiredPermissions, User } from "./auth.types";
 export function isUserAllowed({
   user,
   permissions
-}: { user?: User; permissions: RequiredPermissions }) {
+}: {
+  user?: User;
+  permissions: RequiredPermissions;
+}) {
   if (!user) {
     return false;
   }

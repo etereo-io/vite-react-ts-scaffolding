@@ -4,7 +4,7 @@ import "../features/modules/modules";
 
 import { AppRoutes } from "@/app/components/AppRoutes";
 
-import { Config } from "../features/config/config.types";
+import type { Config } from "../features/config/config.types";
 import { AppProviders } from "./AppProviders";
 
 export function App({ config }: { readonly config?: Config | null }) {

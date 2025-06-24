@@ -1,8 +1,7 @@
-import { ReactNode } from "react";
-import { MemoryRouter, useLocation } from "react-router";
-
 import { act, renderHook } from "@testing-library/react";
-import { Mock } from "vitest";
+import type { ReactNode } from "react";
+import { MemoryRouter, useLocation } from "react-router";
+import type { Mock } from "vitest";
 
 import { useQueryParams } from "./useQueryParams";
 

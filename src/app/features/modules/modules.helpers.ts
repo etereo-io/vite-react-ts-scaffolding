@@ -1,13 +1,10 @@
-import { Location, RouteObject } from "react-router";
-
+/** biome-ignore-all lint/style/noNonNullAssertion: checked */
 import { deepmerge } from "deepmerge-ts";
+import type { Location, RouteObject } from "react-router";
+import type { MenuItem, Module } from "@/app/app.types";
+import type { User } from "@/app/features/auth/auth.types";
+import type { LocaleResources } from "@/app/features/i18n/i18n.types";
 
-import { User } from "@/app/features/auth/auth.types";
-import { LocaleResources } from "@/app/features/i18n/i18n.types";
-
-import { MenuItem, Module } from "@/app/app.types";
-
-// biome-ignore lint/style/useNamingConvention: <explanation>
 export type GlobalThis = typeof globalThis & { APP_MODULES: Module[] };
 
 // use globalThis to store modules as singleton

@@ -1,15 +1,14 @@
 import axios from "axios";
 
 import { getEndpoint } from "@/app/features/api/api";
-import { getQueryString } from "@/lib/queryparams/queryparams.helpers";
-
 import {
   API_DEFAULT_LIMIT,
   API_ENDPOINT_DEFAULT
 } from "@/app/features/api/api.contants";
-import { PaginatedResponse } from "@/app/features/api/api.types";
+import type { PaginatedResponse } from "@/app/features/api/api.types";
+import { getQueryString } from "@/lib/queryparams/queryparams.helpers";
 import { DEFAULT_ORDERS_FILTERS } from "./orders.constants";
-import { Order, OrdersFilters } from "./orders.types";
+import type { Order, OrdersFilters } from "./orders.types";
 
 export function fetchOrders(
   filters: OrdersFilters = {
@@ -32,7 +31,7 @@ export function fetchOrders(
 }
 
 export function deleteOrder(orderId: string) {
-  return axios.delete(getEndpoint(API_ENDPOINT_DEFAULT) + `orders/${orderId}`, {
+  return axios.delete(`${getEndpoint(API_ENDPOINT_DEFAULT)}orders/${orderId}`, {
     method: "DELETE"
   });
 }

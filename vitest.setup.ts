@@ -17,7 +17,7 @@ import { server } from "@/app/features/mock-server/node";
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: configuration
   value: (query: any) => ({
     matches: false,
     media: query,
@@ -52,7 +52,6 @@ beforeAll(() => {
   server.listen(mockServerConfig);
 });
 
-// biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
 beforeEach(() => {});
 
 afterAll(() => {

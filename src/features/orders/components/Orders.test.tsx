@@ -1,15 +1,12 @@
 import { screen, waitFor } from "@testing-library/react";
-import { http, HttpResponse } from "msw";
-import { Mock } from "vitest";
-
+import { HttpResponse, http } from "msw";
+import type { Mock } from "vitest";
+import { renderWithTestProviders } from "#/tests.helpers";
 import { UserMother } from "@/app/features/auth/__mocks__/UserMother";
 import { useLoggedUser } from "@/app/features/auth/hooks/useLoggedUser";
 import { server } from "@/app/features/mock-server/node";
-
 import { OrderMother } from "../__mocks__/OrderMother";
 import { Orders } from "./Orders";
-
-import { renderWithTestProviders } from "#/tests.helpers";
 
 vi.mock("@/app/features/auth/hooks/useLoggedUser");
 

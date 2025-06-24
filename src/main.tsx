@@ -20,6 +20,7 @@ export async function enableMocking() {
   return worker.start(mockServerConfig);
 }
 
+// biome-ignore lint/style/noNonNullAssertion: checked
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 enableMocking().then(() => {

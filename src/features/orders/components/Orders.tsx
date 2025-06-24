@@ -96,6 +96,7 @@ export function Orders() {
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <AllowedAuth permissions={canDelete}>
                     <button
+                      type="button"
                       onClick={handleOrderDelete(order.id)}
                       className="p-1 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors"
                       aria-label="delete"
@@ -117,6 +118,7 @@ export function Orders() {
         </div>
         <div className="flex gap-2">
           <button
+            type="button"
             onClick={() =>
               handleOnPaginationChange(null, Math.max(1, page - 1))
             }
@@ -126,6 +128,7 @@ export function Orders() {
             Previous
           </button>
           <button
+            type="button"
             onClick={() => handleOnPaginationChange(null, page + 1)}
             disabled={page >= (orders?.pagination.count || 0)}
             className="px-3 py-1 text-sm border border-gray-300 rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
@@ -135,13 +138,13 @@ export function Orders() {
         </div>
       </div>
 
-      <a
-        href="#"
+      <button
+        type="button"
         onClick={handleSeeMoreOrders}
         className="inline-block mt-4 text-blue-600 hover:text-blue-800 text-sm transition-colors"
       >
         See more orders
-      </a>
+      </button>
     </>
   );
 }
