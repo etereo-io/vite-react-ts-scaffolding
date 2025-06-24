@@ -1,7 +1,7 @@
 import { screen, waitFor } from "@testing-library/react";
 import type { Mock } from "vitest";
 import { renderWithTestProviders } from "#/tests.helpers";
-import { UserMother } from "@/app/features/auth/__mocks__/UserMother";
+import { userMother } from "@/app/features/auth/__mocks__/user.mother";
 import { useLoggedUser } from "@/app/features/auth/hooks/useLoggedUser";
 import { OrdersPage } from "./OrdersPage";
 
@@ -13,7 +13,7 @@ describe("OrdersPage", () => {
   it("should render Orders", async () => {
     (useLoggedUser as Mock).mockImplementation(() => {
       return {
-        user: UserMother.getMockUser(),
+        user: userMother.getMockUser(),
         isPending: false
       };
     });
@@ -26,7 +26,7 @@ describe("OrdersPage", () => {
   it("should not render Orders", async () => {
     (useLoggedUser as Mock).mockImplementation(() => {
       return {
-        user: UserMother.getMockUser({ permissions: [] }),
+        user: userMother.getMockUser({ permissions: [] }),
         isPending: false
       };
     });

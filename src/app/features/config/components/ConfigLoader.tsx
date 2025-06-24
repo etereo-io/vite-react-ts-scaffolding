@@ -1,5 +1,5 @@
 import type React from "react";
-import { useConfigContext } from "../providers/ConfigProvider";
+import { useConfig } from "../providers/ConfigProvider";
 
 interface Props {
   readonly children: React.ReactNode;
@@ -12,7 +12,7 @@ export function ConfigLoader({
   loadingComponent,
   errorComponent
 }: Props) {
-  const configStatus = useConfigContext();
+  const configStatus = useConfig();
 
   // Show loading state
   if (configStatus.loadingState.isLoading) {

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useMetrics } from "@/lib/metrics/useMetrics";
 
 import { EVENT_ORDER_DELETE, QUERY_KEY_ORDERS } from "../orders.constants";
-import { deleteOrder } from "../orders.services";
+import { ordersService } from "../orders.services";
 
 export function useOrderDelete() {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ export function useOrderDelete() {
     mutationFn: (orderId: string) => {
       // event from mutation actions could be defined in hooks
       metrics.event(EVENT_ORDER_DELETE);
-      return deleteOrder(orderId);
+      return ordersService.deleteOrder(orderId);
     },
     onSuccess: () => {
       // ensure refetch orders after delete

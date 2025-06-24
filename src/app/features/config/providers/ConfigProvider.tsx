@@ -99,16 +99,16 @@ export function ConfigProvider({
 
   return (
     <ConfigContext.Provider value={contextValue}>
-      {!!config && !loadingState.error && !loadingState.isLoading && children}
+      {children}
     </ConfigContext.Provider>
   );
 }
 
-export function useConfigContext(): ConfigContextValue {
+export function useConfig(): ConfigContextValue {
   const context = React.useContext(ConfigContext);
 
   if (!context) {
-    throw new Error("useConfigContext must be used within a ConfigProvider");
+    throw new Error("useConfig must be used within a ConfigProvider");
   }
 
   return context;

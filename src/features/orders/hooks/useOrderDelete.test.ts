@@ -1,7 +1,10 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import { TestProviders } from "#/tests.helpers";
-import { ERROR_INTERNAL } from "@/app/features/api/api.contants";
+import {
+  API_MOCK_PREFIX,
+  ERROR_INTERNAL
+} from "@/app/features/api/api.contants";
 import { server } from "@/app/features/mock-server/node";
 import { EVENT_ORDER_DELETE } from "../orders.constants";
 import { useOrderDelete } from "./useOrderDelete";
@@ -57,7 +60,7 @@ describe("useOrderDelete", () => {
   it("notify on error", async () => {
     // override already mocked endpoint
     server.use(
-      http.delete("/api/orders/orderId", () => {
+      http.delete(`${API_MOCK_PREFIX}/api/v1/orders/orderId`, () => {
         return HttpResponse.json(
           {
             code: ERROR_INTERNAL

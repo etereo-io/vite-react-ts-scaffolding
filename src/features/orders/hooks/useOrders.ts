@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { API_DEFAULT_LIMIT } from "@/app/features/api/api.contants";
 
 import { QUERY_KEY_ORDERS } from "../orders.constants";
-import { fetchOrders } from "../orders.services";
+import { ordersService } from "../orders.services";
 import type { OrdersFilters } from "../orders.types";
 
 export function useOrders(
@@ -11,7 +11,7 @@ export function useOrders(
 ) {
   return useQuery({
     queryKey: [QUERY_KEY_ORDERS, JSON.stringify(filters)],
-    queryFn: () => fetchOrders(filters),
+    queryFn: () => ordersService.fetchOrders(filters),
     // ensure query has error handling
     meta: {
       errorMessage: "orders.fetch.error"

@@ -8,7 +8,7 @@ This is a React TypeScript project using Vite, TailwindCSS, React Query, MSW for
 
 ### Feature-Based Architecture
 
-```
+```bash
 src/
 ├── app/                # Root application components
 │   ├── components/     # App-specific components
@@ -30,6 +30,73 @@ src/
 ├── lib/               # Core utilities and configurations, not React-specific
 ├── assets/            # Static assets
 └── locales/           # Internationalization files
+```
+
+### Feature Module Structure
+
+```bash
+src/features/[feature]/
+├── __mocks__/                  # Mocks and object mothers for testing
+├── assets/
+│   └── locales/                # Feature-specific internationalization
+│       ├── [locale-code].json  # i18n files
+│       └── index.ts            # i18n module, must export `locale` object
+├── components/                 # UI components for this feature
+├-- pages/                      # Feature-specific pages
+├── hooks/                      # Custom hooks, controllers and service layer with bussiness logic
+├── services/                   # API services and business logic
+├── [feature].types.ts          # TypeScript types/interfaces
+├── [feature].constants.ts      # Feature-specific constants
+├── [feature].helpers.ts        # Feature-specific utilities
+├-- [feature].services.ts       # Feature-specific service layer
+├── [feature].mock.handlers.ts  # Mocks for testing
+└-- index.ts                    # Feature module entry point and routes
+```
+
+## Module Declaration with Distributed Routes
+
+### Feature-Level Route Configuration
+
+Each feature module defines its own routes and exports them for composition at the app level.
+
+```typescript
+// filepath: src/features/orders/index.tsx
+import { lazy } from "react";
+import type { RouteObject } from "react-router-dom";
+
+const OrdersListPage = lazy(() => import("./pages/OrdersListPage").then(m => ({ default: m.OrdersListPage })));
+const OrderDetailPage = lazy(() => import("./pages/OrderDetailPage").then(m => ({ default: m.OrderDetailPage })));
+const CreateOrderPage = lazy(() => import("./pages/CreateOrderPage").then(m => ({ default: m.CreateOrderPage })));
+
+export const ordersRoutes: RouteObject[] = [
+  {
+    path: "/orders",
+    children: [
+      {
+        index: true,
+        element: <OrdersListPage />
+      },
+      {
+        path: "new",
+        element: <CreateOrderPage />
+      },
+      {
+        path: ":orderId",
+        element: <OrderDetailPage />
+      },
+      {
+        path: ":orderId/edit",
+        element: <EditOrderPage />
+      }
+    ]
+  }
+];
+
+registerModule({
+  name: MODULE_ORDERS,
+  routes,
+});
+
 ```
 
 ## File Naming Conventions
@@ -204,7 +271,7 @@ This architecture improves testability by:
 
 - Use React Query for server state management
 - Follow naming pattern: `use[Entity][Action]` - `useNodeSignals`, `useSignalsData`
-- Handle loading, error, and success states
+- Handle loading, error, success states and custom business logic
 
 ```typescript
 export function useNodeSignals(nodeId?: string) {
@@ -255,18 +322,22 @@ export interface ChartSignal {
 
 ### 2. Services
 
-Handle API communication and business logic
+Handle API communication
 
 ```typescript
 // chart.service.ts
 import { getEndpoint } from "@/app/api";
 import { API_ENDPOINT_DATA } from "./chart.constants";
 
-export async function getSignals(nodeId: string): Promise<ChartSignal[]> {
+async function getSignals(nodeId: string): Promise<ChartSignal[]> {
   const response = await fetch(
     `${getEndpoint(API_ENDPOINT_DATA)}/${nodeId}/signals`
   );
   return response.json();
+}
+
+export const signalsService = {
+  getSignals,
 }
 ```
 
@@ -291,7 +362,7 @@ Generate test data for development and testing
 
 ```typescript
 // charts.mock.ts
-export const createMockChartSignal = (
+const createChartSignal = (
   overrides?: Partial<ChartSignal>
 ): ChartSignal => ({
   id: faker.string.uuid(),
@@ -300,6 +371,10 @@ export const createMockChartSignal = (
   lineColor: faker.color.rgb(),
   ...overrides,
 });
+
+export const chartMother = {
+  createChartSignal,
+}
 ```
 
 ### 5. MSW Handlers
@@ -318,32 +393,6 @@ export const chartHandlers = [
 
 ## Error Management
 
-### Service Level
-
-```typescript
-// node.service.ts
-import { API_ENDPOINTS, ERROR_MESSAGES } from "./node.constants";
-
-export const nodeService = {
-  getSignals: async (nodeId: string) => {
-    try {
-      const response = await fetch(
-        `${API_ENDPOINTS.NODE_SIGNALS}/${nodeId}/signals`
-      );
-      if (!response.ok) {
-        throw new Error(
-          `${ERROR_MESSAGES.FETCH_SIGNALS_FAILED}: ${response.statusText}`
-        );
-      }
-      return response.json();
-    } catch (error) {
-      console.error(ERROR_MESSAGES.FETCH_SIGNALS_ERROR, error);
-      throw error;
-    }
-  },
-};
-```
-
 ### Hook Level
 
 ```typescript
@@ -352,8 +401,10 @@ export function useNodeSignals(nodeId?: string) {
     queryKey: ["node-signals", nodeId],
     queryFn: () => nodeService.getSignals(nodeId!),
     enabled: !!nodeId,
-    retry: 2,
-    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    meta: {
+      successMessage: "node-signals.fetch.success", // Optional for fetching, recommended for mutations
+      errorMessage: "node-signals.fetch.error"
+    }
   });
 }
 ```

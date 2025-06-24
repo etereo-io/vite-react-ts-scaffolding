@@ -7,14 +7,14 @@ import { registerModule } from "@/app/features/modules/modules.helpers";
 import { queryToObject } from "@/lib/queryparams/queryparams.helpers";
 import { AdminLayout } from "@/shared/layouts/AdminLayout";
 
-import locales from "./assets/locales";
+import { locales } from "./assets/locales";
 import {
   MODULE_ORDERS,
   PERMISSION_ORDERS_DELETE,
   PERMISSION_ORDERS_LIST,
   PERMISSION_ORDERS_VIEW
 } from "./orders.constants";
-import { handlers } from "./orders.mock.handlers";
+import { getMockHandlers } from "./orders.mock.handlers";
 import { OrderStatus } from "./orders.types";
 import { OrdersPage } from "./pages/OrdersPage";
 
@@ -66,7 +66,7 @@ registerModule({
   routes,
   menuItems,
   locales,
-  mockHandlers: handlers,
+  getMockHandlers,
   permissions: [
     PERMISSION_ORDERS_LIST,
     PERMISSION_ORDERS_VIEW,

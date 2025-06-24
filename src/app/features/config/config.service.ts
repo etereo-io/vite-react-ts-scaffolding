@@ -34,6 +34,20 @@ export async function loadConfigFromUrl(
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
 
+  // mock delay
+  // const response = await new Promise<Response>((resolve, reject) => {
+  //   fetch(url, { signal: controller.signal, cache: "no-cache" })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         setTimeout(() => {
+  //           resolve(response);
+  //         }, 2000);
+  //       } else {
+  //         reject(new Error(`Error loading config: ${response.statusText}`));
+  //       }
+  //     })
+  //     .catch(reject);
+  // });
   const response = await fetch(url, {
     signal: controller.signal,
     cache: "no-cache"

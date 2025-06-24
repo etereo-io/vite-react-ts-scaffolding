@@ -31,7 +31,7 @@ function getRandomPage(
   );
 }
 
-export const OrderMother = {
+export const orderMother = {
   getRandomOrder,
   getRandomList,
   getRandomPage

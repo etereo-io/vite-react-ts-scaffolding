@@ -76,5 +76,10 @@
     "vite-plugin-svgr": "^4.3.0",
     "vitest": "^3.2.4",
     "vitest-sonar-reporter": "^2.0.1"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

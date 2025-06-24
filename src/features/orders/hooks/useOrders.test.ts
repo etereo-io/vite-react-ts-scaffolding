@@ -1,8 +1,9 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import { TestProviders } from "#/tests.helpers";
+import { API_MOCK_PREFIX } from "@/app/features/api/api.contants";
 import { server } from "@/app/features/mock-server/node";
-import { OrderMother } from "../__mocks__/OrderMother";
+import { orderMother } from "../__mocks__/order.mother";
 import { useOrders } from "./useOrders";
 
 const mockNotificationError = vi.fn();
@@ -13,12 +14,12 @@ vi.mock("@/lib/notifications/notifications", () => ({
 }));
 
 describe("useOrders", () => {
-  const data = OrderMother.getRandomPage();
+  const data = orderMother.getRandomPage();
 
   beforeEach(() => {
     // override already mocked endpoint
     server.use(
-      http.get("/api/orders", () =>
+      http.get(`${API_MOCK_PREFIX}/api/v1/orders`, () =>
         HttpResponse.json({
           data,
           pagination: {
@@ -43,7 +44,9 @@ describe("useOrders", () => {
   });
 
   it("should notify on error", async () => {
-    server.use(http.get("/api/orders", () => HttpResponse.error()));
+    server.use(
+      http.get(`${API_MOCK_PREFIX}/api/v1/orders`, () => HttpResponse.error())
+    );
     const { result } = renderHook(() => useOrders(), {
       wrapper: TestProviders
     });

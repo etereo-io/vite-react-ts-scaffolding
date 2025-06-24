@@ -2,7 +2,7 @@ app:
   environment: development
 
 endpoints:
-  default: /api/
+  default: /mock/api/
 
 features:
   msw: true

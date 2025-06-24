@@ -1,8 +1,8 @@
-import { UserMother } from "../__mocks__/UserMother";
+import { userMother } from "../__mocks__/user.mother";
 
 export function useLoggedUser() {
   return {
-    user: UserMother.getMockUser(),
+    user: userMother.getMockUser(),
     isPending: false
   };
 }

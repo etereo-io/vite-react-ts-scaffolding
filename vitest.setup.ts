@@ -48,6 +48,9 @@ if (typeof document !== "undefined") {
 // https://github.com/vitest-dev/vitest/issues/1450
 vi.resetModules();
 
+// Mock the browser msw
+vi.mock("./src/app/features/mock-server/providers/MockProvider");
+
 beforeAll(() => {
   server.listen(mockServerConfig);
 });

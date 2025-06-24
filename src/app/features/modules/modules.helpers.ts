@@ -43,8 +43,8 @@ export const getAllRoutes = () => {
 
 export const getAllMockHandlers = () => {
   return modules
-    .filter((module) => !!module.mockHandlers)
-    .flatMap((module) => module.mockHandlers ?? []);
+    .filter((module) => !!module.getMockHandlers)
+    .flatMap((module) => module.getMockHandlers?.() ?? []);
 };
 
 export function registerModule(module: Module) {

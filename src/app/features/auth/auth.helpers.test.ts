@@ -1,9 +1,9 @@
-import { UserMother } from "./__mocks__/UserMother";
+import { userMother } from "./__mocks__/user.mother";
 import { isUserAllowed } from "./auth.helpers";
 
 describe("auth.helpers", () => {
   describe("isUserAllowed", () => {
-    const user = UserMother.getMockUser({
+    const user = userMother.getMockUser({
       permissions: ["permission1", "permission2"]
     });
 

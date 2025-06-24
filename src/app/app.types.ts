@@ -1,4 +1,4 @@
-import type { RequestHandler } from "msw";
+import type { RequestHandler, WebSocketHandler } from "msw";
 import type { ReactElement } from "react";
 import type { Location, RouteObject } from "react-router";
 
@@ -22,7 +22,7 @@ export interface Module {
   menuItems?: MenuItem[];
   routes?: RouteObject[];
   // all module mock handlers
-  mockHandlers?: RequestHandler[];
+  getMockHandlers?: () => (RequestHandler | WebSocketHandler)[];
   // all module permissions definitions
   permissions?: string[];
 }

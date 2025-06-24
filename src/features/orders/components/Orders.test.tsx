@@ -2,20 +2,21 @@ import { screen, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import type { Mock } from "vitest";
 import { renderWithTestProviders } from "#/tests.helpers";
-import { UserMother } from "@/app/features/auth/__mocks__/UserMother";
+import { API_MOCK_PREFIX } from "@/app/features/api/api.contants";
+import { userMother } from "@/app/features/auth/__mocks__/user.mother";
 import { useLoggedUser } from "@/app/features/auth/hooks/useLoggedUser";
 import { server } from "@/app/features/mock-server/node";
-import { OrderMother } from "../__mocks__/OrderMother";
+import { orderMother } from "../__mocks__/order.mother";
 import { Orders } from "./Orders";
 
 vi.mock("@/app/features/auth/hooks/useLoggedUser");
 
 describe("Orders", () => {
-  const orders = OrderMother.getRandomList();
+  const orders = orderMother.getRandomList();
 
   beforeEach(() => {
     server.use(
-      http.get("/api/orders", () =>
+      http.get(`${API_MOCK_PREFIX}/api/v1/orders`, () =>
         HttpResponse.json({
           data: orders,
           pagination: {
@@ -31,7 +32,7 @@ describe("Orders", () => {
 
   it("render delete button", async () => {
     (useLoggedUser as Mock).mockImplementation(() => ({
-      user: UserMother.getMockUser()
+      user: userMother.getMockUser()
     }));
 
     const { container } = renderWithTestProviders(<Orders />);
@@ -45,7 +46,7 @@ describe("Orders", () => {
 
   it("not render delete button", async () => {
     (useLoggedUser as Mock).mockImplementation(() => ({
-      user: UserMother.getMockUser({
+      user: userMother.getMockUser({
         permissions: []
       })
     }));
