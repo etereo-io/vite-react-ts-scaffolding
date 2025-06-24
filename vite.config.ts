@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
 import { loadEnv } from "vite";
 import checker from "vite-plugin-checker";
+import svgr from "vite-plugin-svgr";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig(({ mode }) => {
@@ -34,6 +35,7 @@ export default defineConfig(({ mode }) => {
           attributes: ["data-testid"]
         }),
       react(),
+      svgr(),
       ViteYaml()
     ],
 
