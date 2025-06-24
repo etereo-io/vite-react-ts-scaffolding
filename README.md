@@ -116,10 +116,10 @@ npm run preview
 - React
 - React DOM
 - React Router DOM
-- Emotion (for CSS-in-JS)
 - Tailwind
 - React Query (for data fetching)
 - i18next (for internationalization)
+- Zustand (for state management)
 
 ### Development Dependencies
 

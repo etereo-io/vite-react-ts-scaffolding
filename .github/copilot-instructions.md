@@ -69,6 +69,8 @@ export const DEFAULT_TIMEZONE = "Etc/UTC";
 export const CURRENT_TIMEZONE =
   Intl.DateTimeFormat().resolvedOptions().timeZone;
 export const CHART_REFRESH_INTERVAL = 30000;
+export const QUERY_KEY_SIGNALS = "signals";
+export const METRIC_SIGNALS_UPDATE = "update_signals";
 ```
 
 ### Types and Interfaces
