@@ -13,6 +13,8 @@ src/
 ├── app/                # Root application components
 │   ├── components/     # App-specific components
 │   └── features/       # App wide feature modules
+│       └── modules/    # Feature modules
+│           └── modules.ts  # Module registration
 ├── features/           # Feature modules
 │   ├── [feature]/
 │   │   ├── __mocks__/  # Mocks for testing
@@ -50,7 +52,7 @@ src/features/[feature]/
 ├── [feature].helpers.ts        # Feature-specific utilities
 ├-- [feature].services.ts       # Feature-specific service layer
 ├── [feature].mock.handlers.ts  # Mocks for testing
-└-- index.ts                    # Feature module entry point and routes
+└-- index.tsx                   # Feature module entry point and routes
 ```
 
 ## Module Declaration with Distributed Routes
@@ -63,6 +65,14 @@ Each feature module defines its own routes and exports them for composition at t
 // filepath: src/features/orders/index.tsx
 import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
+import { locales } from "./assets/locales";
+import { getMockHandlers } from "./orders.mock.handlers";
+import {
+  MODULE_ORDERS,
+  PERMISSION_ORDERS_DELETE,
+  PERMISSION_ORDERS_LIST,
+  PERMISSION_ORDERS_VIEW
+} from "./orders.constants";
 
 const OrdersListPage = lazy(() => import("./pages/OrdersListPage").then(m => ({ default: m.OrdersListPage })));
 const OrderDetailPage = lazy(() => import("./pages/OrderDetailPage").then(m => ({ default: m.OrderDetailPage })));
@@ -92,9 +102,47 @@ export const ordersRoutes: RouteObject[] = [
   }
 ];
 
+const menuItems: MenuItem[] = [
+  {
+    title: "orders.title",
+    path: "/admin/orders",
+    icon: <ShoppingCart className="w-5 h-5" />,
+    isAllowed: (user: User) =>
+      Object.values(UserRoles).some((role) => user.roles.includes(role)),
+    children: [
+      {
+        title: "orders.open.title",
+        path: `/admin/orders?status=${OrderStatus.PENDING}`,
+        isActive: (location) =>
+          location.pathname.includes("/admin/orders") &&
+          queryToObject(location.search).status === OrderStatus.PENDING,
+        isAllowed: (user: User) =>
+          Object.values(UserRoles).some((role) => user.roles.includes(role))
+      },
+      {
+        title: "orders.closed.title",
+        path: `/admin/orders?status=${OrderStatus.CLOSED}`,
+        isActive: (location) =>
+          location.pathname.includes("/admin/orders") &&
+          queryToObject(location.search).status === OrderStatus.CLOSED,
+        isAllowed: (user: User) =>
+          Object.values(UserRoles).some((role) => user.roles.includes(role))
+      }
+    ]
+  }
+];
+
 registerModule({
   name: MODULE_ORDERS,
   routes,
+  menuItems,
+  locales,
+  getMockHandlers,
+  permissions: [
+    PERMISSION_ORDERS_LIST,
+    PERMISSION_ORDERS_VIEW,
+    PERMISSION_ORDERS_DELETE
+  ]
 });
 
 ```
@@ -565,6 +613,8 @@ Focus on behavior, not implementation:
 
 ```typescript
 // ✅ Test behavior
+const { container } = renderWithTestProviders(<Component />);
+
 expect(screen.getByRole("button", { name: /reset zoom/i })).toBeInTheDocument();
 
 // ❌ Avoid testing implementation details
@@ -583,6 +633,36 @@ test("useTimeLineChartController returns correct data", () => {
 
   expect(result.current.isPending).toBe(false);
   expect(result.current.data).toBeDefined();
+}, {
+      wrapper: TestProviders
+    });
+```
+
+### Network mocking
+
+```typescript
+import { server } from "@/app/features/mock-server/node";
+describe("description", () => {
+  beforeEach(() => {
+    // override already mocked endpoint
+    server.use(
+      http.get(`${API_MOCK_PREFIX}/api/v1/orders`, () =>
+        HttpResponse.json({
+          data,
+          pagination: {
+            offset: 0,
+            limit: 10,
+            count: 100,
+            hasMore: true
+          }
+        })
+      )
+    ); // ok
+
+    server.use(
+      http.get(`${API_MOCK_PREFIX}/api/v1/orders`, () => HttpResponse.error())
+    ); // error
+  });
 });
 ```
 
@@ -607,3 +687,20 @@ test("useTimeLineChartController returns correct data", () => {
 - **Feature-based** module organization
 - **Flexbox-first** layout approach
 - **No magic strings** - use constants or enums from domain files
+
+## Stack
+  * React
+  * TypeScript
+  * Vite
+  * TailwindCSS
+  * React Query
+  * MSW
+  * i18next
+  * Zustand
+  * React Router
+  * Faker
+  * Vitest
+  * Biome
+
+## i18n
+ * supported langages: en, es
