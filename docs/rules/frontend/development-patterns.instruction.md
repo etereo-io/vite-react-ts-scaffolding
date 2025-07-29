@@ -2,7 +2,7 @@
 
 ## Entity-Service-Hook-Mock Pattern
 
-Complete data flow from API to component with full testing support.
+Follow this workflow step by step to build from API/domain to component with full testing support.
 
 ### 1. Entity Types (Data Structures)
 
@@ -128,9 +128,12 @@ export const chartService = {
 
 ### 5. Service Hooks (React Query Integration)
 
+1 hook per file
+
 **Handle error management, retry logic, and caching**:
 
 ```typescript
+// hooks/useNodeSignals.ts
 export function useNodeSignals(nodeId?: string) {
   return useQuery({
     queryKey: [QUERY_KEYS.SIGNALS, nodeId],
@@ -142,6 +145,7 @@ export function useNodeSignals(nodeId?: string) {
   });
 }
 
+// hooks/useUpdateSignal.ts
 export function useUpdateSignal() {
   const queryClient = useQueryClient();
 

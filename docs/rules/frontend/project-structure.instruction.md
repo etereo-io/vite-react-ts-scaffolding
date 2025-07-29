@@ -104,7 +104,7 @@ features/[feature-name]/
 │   └── [SubPage].tsx
 ├── hooks/                          # Business logic hooks
 │   ├── use[Feature]Controller.ts
-│   └── use[Feature]Service.ts
+│   └── use[ServiceHook].ts
 ├── [feature].service.ts            # API and business logic
 ├── [feature].types.ts              # TypeScript definitions
 └── [feature].helpers.ts            # Feature-specific utilities

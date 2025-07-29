@@ -483,6 +483,119 @@ export function ChartContainer() {
 }
 ```
 
+### 8. Single Responsibility Per File
+
+For components, hooks, services, mock-factories, each file should have a single, well-defined purpose and responsibility:
+
+```typescript
+// ✅ Single responsibility - only chart data transformation
+// src/features/charts/utils/ChartComponent.ts
+export function ChartComponent(rawData: RawTimeSeriesData[]): ChartData {
+  // Single purpose: transform raw data to chart format
+}
+
+// src/features/charts/utils/order.services.ts
+export const orderServices = {
+  fetchOrders: async () => { /* fetch orders */ },
+  createOrder: async (order) => { /* create order */ },
+  updateOrder: async (order) => { /* update order */ },
+}
+
+// src/features/charts/utils/order.mother.ts
+export const orderMother = {
+  getRandomOrder,
+  getRandomList,
+  getRandomPage
+};
+
+// ✅ Single responsibility - only chart controller logic
+// src/features/charts/hooks/useChartController.ts
+export function useChartController(params: ChartParams) {
+  // Single purpose: manage chart state and actions
+}
+```
+
+**Benefits:**
+- Easier to locate and modify specific functionality
+- Clearer testing boundaries
+- Better code organization and maintainability
+- Reduces merge conflicts in team environments
+
+### 9. Strategic Comments
+
+Add comments only when code cannot be self-explanatory. Focus on explaining **why**, not **what**:
+
+```typescript
+// ✅ Good comments - explain the why
+export function useChartController({ nodeId, sampling }: Props) {
+  // Use shorter intervals for real-time data to reduce server load
+  // while maintaining responsive UI updates
+  const pollInterval = sampling === 'realtime' ? 1000 : 5000;
+  
+  // Debounce zoom operations to prevent excessive API calls
+  // during continuous user interactions like mouse wheel scrolling
+  const debouncedZoom = useMemo(
+    () => debounce(handleZoom, 150),
+    [handleZoom]
+  );
+
+  return { /* ... */ };
+}
+
+// ✅ Complex business logic explanation
+export function calculateOptimalSampling(dataPoints: number, timeRange: TimeRange): SamplingRate {
+  // For datasets larger than 10k points, we need to downsample to prevent
+  // browser performance issues. The sampling rate is calculated based on
+  // the available screen pixels to ensure we don't lose visual fidelity
+  if (dataPoints > 10000) {
+    const screenWidth = window.innerWidth;
+    return Math.ceil(dataPoints / screenWidth);
+  }
+  
+  return 1; // No sampling needed for smaller datasets
+}
+
+// ❌ Unnecessary comments - code is self-explanatory
+export function getUserName(user: User): string {
+  // Get the user name from user object
+  return user.name;
+}
+
+// ❌ Comments explaining what (code should be self-documenting)
+export function validateEmail(email: string): boolean {
+  // Check if email contains @ symbol
+  if (!email.includes('@')) {
+    return false;
+  }
+  
+  // Check if domain part exists
+  const parts = email.split('@');
+  return parts.length === 2 && parts[1].length > 0;
+}
+
+// ✅ Better approach - self-documenting code
+export function validateEmail(email: string): boolean {
+  const emailParts = email.split('@');
+  const hasAtSymbol = emailParts.length === 2;
+  const hasDomain = emailParts[1]?.length > 0;
+  
+  return hasAtSymbol && hasDomain;
+}
+```
+
+**When to add comments:**
+- Complex algorithms or business logic
+- Non-obvious performance optimizations
+- Workarounds for browser bugs or library limitations
+- Integration points with external systems
+- Regular expressions or complex data transformations
+
+**When NOT to add comments:**
+- Simple variable assignments
+- Obvious function calls
+- Standard React patterns
+- Self-explanatory type definitions
+
 ## Development Workflow
 
 ### Code Review Checklist
@@ -492,3 +605,5 @@ export function ChartContainer() {
 3. **Testing**: Are there appropriate tests for the functionality?
 4. **Performance**: Are there any obvious performance issues?
 5. **Consistency**: Does this match the existing codebase style?
+6. **Single Responsibility**: Does each file have a single, clear purpose?
+7. **Comments**: Are comments focused on explaining why, not what?

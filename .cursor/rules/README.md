@@ -1,6 +1,8 @@
 # Exercise Editor Coding Rules (Cursor)
 
-This document references the canonical coding rules in `docs/rules/frontend/README.md`.
+This project uses a single source of truth for coding conventions and architecture, located in [README.md](../../docs/rules/frontend/README.md) and related files.his document references the canonical coding rules in `docs/rules/frontend/README.md`.
+
+Read through all instructions beafore anything else to understand the coding standards, architectural patterns, and best practices to follow while contributing to the project.
 
 ## Reference (Cursor Syntax)
 
