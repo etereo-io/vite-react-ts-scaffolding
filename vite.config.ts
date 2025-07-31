@@ -23,9 +23,14 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
-      checker({
-        typescript: true
-      }),
+      !process.env.VITEST
+        ? checker({
+            typescript: true,
+            biome: {
+              command: "check"
+            }
+          })
+        : undefined,
       tailwindcss(),
       inProdMode &&
         removeAttr({

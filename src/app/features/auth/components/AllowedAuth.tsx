@@ -14,7 +14,7 @@ export function AllowedAuth({
 
   if (isPending) {
     // loading state
-    return <></>;
+    return null;
   }
 
   if (typeof permissions === "boolean") {
