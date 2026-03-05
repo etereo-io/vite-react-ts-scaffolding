@@ -1,0 +1,14 @@
+app:
+  environment: staging
+
+endpoints:
+  default: https://api-staging.example.com/api
+
+features:
+  msw: false
+  debugMode: true
+  analytics: false
+  betaFeatures: true
+
+analytics:
+  measurementId: "G-XXXXXXXXXX"

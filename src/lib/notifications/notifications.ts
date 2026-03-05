@@ -1,15 +1,16 @@
-// notifications api example that can be used to send system-wide notifications
+import { toast } from "sonner";
+
 export const notifications = {
-  success: (name: string) => {
-    console.log("success =>", name);
+  success: (message: string) => {
+    toast.success(message);
   },
-  info: (name: string) => {
-    console.info("info =>", name);
+  info: (message: string) => {
+    toast.info(message);
   },
-  warn: (name: string) => {
-    console.warn("warn =>", name);
+  warn: (message: string) => {
+    toast.warning(message);
   },
-  error: (name: string) => {
-    console.error("error =>", name);
+  error: (message: string) => {
+    toast.error(message);
   }
 };

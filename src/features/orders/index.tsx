@@ -5,7 +5,7 @@ import type { MenuItem } from "@/app/app.types";
 import { type User, UserRoles } from "@/app/features/auth/auth.types";
 import { registerModule } from "@/app/features/modules/modules.helpers";
 import { queryToObject } from "@/lib/queryparams/queryparams.helpers";
-import { AdminLayout } from "@/shared/layouts/AdminLayout";
+import { ProtectedAdminLayout } from "@/shared/layouts/ProtectedAdminLayout";
 
 import { locales } from "./assets/locales";
 import {
@@ -21,7 +21,7 @@ import { OrdersPage } from "./pages/OrdersPage";
 const routes: RouteObject[] = [
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: <ProtectedAdminLayout />,
     children: [
       {
         path: "orders",

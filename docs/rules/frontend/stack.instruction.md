@@ -7,12 +7,27 @@
 
 ## Styling & Design
 - **TailwindCSS** - Utility-first CSS framework
+- **shadcn/ui** - Accessible component library built on Radix UI + Tailwind
 - **Container Queries** - Component-based responsive design
 - **Flexbox-first** - Layout strategy for most UI components
 
 ## State Management
-- **Zustand** - Lightweight global state management
 - **TanStack React Query** - Server state management, caching, and synchronization
+- **react-idle-timer** - Pauses query polling when user is idle (bridges with focusManager)
+- React Query + context is the state strategy (no dedicated global state library)
+
+## Forms & Validation
+- **React Hook Form** - Performant form state management
+- **Zod** - Schema validation for forms and API data
+
+## HTTP
+- **Axios** - HTTP client with interceptor support
+
+## UI
+- **sonner** - Toast notification library
+
+## Utilities
+- **date-fns** - Lightweight date manipulation library
 
 ## Development & Testing
 - **Vitest** - Fast unit testing framework
@@ -21,9 +36,6 @@
 
 ## Internationalization
 - **react-i18next** - Internationalization framework for React applications
-
-## Canvas & Graphics
-- **Fabric.js** - Interactive canvas library for drawing and editing operations
 
 ## Architecture Patterns
 

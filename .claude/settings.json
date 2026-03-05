@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm *)",
+      "Bash(npx vitest *)",
+      "Bash(npx biome *)",
+      "Bash(gh *)",
+      "Edit(**/*.ts)",
+      "Edit(**/*.tsx)",
+      "Edit(**/*.json)",
+      "Edit(**/*.css)",
+      "Write(**/*.ts)",
+      "Write(**/*.tsx)",
+      "Write(**/*.json)",
+      "Write(**/*.css)"
+    ]
+  },
+  "enabledPlugins": {
+    "ralph-loop@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=\"$CLAUDE_FILE_PATH\"; if [[ \"$FILE\" == *.ts || \"$FILE\" == *.tsx ]]; then if grep -qn \"export default\" \"$FILE\" 2>/dev/null; then echo \"WARNING: Default export detected in $FILE. This project uses named exports ONLY.\"; fi; fi; exit 0'"
+          }
+        ]
+      }
+    ]
+  }
+}

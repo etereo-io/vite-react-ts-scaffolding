@@ -1,6 +1,15 @@
 {
   "translation": {
     "shared.error.page.permissions": "You do not have permission to access this page",
+    "shared.error.403.title": "Access Denied",
+    "shared.error.403.message": "You do not have permission to view this content. Contact your administrator if you believe this is an error.",
+    "shared.error.404.title": "Page Not Found",
+    "shared.error.404.message": "We couldn't find the page you're looking for. It may have been moved or deleted.",
+    "shared.error.500.title": "Something Went Wrong",
+    "shared.error.500.message": "An unexpected error occurred. Please try again later.",
+    "shared.error.router.title": "Error Loading Page",
+    "shared.error.router.message": "An error occurred while loading this page. Please try again.",
+    "shared.error.button.goBack": "Go Back",
     "shared.all": "All"
   }
 }

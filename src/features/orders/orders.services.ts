@@ -1,12 +1,8 @@
-import axios from "axios";
-
-import { getEndpoint } from "@/app/features/api/api";
-import {
-  API_DEFAULT_LIMIT,
-  API_ENDPOINT_DEFAULT
-} from "@/app/features/api/api.contants";
+import { apiClient } from "@/app/features/api/api";
+import { API_DEFAULT_LIMIT } from "@/app/features/api/api.constants";
 import type { PaginatedResponse } from "@/app/features/api/api.types";
 import { getQueryString } from "@/lib/queryparams/queryparams.helpers";
+
 import { DEFAULT_ORDERS_FILTERS } from "./orders.constants";
 import type { Order, OrdersFilters } from "./orders.types";
 
@@ -22,22 +18,13 @@ function fetchOrders(
     filters
   ) as unknown as Record<string, unknown>;
 
-  return axios
-    .get<PaginatedResponse<Order[]>>(
-      getEndpoint(API_ENDPOINT_DEFAULT) +
-        "v1/orders?" +
-        getQueryString(finalParams)
-    )
+  return apiClient
+    .get<PaginatedResponse<Order[]>>(`v1/orders?${getQueryString(finalParams)}`)
     .then((res) => res.data);
 }
 
 function deleteOrder(orderId: string) {
-  return axios.delete(
-    `${getEndpoint(API_ENDPOINT_DEFAULT)}v1/orders/${orderId}`,
-    {
-      method: "DELETE"
-    }
-  );
+  return apiClient.delete(`v1/orders/${orderId}`);
 }
 
 export const ordersService = {

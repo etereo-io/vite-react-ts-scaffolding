@@ -1,9 +1,9 @@
 import { bypass } from "msw";
 import type { StartOptions } from "msw/browser";
-import { API_MOCK_PREFIX } from "../api/api.contants";
+import { API_MOCK_PREFIX } from "../api/api.constants";
 
 export const DEFAULT_DELAY = import.meta.env.VITE_DEFAULT_DELAY
-  ? parseInt(import.meta.env.VITE_DEFAULT_DELAY)
+  ? parseInt(import.meta.env.VITE_DEFAULT_DELAY, 10)
   : 500;
 
 export const mockServerConfig: StartOptions = {

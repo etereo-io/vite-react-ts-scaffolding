@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./src:/app/src
+      - ./config:/app/config
+      - ./public:/app/public
+      - ./index.html:/app/index.html
+    environment:
+      - VITE_DEFAULT_DELAY=200

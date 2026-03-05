@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { API_DEFAULT_LIMIT } from "@/app/features/api/api.contants";
+import { API_DEFAULT_LIMIT } from "@/app/features/api/api.constants";
 import { useQueryParamState } from "@/lib/queryparams/hooks/useQueryParamState";
 import { useOrderDelete } from "../hooks/useOrderDelete";
 import { useOrders } from "../hooks/useOrders";

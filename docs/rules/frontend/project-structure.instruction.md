@@ -3,29 +3,69 @@
 ## Feature-Based Architecture
 
 ```
+docker/                     # Docker config (entrypoint.sh, nginx.conf)
+config/                     # Environment YAML configs (config.dev.yml, config.pro.yml, etc.)
 src/
-├── app/                # Root application components
-│   ├── components/     # App-specific components
-│   └── features/       # App wide feature modules
-├── features/           # Feature modules
+├── app/                    # Root application components
+│   ├── components/         # App-specific components
+│   └── features/           # App-wide feature modules
+│       ├── api/            # API client setup
+│       ├── auth/           # Authentication providers & hooks
+│       ├── config/         # Runtime config providers
+│       ├── debug/          # Debug providers (e.g. DebugProviders)
+│       ├── idle/           # Idle detection (pauses query polling)
+│       ├── i18n/           # i18n setup components
+│       ├── mock-server/    # MSW server providers
+│       ├── modules/        # Module registration
+│       └── vite-plugins/   # Custom Vite plugins (e.g. htmlMetaTagsPlugin)
+├── features/               # Feature modules
 │   ├── [feature]/
-│   │   ├── __mocks__/  # Mocks for testing
-│   │   ├── components/ # UI components for this feature
-│   │   ├── pages/      # Feature-specific pages
-│   │   ├── hooks/      # Custom hooks and controllers
-│   │   ├── services/   # API services and business logic
-│   │   ├── types/      # TypeScript types/interfaces
-│   │   └── utils/      # Feature-specific utilities
-├── shared/            # Shared across features, React-specific
-│   ├── components/    # Reusable UI components
-│   ├── pages/         # Shared pages
-│   ├── hooks/         # Shared hooks
-│   ├── services/      # Shared services
-│   ├── types/         # Shared types
-│   └── utils/         # Shared utilities
-├── lib/               # Core utilities, not React-specific
-├── assets/            # Static assets
-└── locales/           # Internationalization files
+│   │   ├── __mocks__/      # Mock factories and mock databases
+│   │   ├── assets/locales/ # Feature-scoped i18n translations
+│   │   ├── components/     # UI components for this feature
+│   │   ├── pages/          # Feature-specific pages
+│   │   ├── hooks/          # Custom hooks and controllers
+│   │   ├── services/       # API services and business logic
+│   │   ├── types/          # TypeScript types/interfaces
+│   │   └── utils/          # Feature-specific utilities
+├── shared/                 # Shared across features, React-specific
+│   ├── components/         # Reusable UI components
+│   │   └── ui/             # shadcn/ui generated components (button, card, dialog, etc.)
+│   ├── hooks/              # Shared hooks
+│   │   ├── useDebounce.ts
+│   │   ├── useDebouncedCallback.ts
+│   │   ├── useDataTable.ts
+│   │   ├── useMediaQuery.ts
+│   │   ├── useMobile.ts
+│   │   ├── useInfiniteScroll.ts
+│   │   ├── useNavigationBlocker.ts
+│   │   ├── usePaginatedQuery.ts
+│   │   └── ...
+│   ├── layouts/            # Shared layout components
+│   ├── pages/              # Shared pages
+│   ├── services/           # Shared services
+│   ├── types/              # Shared types
+│   └── utils/              # Shared utilities
+├── lib/                    # Core utilities, not React-specific
+│   ├── string.ts           # String manipulation helpers
+│   ├── date.ts             # Date utilities (date-fns wrappers)
+│   ├── file.ts             # File handling utilities
+│   ├── id.ts               # ID generation (nanoid, etc.)
+│   ├── format.ts           # Formatting helpers
+│   ├── parsers.ts          # Data parsing utilities
+│   ├── compose-refs.ts     # Ref composition utility
+│   ├── breakpoints.ts      # Responsive breakpoint definitions
+│   ├── classnames.ts       # Classname merge utility (cn)
+│   ├── object.ts           # Object manipulation helpers
+│   ├── storage/            # Storage manager, IndexedDB wrapper
+│   │   ├── storage.ts
+│   │   ├── indexed-db.ts
+│   │   └── msw-storage.ts
+│   ├── metrics/            # Metrics collection
+│   ├── notifications/      # Notification utilities
+│   └── queryparams/        # URL query parameter hooks
+├── assets/                 # Static assets
+└── locales/                # Internationalization files
 ```
 
 ## File Naming Conventions
@@ -91,11 +131,17 @@ import { TimeLineChart, useTimeLineChartController } from "@/features/charts";
 ## Directory Structure Guidelines
 
 ### Feature Module Template
+Based on the actual `tasks` module structure:
 ```
 features/[feature-name]/
-├── __mocks__/                      # Test data factories and MSW handlers
-│   ├── [Feature]Mother.ts
-│   └── [feature].mock.ts
+├── __mocks__/                      # Test data factories and mock databases
+│   ├── [feature].mother.ts         # Object Mother factory for test data
+│   └── [feature].mock-db.ts        # IndexedDB mock database for MSW handlers
+├── assets/
+│   └── locales/                    # Feature-scoped i18n translations
+│       ├── en.json
+│       ├── es.json
+│       └── index.ts
 ├── components/                     # UI components
 │   ├── [FeatureComponent].tsx
 │   └── [SubComponent].tsx
@@ -103,11 +149,17 @@ features/[feature-name]/
 │   ├── [FeaturePage].tsx
 │   └── [SubPage].tsx
 ├── hooks/                          # Business logic hooks
-│   ├── use[Feature]Controller.ts
-│   └── use[ServiceHook].ts
-├── [feature].service.ts            # API and business logic
+│   ├── use[Feature]Controller.ts   # Controller hooks
+│   └── use[ServiceHook].ts         # React Query service hooks
+├── [feature].services.ts           # API communication layer
 ├── [feature].types.ts              # TypeScript definitions
-└── [feature].helpers.ts            # Feature-specific utilities
+├── [feature].schemas.ts            # Zod validation schemas
+├── [feature].routes.ts             # Feature route definitions
+├── [feature].enums.ts              # Feature-specific enumerations
+├── [feature].constants.ts          # Feature-specific constants
+├── [feature].helpers.ts            # Feature-specific utilities
+├── [feature].mock.handlers.ts      # MSW request handlers for this feature
+└── index.tsx                       # Module registration entry point
 ```
 
 ### Asset Organization

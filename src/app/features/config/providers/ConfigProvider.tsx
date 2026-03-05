@@ -29,9 +29,16 @@ export function ConfigProvider({
   configUrl = CONFIG_DEFAULT_URL,
   config: initialConfig
 }: ConfigProviderProps) {
+  // Eagerly populate the global config singleton when an initial config is
+  // provided so that consumers (e.g. getConfig / isMswEnabled) that read from
+  // the global object can access values before the first useEffect fires.
+  if (initialConfig) {
+    loadConfig({ url: configUrl, providedConfig: initialConfig });
+  }
+
   const [config, setConfig] = useState<Config | null>(initialConfig);
   const [loadingState, setLoadingState] = useState<ConfigLoadingState>({
-    isLoading: true,
+    isLoading: !initialConfig,
     isError: false,
     error: null
   });
