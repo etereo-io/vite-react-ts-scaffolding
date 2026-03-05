@@ -2,10 +2,13 @@ app:
   environment: production
 
 endpoints:
-  default: https://api.myapp.com/
+  default: https://api.example.com/api
 
 features:
   msw: false
   debugMode: false
   analytics: true
   betaFeatures: false
+
+analytics:
+  measurementId: "G-XXXXXXXXXX"

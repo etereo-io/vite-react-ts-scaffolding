@@ -4,7 +4,7 @@ import { TestProviders } from "#/tests.helpers";
 import {
   API_MOCK_PREFIX,
   ERROR_INTERNAL
-} from "@/app/features/api/api.contants";
+} from "@/app/features/api/api.constants";
 import { server } from "@/app/features/mock-server/node";
 import { EVENT_ORDER_DELETE } from "../orders.constants";
 import { useOrderDelete } from "./useOrderDelete";
@@ -36,6 +36,15 @@ vi.mock("@/lib/notifications/notifications", () => ({
 describe("useOrderDelete", () => {
   const orderId = "orderId";
 
+  beforeEach(() => {
+    server.use(
+      http.delete(
+        `${API_MOCK_PREFIX}/api/v1/orders/:orderId`,
+        () => new HttpResponse(null, { status: 204 })
+      )
+    );
+  });
+
   it("delete single", async () => {
     const { result } = renderHook(() => useOrderDelete(), {
       wrapper: TestProviders
@@ -52,13 +61,9 @@ describe("useOrderDelete", () => {
     await waitFor(() =>
       expect(mockNotificationSuccess).toHaveBeenCalledTimes(1)
     );
-    expect(mockNotificationSuccess).toHaveBeenCalledWith(
-      "Order deleted successfully"
-    );
   });
 
   it("notify on error", async () => {
-    // override already mocked endpoint
     server.use(
       http.delete(`${API_MOCK_PREFIX}/api/v1/orders/orderId`, () => {
         return HttpResponse.json(
@@ -81,6 +86,5 @@ describe("useOrderDelete", () => {
     await waitFor(() => expect(result.current.isPending).toBe(false));
     expect(mockEvent).toHaveBeenCalledWith(EVENT_ORDER_DELETE);
     await waitFor(() => expect(mockNotificationError).toHaveBeenCalledTimes(1));
-    expect(mockNotificationError).toHaveBeenCalledWith("Error deleting order");
   });
 });

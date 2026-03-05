@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-import { API_DEFAULT_LIMIT } from "@/app/features/api/api.contants";
+import { API_DEFAULT_LIMIT } from "@/app/features/api/api.constants";
 
 import { type Order, OrderStatus } from "../orders.types";
 

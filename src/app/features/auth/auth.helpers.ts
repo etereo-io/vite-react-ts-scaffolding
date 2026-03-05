@@ -1,4 +1,9 @@
-import type { RequiredPermissions, User } from "./auth.types";
+import { AUTH_REDIRECT_AFTER_LOGIN_KEY } from "./auth.constants";
+import type {
+  AuthorizationRule,
+  RequiredPermissions,
+  User
+} from "./auth.types";
 
 /**
  * permissions examples
@@ -36,4 +41,72 @@ export function isUserAllowed({
   }
 
   return false;
+}
+
+/**
+ * Evaluates an authorization rule against a user.
+ *
+ * Evaluation order:
+ * 1. No rule → ALLOW (authentication-only check)
+ * 2. bypassPermissions: if user has ANY → ALLOW
+ * 3. requiredRoles: if specified, user must have at least one. If not → DENY
+ * 4. requiredPermissions: if specified, user must have at least one. If not → DENY
+ * 5. customCheck: escape hatch for complex logic
+ * 6. Default → ALLOW (rule present but empty = authenticated-only)
+ */
+export function evaluateAuthorizationRule({
+  user,
+  rule
+}: {
+  user: User;
+  rule?: AuthorizationRule;
+}): boolean {
+  if (!rule) {
+    return true;
+  }
+
+  if (rule.bypassPermissions && rule.bypassPermissions.length > 0) {
+    const hasBypass = rule.bypassPermissions.some((permission) =>
+      user.permissions.includes(permission)
+    );
+    if (hasBypass) {
+      return true;
+    }
+  }
+
+  if (rule.requiredRoles && rule.requiredRoles.length > 0) {
+    const hasRole = rule.requiredRoles.some((role) =>
+      user.roles.includes(role)
+    );
+    if (!hasRole) {
+      return false;
+    }
+  }
+
+  if (rule.requiredPermissions && rule.requiredPermissions.length > 0) {
+    const hasPermission = rule.requiredPermissions.some((permission) =>
+      user.permissions.includes(permission)
+    );
+    if (!hasPermission) {
+      return false;
+    }
+  }
+
+  if (rule.customCheck) {
+    return rule.customCheck(user);
+  }
+
+  return true;
+}
+
+export function setRedirectAfterLogin(path: string): void {
+  sessionStorage.setItem(AUTH_REDIRECT_AFTER_LOGIN_KEY, path);
+}
+
+export function getAndClearRedirectAfterLogin(): string | null {
+  const path = sessionStorage.getItem(AUTH_REDIRECT_AFTER_LOGIN_KEY);
+  if (path) {
+    sessionStorage.removeItem(AUTH_REDIRECT_AFTER_LOGIN_KEY);
+  }
+  return path;
 }

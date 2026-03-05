@@ -1,0 +1,318 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TasksList > should match snapshot with tasks 1`] = `
+<div>
+  <div
+    class="relative w-full overflow-x-auto"
+    data-slot="table-container"
+  >
+    <table
+      class="w-full caption-bottom text-sm"
+      data-slot="table"
+    >
+      <thead
+        class="[&_tr]:border-b"
+        data-slot="table-header"
+      >
+        <tr
+          class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+          data-slot="table-row"
+        >
+          <th
+            class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-head"
+          >
+            tasks.table.columns.title
+          </th>
+          <th
+            class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-head"
+          >
+            tasks.table.columns.status
+          </th>
+          <th
+            class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-head"
+          >
+            tasks.table.columns.priority
+          </th>
+          <th
+            class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-head"
+          >
+            tasks.table.columns.assignee
+          </th>
+          <th
+            class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-head"
+          >
+            tasks.table.columns.dueDate
+          </th>
+          <th
+            class="text-foreground h-10 px-2 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-right"
+            data-slot="table-head"
+          >
+            tasks.table.columns.actions
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="[&_tr:last-child]:border-0"
+        data-slot="table-body"
+      >
+        <tr
+          class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+          data-slot="table-row"
+        >
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] font-medium"
+            data-slot="table-cell"
+          >
+            Fix login bug
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-cell"
+          >
+            <span
+              class="inline-flex items-center justify-center rounded-full border border-transparent px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90"
+              data-slot="badge"
+              data-variant="secondary"
+            >
+              tasks.status.PENDING
+            </span>
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-cell"
+          >
+            <span
+              class="inline-flex items-center justify-center rounded-full border border-transparent px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden bg-primary text-primary-foreground [a&]:hover:bg-primary/90"
+              data-slot="badge"
+              data-variant="default"
+            >
+              tasks.priority.HIGH
+            </span>
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-cell"
+          >
+            Alice
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-cell"
+          >
+            4/1/2026
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-right"
+            data-slot="table-cell"
+          >
+            <div
+              class="flex justify-end gap-2"
+            >
+              <a
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-6 rounded-md [&_svg:not([class*='size-'])]:size-3"
+                data-discover="true"
+                data-size="icon-xs"
+                data-slot="button"
+                data-variant="ghost"
+                href="/admin/tasks/task-1/edit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-pencil w-4 h-4"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                  />
+                  <path
+                    d="m15 5 4 4"
+                  />
+                </svg>
+              </a>
+              <button
+                aria-label="tasks.actions.delete"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-6 rounded-md [&_svg:not([class*='size-'])]:size-3"
+                data-size="icon-xs"
+                data-slot="button"
+                data-variant="ghost"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-trash2 lucide-trash-2 w-4 h-4 text-destructive"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 11v6"
+                  />
+                  <path
+                    d="M14 11v6"
+                  />
+                  <path
+                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"
+                  />
+                  <path
+                    d="M3 6h18"
+                  />
+                  <path
+                    d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                  />
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr
+          class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+          data-slot="table-row"
+        >
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] font-medium"
+            data-slot="table-cell"
+          >
+            Write tests
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-cell"
+          >
+            <span
+              class="inline-flex items-center justify-center rounded-full border border-transparent px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden bg-primary text-primary-foreground [a&]:hover:bg-primary/90"
+              data-slot="badge"
+              data-variant="default"
+            >
+              tasks.status.IN_PROGRESS
+            </span>
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-cell"
+          >
+            <span
+              class="inline-flex items-center justify-center rounded-full border border-transparent px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90"
+              data-slot="badge"
+              data-variant="secondary"
+            >
+              tasks.priority.MEDIUM
+            </span>
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-cell"
+          >
+            -
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-cell"
+          >
+            -
+          </td>
+          <td
+            class="p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-right"
+            data-slot="table-cell"
+          >
+            <div
+              class="flex justify-end gap-2"
+            >
+              <a
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-6 rounded-md [&_svg:not([class*='size-'])]:size-3"
+                data-discover="true"
+                data-size="icon-xs"
+                data-slot="button"
+                data-variant="ghost"
+                href="/admin/tasks/task-2/edit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-pencil w-4 h-4"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                  />
+                  <path
+                    d="m15 5 4 4"
+                  />
+                </svg>
+              </a>
+              <button
+                aria-label="tasks.actions.delete"
+                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-6 rounded-md [&_svg:not([class*='size-'])]:size-3"
+                data-size="icon-xs"
+                data-slot="button"
+                data-variant="ghost"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-trash2 lucide-trash-2 w-4 h-4 text-destructive"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 11v6"
+                  />
+                  <path
+                    d="M14 11v6"
+                  />
+                  <path
+                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"
+                  />
+                  <path
+                    d="M3 6h18"
+                  />
+                  <path
+                    d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                  />
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <section
+    aria-atomic="false"
+    aria-label="Notifications alt+T"
+    aria-live="polite"
+    aria-relevant="additions text"
+    tabindex="-1"
+  />
+</div>
+`;

@@ -3,6 +3,9 @@ import * as React from "react";
 import { Outlet } from "react-router";
 
 import { LocaleSelector } from "@/app/features/i18n/components/LocaleSelector";
+import { Button } from "@/shared/components/ui/button";
+import { Separator } from "@/shared/components/ui/separator";
+
 import { AdminMenuItems } from "../components/AdminMenuItems";
 
 const drawerWidth = 240;
@@ -32,28 +35,30 @@ export function AdminLayout({
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">
             {!open && (
-              <button
-                type="button"
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={toggleDrawer}
-                className="p-2 rounded hover:bg-blue-700 transition-colors"
+                className="text-white hover:bg-blue-700"
                 aria-label="open drawer"
               >
                 <Menu className="w-6 h-6" />
-              </button>
+              </Button>
             )}
             <h1 className="text-xl font-semibold">Dashboard</h1>
           </div>
 
           <div className="flex items-center gap-4">
-            <button
-              type="button"
-              className="p-2 rounded hover:bg-blue-700 transition-colors relative"
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white hover:bg-blue-700 relative"
             >
               <Bell className="w-6 h-6" />
               <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 4
               </span>
-            </button>
+            </Button>
             <LocaleSelector />
           </div>
         </div>
@@ -65,17 +70,13 @@ export function AdminLayout({
           open ? "w-60" : "w-16"
         }`}
       >
-        <div className="flex items-center justify-end p-4 border-b border-gray-200">
-          <button
-            type="button"
-            onClick={toggleDrawer}
-            className="p-2 rounded hover:bg-gray-100 transition-colors"
-          >
+        <div className="flex items-center justify-end p-4">
+          <Button variant="ghost" size="icon" onClick={toggleDrawer}>
             <ChevronLeft className="w-6 h-6" />
-          </button>
+          </Button>
         </div>
 
-        <div className="border-b border-gray-200" />
+        <Separator />
 
         <nav className="py-4">
           <AdminMenuItems />

@@ -79,7 +79,11 @@ export function getConfig<T = string>(
   try {
     const value = key
       .split(".")
-      .reduce((acc, part) => acc?.[part], config) as T;
+      .reduce(
+        (acc: Record<string, unknown>, part) =>
+          acc?.[part] as Record<string, unknown>,
+        config as unknown as Record<string, unknown>
+      ) as T;
     if (value === undefined && required) {
       throw new Error(`Config key not found: ${key}`);
     }

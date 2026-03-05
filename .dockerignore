@@ -1,0 +1,10 @@
+node_modules
+dist
+reports
+.git
+.claude
+.cursor
+.vscode
+.husky
+*.md
+!README.md

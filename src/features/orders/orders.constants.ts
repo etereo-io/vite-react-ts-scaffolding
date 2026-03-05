@@ -1,8 +1,17 @@
-import { API_DEFAULT_LIMIT } from "@/app/features/api/api.contants";
+import { API_DEFAULT_LIMIT } from "@/app/features/api/api.constants";
 
 export const MODULE_ORDERS = "orders";
 
 export const QUERY_KEY_ORDERS = "orders";
+
+export const orderKeys = {
+  all: [QUERY_KEY_ORDERS] as const,
+  lists: () => [...orderKeys.all, "list"] as const,
+  list: (filters: Record<string, unknown>) =>
+    [...orderKeys.lists(), filters] as const,
+  details: () => [...orderKeys.all, "detail"] as const,
+  detail: (id: string) => [...orderKeys.details(), id] as const
+};
 
 export const EVENT_ORDER_DELETE = "order_delete";
 

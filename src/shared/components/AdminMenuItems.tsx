@@ -21,7 +21,7 @@ export function AdminMenuItems() {
 
   return (
     <ul className="space-y-1 px-3">
-      {getAllowedMenuItems(user)().map((menuItem) => {
+      {(user ? getAllowedMenuItems(user)() : []).map((menuItem) => {
         const isActive = (menuItem.isActive ?? defaultIsActiveHandler)(
           location,
           menuItem.path

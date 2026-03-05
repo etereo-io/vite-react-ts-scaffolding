@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { useMetrics } from "@/lib/metrics/useMetrics";
 
-import { EVENT_ORDER_DELETE, QUERY_KEY_ORDERS } from "../orders.constants";
+import { EVENT_ORDER_DELETE, orderKeys } from "../orders.constants";
 import { ordersService } from "../orders.services";
 
 export function useOrderDelete() {
@@ -20,7 +20,7 @@ export function useOrderDelete() {
     onSuccess: () => {
       // ensure refetch orders after delete
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_ORDERS]
+        queryKey: orderKeys.all
       });
     },
     // ensure mutation has error/success handling

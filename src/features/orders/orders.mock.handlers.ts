@@ -3,7 +3,7 @@ import { delay, HttpResponse, http } from "msw";
 import {
   API_DEFAULT_LIMIT,
   API_MOCK_PREFIX
-} from "@/app/features/api/api.contants";
+} from "@/app/features/api/api.constants";
 import { DEFAULT_DELAY } from "@/app/features/mock-server/constants";
 import { queryToObject } from "@/lib/queryparams/queryparams.helpers";
 

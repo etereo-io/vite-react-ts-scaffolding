@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import { TestProviders } from "#/tests.helpers";
-import { API_MOCK_PREFIX } from "@/app/features/api/api.contants";
+import { API_MOCK_PREFIX } from "@/app/features/api/api.constants";
 import { server } from "@/app/features/mock-server/node";
 import { orderMother } from "../__mocks__/order.mother";
 import { useOrders } from "./useOrders";

@@ -1,6 +1,15 @@
 {
   "translation": {
     "shared.error.page.permissions": "No tienes permisos para acceder a esta página.",
+    "shared.error.403.title": "Acceso Denegado",
+    "shared.error.403.message": "No tienes permisos para ver este contenido. Contacta con tu administrador si crees que es un error.",
+    "shared.error.404.title": "Página No Encontrada",
+    "shared.error.404.message": "No pudimos encontrar la página que buscas. Es posible que se haya movido o eliminado.",
+    "shared.error.500.title": "Algo Salió Mal",
+    "shared.error.500.message": "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo más tarde.",
+    "shared.error.router.title": "Error al Cargar la Página",
+    "shared.error.router.message": "Ha ocurrido un error al cargar esta página. Por favor, inténtalo de nuevo.",
+    "shared.error.button.goBack": "Volver",
     "shared.all": "Todos"
   }
 }

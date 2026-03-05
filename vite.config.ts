@@ -7,6 +7,7 @@ import { loadEnv } from "vite";
 import checker from "vite-plugin-checker";
 import svgr from "vite-plugin-svgr";
 import { defineConfig } from "vitest/config";
+import { htmlMetaTagsPlugin } from "./src/app/features/vite-plugins/htmlMetaTagsPlugin";
 
 export default defineConfig(({ mode }) => {
   process.env.NODE_ENV = mode; // Make sure NODE_ENV matches mode when building
@@ -39,7 +40,8 @@ export default defineConfig(({ mode }) => {
         }),
       react(),
       svgr(),
-      ViteYaml()
+      ViteYaml(),
+      htmlMetaTagsPlugin()
     ],
 
     build: {
@@ -62,6 +64,10 @@ export default defineConfig(({ mode }) => {
       environmentOptions: {
         url: "http://localhost"
       },
+
+      pool: "forks",
+      minWorkers: 2,
+      maxWorkers: 4,
 
       include: [
         "**/*.test.js",
@@ -87,7 +93,12 @@ export default defineConfig(({ mode }) => {
           "src/main.tsx",
           "src/mock-server/**/*",
           "*.test.*",
-          "*/__mocks__/*"
+          "*/__mocks__/*",
+          "**/*.types.ts",
+          "**/*.constants.ts",
+          "**/index.tsx",
+          "**/config/**",
+          "**/ui/**"
         ],
         reporter: ["text", "html", "lcov"],
         reportsDirectory: "reports/vite-coverage",
@@ -98,7 +109,13 @@ export default defineConfig(({ mode }) => {
       mockReset: true,
       restoreMocks: true,
       unstubGlobals: true,
-      unstubEnvs: true
+      unstubEnvs: true,
+
+      // Suppress noisy third-party console output during tests
+      onConsoleLog(log) {
+        if (log.includes("i18next is maintained") || log.includes("locize"))
+          return false;
+      }
     }
   };
 });

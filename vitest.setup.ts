@@ -10,7 +10,8 @@ import { ResizeObserver as ResizeObserverPolyfill } from "@juggle/resize-observe
 import { cleanup } from "@testing-library/react";
 import { afterAll, afterEach, beforeAll, beforeEach, vi } from "vitest";
 
-import "@/app/features/modules";
+// Commented due performance reasons – we don't need to register all modules for tests, and it can be done on a per-test basis when needed
+// import "@/app/features/modules";
 
 import { mockServerConfig } from "@/app/features/mock-server/constants";
 import { server } from "@/app/features/mock-server/node";
@@ -48,8 +49,11 @@ if (typeof document !== "undefined") {
 // https://github.com/vitest-dev/vitest/issues/1450
 vi.resetModules();
 
-// Mock the browser msw
-vi.mock("./src/app/features/mock-server/providers/MockProvider");
+// Mock the browser msw – provide an explicit pass-through so that
+// the provider tree renders children normally during tests.
+vi.mock("@/app/features/mock-server/providers/MockProvider", () => ({
+  MockProvider: ({ children }: { readonly children: unknown }) => children
+}));
 
 beforeAll(() => {
   server.listen(mockServerConfig);

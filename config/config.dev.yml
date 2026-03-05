@@ -2,10 +2,13 @@ app:
   environment: development
 
 endpoints:
-  default: /mock/api/
+  default: https://api-dev.example.com/api
 
 features:
   msw: false
-  debugMode: false
+  debugMode: true
   analytics: false
   betaFeatures: true
+
+analytics:
+  measurementId: ""

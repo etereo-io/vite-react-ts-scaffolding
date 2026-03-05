@@ -28,7 +28,7 @@ export function useQueryParams() {
   const removeParams = useCallback(
     (keys: string | string[], options?: NavigateOptions) => {
       if (Array.isArray(keys)) {
-        keys.forEach((key) => params.delete(key));
+        for (const key of keys) params.delete(key);
       } else {
         params.delete(keys);
       }

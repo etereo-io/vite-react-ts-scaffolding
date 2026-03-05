@@ -2,11 +2,12 @@ import { screen, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import type { Mock } from "vitest";
 import { renderWithTestProviders } from "#/tests.helpers";
-import { API_MOCK_PREFIX } from "@/app/features/api/api.contants";
+import { API_MOCK_PREFIX } from "@/app/features/api/api.constants";
 import { userMother } from "@/app/features/auth/__mocks__/user.mother";
 import { useLoggedUser } from "@/app/features/auth/hooks/useLoggedUser";
 import { server } from "@/app/features/mock-server/node";
 import { orderMother } from "../__mocks__/order.mother";
+import { PERMISSION_ORDERS_DELETE } from "../orders.constants";
 import { Orders } from "./Orders";
 
 vi.mock("@/app/features/auth/hooks/useLoggedUser");
@@ -32,7 +33,9 @@ describe("Orders", () => {
 
   it("render delete button", async () => {
     (useLoggedUser as Mock).mockImplementation(() => ({
-      user: userMother.getMockUser()
+      user: userMother.getMockUser({
+        permissions: [PERMISSION_ORDERS_DELETE]
+      })
     }));
 
     const { container } = renderWithTestProviders(<Orders />);
