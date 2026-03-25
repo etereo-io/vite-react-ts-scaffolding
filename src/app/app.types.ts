@@ -21,8 +21,10 @@ export interface Module {
   locales?: LocaleResources;
   menuItems?: MenuItem[];
   routes?: RouteObject[];
-  // all module mock handlers
-  getMockHandlers?: () => (RequestHandler | WebSocketHandler)[];
+  // all module mock handlers (supports async for lazy-loading)
+  getMockHandlers?: () =>
+    | (RequestHandler | WebSocketHandler)[]
+    | Promise<(RequestHandler | WebSocketHandler)[]>;
   // all module permissions definitions
   permissions?: string[];
 }

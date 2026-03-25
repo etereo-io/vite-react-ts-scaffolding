@@ -14,9 +14,7 @@ import {
   PERMISSION_ORDERS_LIST,
   PERMISSION_ORDERS_VIEW
 } from "./orders.constants";
-import { getMockHandlers } from "./orders.mock.handlers";
 import { OrderStatus } from "./orders.types";
-import { OrdersPage } from "./pages/OrdersPage";
 
 const routes: RouteObject[] = [
   {
@@ -25,7 +23,10 @@ const routes: RouteObject[] = [
     children: [
       {
         path: "orders",
-        element: <OrdersPage />
+        async lazy() {
+          const { OrdersPage } = await import("./pages/OrdersPage");
+          return { Component: OrdersPage };
+        }
       }
     ]
   }
@@ -66,7 +67,8 @@ registerModule({
   routes,
   menuItems,
   locales,
-  getMockHandlers,
+  getMockHandlers: () =>
+    import("./orders.mock.handlers").then((m) => m.getMockHandlers()),
   permissions: [
     PERMISSION_ORDERS_LIST,
     PERMISSION_ORDERS_VIEW,

@@ -46,7 +46,8 @@ export function MockProvider({ children, enabled }: MockProviderProps) {
     });
 
     try {
-      const { worker } = await import("@/app/features/mock-server/browser");
+      const { getWorker } = await import("@/app/features/mock-server/browser");
+      const worker = await getWorker();
 
       // Race the worker start against a timeout so the app is not blocked forever
       await Promise.race([

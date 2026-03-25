@@ -3,10 +3,10 @@ import localConfig from "../../../config/config.local.yml";
 import { App } from "./App";
 
 describe("App", () => {
-  test("should render login by default", () => {
+  test("should render login by default", async () => {
     const { container } = render(<App config={localConfig} />);
 
-    expect(screen.getByTestId("login-page")).toBeInTheDocument();
+    expect(await screen.findByTestId("login-page")).toBeInTheDocument();
     expect(container).toMatchSnapshot();
   });
 });

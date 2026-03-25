@@ -8,7 +8,6 @@ import { ProtectedAdminLayout } from "@/shared/layouts/ProtectedAdminLayout";
 
 import locales from "./assets/locales";
 import { MODULE_DASHBOARD } from "./dashboard.constants";
-import { DashboardPage } from "./pages/DashboardPage";
 
 const routes: RouteObject[] = [
   {
@@ -21,7 +20,10 @@ const routes: RouteObject[] = [
       },
       {
         path: "dashboard",
-        element: <DashboardPage />
+        async lazy() {
+          const { DashboardPage } = await import("./pages/DashboardPage");
+          return { Component: DashboardPage };
+        }
       }
     ]
   }

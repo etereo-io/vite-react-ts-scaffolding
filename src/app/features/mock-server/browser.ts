@@ -2,4 +2,12 @@ import { setupWorker } from "msw/browser";
 
 import { getAllMockHandlers } from "@/app/features/modules/modules.helpers";
 
-export const worker = setupWorker(...getAllMockHandlers());
+let workerInstance: ReturnType<typeof setupWorker> | undefined;
+
+export async function getWorker() {
+  if (!workerInstance) {
+    const handlers = await getAllMockHandlers();
+    workerInstance = setupWorker(...handlers);
+  }
+  return workerInstance;
+}

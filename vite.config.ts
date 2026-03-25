@@ -46,7 +46,16 @@ export default defineConfig(({ mode }) => {
 
     build: {
       sourcemap: !inProdMode,
-      reportCompressedSize: false
+      reportCompressedSize: false,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            "vendor-react": ["react", "react-dom", "react-router"],
+            "vendor-query": ["@tanstack/react-query"],
+            "vendor-i18n": ["i18next", "react-i18next"]
+          }
+        }
+      }
     },
 
     resolve: {

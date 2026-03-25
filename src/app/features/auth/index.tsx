@@ -4,8 +4,6 @@ import { registerModule } from "@/app/features/modules/modules.helpers";
 import { Error404 } from "@/shared/components/Error404";
 
 import { MODULE_AUTH } from "./auth.constants";
-import { getMockHandlers } from "./auth.mock.handlers";
-import { SignInPage } from "./pages/SignInPage";
 
 const routes: RouteObject[] = [
   {
@@ -14,7 +12,10 @@ const routes: RouteObject[] = [
   },
   {
     path: "/login",
-    element: <SignInPage />
+    async lazy() {
+      const { SignInPage } = await import("./pages/SignInPage");
+      return { Component: SignInPage };
+    }
   },
   {
     path: "*",
@@ -25,5 +26,6 @@ const routes: RouteObject[] = [
 registerModule({
   name: MODULE_AUTH,
   routes,
-  getMockHandlers
+  getMockHandlers: () =>
+    import("./auth.mock.handlers").then((m) => m.getMockHandlers())
 });

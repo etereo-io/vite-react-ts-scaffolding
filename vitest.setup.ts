@@ -14,7 +14,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, vi } from "vitest";
 // import "@/app/features/modules";
 
 import { mockServerConfig } from "@/app/features/mock-server/constants";
-import { server } from "@/app/features/mock-server/node";
+import { createServer, getServer } from "@/app/features/mock-server/node";
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
@@ -55,17 +55,18 @@ vi.mock("@/app/features/mock-server/providers/MockProvider", () => ({
   MockProvider: ({ children }: { readonly children: unknown }) => children
 }));
 
-beforeAll(() => {
+beforeAll(async () => {
+  const server = await createServer();
   server.listen(mockServerConfig);
 });
 
 beforeEach(() => {});
 
 afterAll(() => {
-  server.close();
+  getServer()?.close();
 });
 
 afterEach(() => {
-  server.resetHandlers();
+  getServer()?.resetHandlers();
   cleanup();
 });

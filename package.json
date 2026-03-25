@@ -23,6 +23,7 @@
     "test:ui": "npm run test:base -- --ui",
     "test:run": "npm run test:base -- --run",
     "test:coverage": "npm run test:base -- --run --coverage",
+    "verify": "npm run lint:fix && npm run test && npm run build && npm run lint:deps",
     "preview": "vite preview",
     "prepare": "husky"
   },

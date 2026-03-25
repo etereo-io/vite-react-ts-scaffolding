@@ -41,10 +41,13 @@ export const getAllRoutes = () => {
     .flatMap((module) => module.routes) as RouteObject[];
 };
 
-export const getAllMockHandlers = () => {
-  return modules
-    .filter((module) => !!module.getMockHandlers)
-    .flatMap((module) => module.getMockHandlers?.() ?? []);
+export const getAllMockHandlers = async () => {
+  const results = await Promise.all(
+    modules
+      .filter((module) => !!module.getMockHandlers)
+      .map((module) => module.getMockHandlers?.() ?? [])
+  );
+  return results.flat();
 };
 
 export function registerModule(module: Module) {
