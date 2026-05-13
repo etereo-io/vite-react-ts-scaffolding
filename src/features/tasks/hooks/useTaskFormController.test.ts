@@ -1,6 +1,7 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import { describe, expect, test, vi } from "vitest";
+import { setupMockServer } from "#/msw";
 import { TestProviders } from "#/tests.helpers";
 import { API_MOCK_PREFIX } from "@/app/features/api/api.constants";
 import { server } from "@/app/features/mock-server/node";
@@ -23,6 +24,8 @@ vi.mock("@tanstack/react-query", async () => ({
     invalidateQueries: () => mockInvalidateQueries()
   })
 }));
+
+setupMockServer();
 
 describe("useTaskFormController", () => {
   const existingTask: TaskResponse = taskMother.getRandomTask({

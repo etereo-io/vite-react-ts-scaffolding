@@ -1,6 +1,7 @@
 import { screen, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import type { Mock } from "vitest";
+import { setupMockServer } from "#/msw";
 import { renderWithTestProviders } from "#/tests.helpers";
 import { API_MOCK_PREFIX } from "@/app/features/api/api.constants";
 import { userMother } from "@/app/features/auth/__mocks__/user.mother";
@@ -11,6 +12,8 @@ import { PERMISSION_ORDERS_DELETE } from "../orders.constants";
 import { Orders } from "./Orders";
 
 vi.mock("@/app/features/auth/hooks/useLoggedUser");
+
+setupMockServer();
 
 describe("Orders", () => {
   const orders = orderMother.getRandomList();

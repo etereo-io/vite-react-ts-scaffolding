@@ -68,15 +68,33 @@ export default defineConfig(({ mode }) => {
     test: {
       globals: true,
 
-      environment: "jsdom",
+      environment: "happy-dom",
 
       environmentOptions: {
         url: "http://localhost"
       },
 
-      pool: "forks",
-      minWorkers: 2,
-      maxWorkers: 4,
+      // threads: worker_thread-based pool. Cold start ~3× faster than forks
+      // (no process spawn, no IPC) and the worker globals (TransformStream,
+      // Web Streams, etc.) reach the test context.
+      //
+      // Trade-off measured in player-spa's PR #1159: threads accumulates memory
+      // per worker by the end of the suite, but forks costs significant wall-clock
+      // from process spawn overhead — threads wins net.
+      //
+      // Experiments that FAILED (do not re-attempt without reading the PR notes):
+      // - `pool: "vmThreads"`: breaks MSW (TransformStream missing in VM context).
+      // - `isolate: false`: `vi.mock("../sibling", ...)` factories don't override
+      //   modules already cached by a previous file in the same worker (verified
+      //   against Vitest 3.2.4 source: execute.B7h3T_Hc.js:264).
+      // - `deps.optimizer.web`: pre-bundles axios → bypasses MSW intercept.
+      //
+      // Parallelism: CI runners are typically 2-4 vCPU so cap there; local dev
+      // boxes usually have 8+ cores → use more workers for faster feedback.
+      pool: "threads",
+      poolOptions: {
+        threads: { minThreads: 2, maxThreads: process.env.CI ? 4 : 8 }
+      },
 
       include: [
         "**/*.test.js",
@@ -114,11 +132,15 @@ export default defineConfig(({ mode }) => {
         enabled: false
       },
 
-      clearMocks: true,
-      mockReset: true,
-      restoreMocks: true,
-      unstubGlobals: true,
-      unstubEnvs: true,
+      // NOTE: clearMocks/mockReset/restoreMocks were tried but they wipe vi.fn() inside
+      // global factory mocks in vitest.setup.ts (e.g. `useFoo: vi.fn(() => true)` loses
+      // the return value after the first test).
+      // unstubGlobals/unstubEnvs auto-revert `vi.stubGlobal(...)` calls at module level
+      // (the pattern `vi.stubGlobal("crypto", ...)` outside a beforeEach), breaking any
+      // test that relies on the stub for more than the first `it`.
+      // With `isolate: true` (default), per-test cleanup isn't necessary — each file
+      // gets a fresh globalThis anyway.
+      // See: github.com/rafanadalacademy/apps PR #1159 for full root-cause analysis.
 
       // Suppress noisy third-party console output during tests
       onConsoleLog(log) {

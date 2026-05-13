@@ -1,5 +1,6 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
+import { setupMockServer } from "#/msw";
 import { TestProviders } from "#/tests.helpers";
 import { API_MOCK_PREFIX } from "@/app/features/api/api.constants";
 import { server } from "@/app/features/mock-server/node";
@@ -12,6 +13,8 @@ vi.mock("@/lib/notifications/notifications", () => ({
     error: (...args: unknown[]) => mockNotificationError(...args)
   }
 }));
+
+setupMockServer();
 
 describe("useTasks", () => {
   const page = taskMother.getRandomPage();

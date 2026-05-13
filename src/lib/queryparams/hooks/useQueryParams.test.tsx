@@ -18,6 +18,7 @@ interface WrapperProps {
 
 describe("useQueryParams", () => {
   beforeEach(() => {
+    mockNavigate.mockClear();
     (useLocation as Mock).mockImplementation(() => ({
       search: "?param1=value1&param2=value2"
     }));
