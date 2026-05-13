@@ -1,6 +1,7 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
 import { beforeEach, describe, expect, test } from "vitest";
+import { setupMockServer } from "#/msw";
 import { TestProviders } from "#/tests.helpers";
 import {
   API_DEFAULT_LIMIT,
@@ -16,6 +17,8 @@ vi.mock("@/lib/metrics/useMetrics", () => ({
     event: (name: string) => mockEvent(name)
   })
 }));
+
+setupMockServer();
 
 describe("useOrdersController", () => {
   const orderPage = {

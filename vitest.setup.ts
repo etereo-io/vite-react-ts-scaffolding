@@ -1,20 +1,18 @@
 import "@testing-library/jest-dom/vitest";
 import "@testing-library/user-event";
 
-import "@/app/polyfills";
-import "intersection-observer";
-import "matchmedia-polyfill";
-import "matchmedia-polyfill/matchMedia.addListener";
-
-import { ResizeObserver as ResizeObserverPolyfill } from "@juggle/resize-observer";
 import { cleanup } from "@testing-library/react";
-import { afterAll, afterEach, beforeAll, beforeEach, vi } from "vitest";
+import { afterEach, vi } from "vitest";
 
-// Commented due performance reasons – we don't need to register all modules for tests, and it can be done on a per-test basis when needed
-// import "@/app/features/modules";
-
-import { mockServerConfig } from "@/app/features/mock-server/constants";
-import { createServer, getServer } from "@/app/features/mock-server/node";
+// happy-dom 20+ provides matchMedia / ResizeObserver / IntersectionObserver /
+// DOMMatrix / scrollTo / scrollIntoView natively. The legacy polyfills
+// (intersection-observer, matchmedia-polyfill, @juggle/resize-observer) are
+// no-ops here — removed to skip the module evaluation cost on every test file.
+//
+// Object.defineProperty(matchMedia) is kept because the polyfill returned
+// `matches: false` deterministically for every query; happy-dom's built-in
+// can return different values depending on viewport defaults and some
+// component tests rely on the deterministic fallback.
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
@@ -31,23 +29,10 @@ Object.defineProperty(window, "matchMedia", {
   })
 });
 
-if (typeof window !== "undefined") {
-  if (!window.ResizeObserver) {
-    window.ResizeObserver = ResizeObserverPolyfill;
-  }
-}
-
-if (typeof Element !== "undefined") {
-  Element.prototype.scrollIntoView = vi.fn();
-}
-
-if (typeof document !== "undefined") {
-  document.queryCommandSupported = () => false;
-  Element.prototype.scrollTo = vi.fn();
-}
-
-// https://github.com/vitest-dev/vitest/issues/1450
-vi.resetModules();
+// vi.fn so tests can assert call patterns (e.g. spy on scrollIntoView).
+Element.prototype.scrollIntoView = vi.fn();
+Element.prototype.scrollTo = vi.fn();
+document.queryCommandSupported = () => false;
 
 // Mock the browser msw – provide an explicit pass-through so that
 // the provider tree renders children normally during tests.
@@ -55,18 +40,13 @@ vi.mock("@/app/features/mock-server/providers/MockProvider", () => ({
   MockProvider: ({ children }: { readonly children: unknown }) => children
 }));
 
-beforeAll(async () => {
-  const server = await createServer();
-  server.listen(mockServerConfig);
-});
-
-beforeEach(() => {});
-
-afterAll(() => {
-  getServer()?.close();
-});
-
+// Per-test DOM cleanup. MSW lifecycle is registered opt-in via
+// `setupMockServer()` from "#/msw" only in tests that need it.
+//
+// `useRealTimers()` here is a defensive net: tests calling `vi.setSystemTime()`
+// in beforeEach without restoring would leak the frozen clock into the next
+// file scheduled on the same worker thread.
 afterEach(() => {
-  getServer()?.resetHandlers();
   cleanup();
+  vi.useRealTimers();
 });

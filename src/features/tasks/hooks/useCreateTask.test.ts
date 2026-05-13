@@ -1,5 +1,6 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse, http } from "msw";
+import { setupMockServer } from "#/msw";
 import { TestProviders } from "#/tests.helpers";
 import {
   API_MOCK_PREFIX,
@@ -34,6 +35,8 @@ vi.mock("@/lib/notifications/notifications", () => ({
     success: (...args: unknown[]) => mockNotificationSuccess(...args)
   }
 }));
+
+setupMockServer();
 
 describe("useCreateTask", () => {
   const createPayload: TaskCreateRequest = {
